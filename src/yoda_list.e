@@ -20,49 +20,37 @@ class
 
 
 	feature {ANY}
-		make(u_content: ARRAY[YODA_ELEMENT])
+		make(u_content: ARRAY[YODA_ELEMENT]; u_is_ordered: BOOLEAN)
 			--some fancy comment
 			require
-				placeholder: True
+				u_content_not_void: u_content /= void
+				u_content_not_empty: u_content.count > 0
+
 			do
+
+				--validation
 				--comment what is done
+				--make instance of ARRAY
+				--sets content = u_content
+				--set is_ordered = u_is_ordered
 			ensure
-				placeholder: True
+				content_array_instantiated: content /= void
+				is_ordered_set: is_ordered = u_is_ordered
+				content_set: content = u_content
 			end
-
-		ordered
-			--some fancy comment
-			require
-				placeholder: True
-			do
-				--comment what is done
-			ensure
-				placeholder: True
-			end
-
-
-		endordered
-			--some fancy comment
-			require
-				placeholder: True
-			do
-				--comment what is done
-			ensure
-				placeholder: True
-			end
-
 
 		render(render_obj: RENDERER; nesting: INTEGER): STRING
 			--some fancy comment
 			require else
 				placeholder: True
 			do
-				--comment what is done
+				--calls render_obj with self and nesting as arguments
+				--recieves STRING with rendered text inc. tags.
 			ensure then
 				placeholder: True
 			end
 
 
 	invariant
-		placeholder: True
+		content_not_empty: content.count > 0
 end
