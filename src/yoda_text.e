@@ -24,11 +24,18 @@ class
 		make(u_content: STRING)
 			--some fancy comment
 			require
-				placeholder: True
+				u_content_not_void: u_content /= void
+				u_content_not_empty: u_content.count > 0
 			do
+				--validation
 				--comment what is done
+				--make instance of TEXT
+				--sets content = u_content
+				--set is_ordered = u_is_ordered
 			ensure
-				placeholder: True
+				content_text_instantiated: content /= void
+				is_ordered_set: is_ordered = u_is_ordered
+				content_set: content = u_content
 			end
 
 
