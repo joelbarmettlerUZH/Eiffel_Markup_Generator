@@ -1,14 +1,14 @@
 note
-	description: "Summary description for {HTML_VALIDATOR}."
+	description: "Summary description for {YODA}."
 	author: ""
 	date: "$Date$"
 	revision: "$Revision$"
 
 class
-	HTML_VALIDATOR
+	YODA
 
-	inherit
-		VALIDATOR
+	create
+		make
 
 	feature {ANY}
 		make
@@ -22,7 +22,7 @@ class
 			end
 
 
-		validata_text(element: YODA_TEXT): BOOLEAN
+		text(content: STRING): YODA_TEXT
 			--some fancy comment
 			require
 				placeholder: True
@@ -33,7 +33,7 @@ class
 			end
 
 
-		validata_table(element: YODA_TABLE): BOOLEAN
+		table(content: ARRAY2[YODA_ELEMENT]): YODA_TABLE
 			--some fancy comment
 			require
 				placeholder: True
@@ -44,7 +44,7 @@ class
 			end
 
 
-		validata_list(element: YODA_LIST): BOOLEAN
+		liste(content: ARRAY[YODA_ELEMENT]): YODA_LIST
 			--some fancy comment
 			require
 				placeholder: True
@@ -55,7 +55,7 @@ class
 			end
 
 
-		validata_link(element: YODA_LINK): BOOLEAN
+		link_intern(content: STRING; linked_doc: YODA_DOCUMENT): YODA_LINK
 			--some fancy comment
 			require
 				placeholder: True
@@ -66,17 +66,7 @@ class
 			end
 
 
-		validata_image(element: YODA_IMAGE): BOOLEAN
-			--some fancy comment
-			require
-				placeholder: True
-			do
-				--comment what is done
-			ensure
-				placeholder: True
-			end
-
-		validata_snippet(element: YODA_IMAGE): BOOLEAN
+		link_extern(content, url: STRING): YODA_LINK
 			--some fancy comment
 			require
 				placeholder: True
@@ -87,7 +77,36 @@ class
 			end
 
 
-	invariant
-		placeholder: True
+		email(mail_address: STRING): YODA_LINK
+			--some fancy comment
+			require
+				placeholder: True
+			do
+				--comment what is done
+			ensure
+				placeholder: True
+			end
+
+
+		image(content: STRING): YODA_IMAGE
+			--some fancy comment
+			require
+				placeholder: True
+			do
+				--comment what is done
+			ensure
+				placeholder: True
+			end
+
+
+		snippet(content: STRING): YODA_SNIPPET
+			--some fancy comment
+			require
+				placeholder: True
+			do
+				--comment what is done
+			ensure
+				placeholder: True
+			end
 
 end

@@ -26,6 +26,7 @@ class
 			do
 				--comment what is done
 			ensure
+				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_table(?))
 				placeholder: True
 			end
 
