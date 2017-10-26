@@ -34,17 +34,16 @@ feature
 		end
 
 feature
-	style_renderer(render_obj: RENDERER; nesting: INTEGER): STRING
+	style_render(render_obj: RENDERER; nesting: INTEGER): STRING
+		require else
+			placeholder: True
 		do
-			require else
-				placeholder: True
-			do
-				--calls render_obj with self and nesting as arguments
-				--recieves STRING with rendered text inc. tags.
-			ensure then
-				placeholder: True
-			end
+			--calls render_obj with self and nesting as arguments
+			--recieves STRING with rendered text inc. tags.
+		ensure then
+			placeholder: True
 		end
+
 
 
 

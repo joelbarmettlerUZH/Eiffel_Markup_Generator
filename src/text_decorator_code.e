@@ -1,11 +1,11 @@
 note
-	description: "Summary description for {TEXT_DECORATOR_ITALIC}."
+	description: "Summary description for {TEXT_DECORATOR_CODE}."
 	author: ""
 	date: "$Date$"
 	revision: "$Revision$"
 
 class
-	TEXT_DECORATOR_ITALIC
+	TEXT_DECORATOR_CODE
 
 inherit
 	TEXT_DECORATOR
@@ -18,8 +18,9 @@ create
 
 feature
 	style_render(render_obj: RENDERER; nesting: INTEGER): STRING
+
 	do
-		--call italic renderer
+		--call code renderer
 	end
 
 end

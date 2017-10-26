@@ -10,7 +10,7 @@ class
 inherit
 	TEXT_DECORATOR
 		redefine
-			add_style
+			style_render
 		end
 
 create
@@ -19,7 +19,7 @@ create
 feature
 	style_render(render_obj: RENDERER; nesting: INTEGER): STRING
 	do
-		--add bold tags
+		--call bold renderer
 	end
 
 end
