@@ -84,6 +84,16 @@ class
 				placeholder: True
 			end
 
+		render_image(element: YODA_SNIPPET; nesting: INTEGER): STRING
+			--some fancy comment
+			require
+				placeholder: True
+			do
+				--comment what is done
+			ensure
+				placeholder: True
+			end
+
 
 	invariant
 		placeholder: True

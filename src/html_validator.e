@@ -76,6 +76,16 @@ class
 				placeholder: True
 			end
 
+		validata_snippet(element: YODA_IMAGE): BOOLEAN
+			--some fancy comment
+			require
+				placeholder: True
+			do
+				--comment what is done
+			ensure
+				placeholder: True
+			end
+
 
 	invariant
 		placeholder: True
