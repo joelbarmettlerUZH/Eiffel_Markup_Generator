@@ -34,6 +34,7 @@ class
 				--sets content = u_content
 				--set is_ordered = u_is_ordered
 			ensure
+				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_list(?))
 				content_array_instantiated: content /= void
 				is_ordered_set: is_ordered = u_is_ordered
 				content_set: content = u_content

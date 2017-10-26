@@ -28,6 +28,7 @@ deferred class
 			ensure
 				placeholder: True
 			end
+			
 
 
 	invariant
