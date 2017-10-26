@@ -44,7 +44,7 @@ class
 			end
 
 
-		liste(content: ARRAY[YODA_ELEMENT]): YODA_LIST
+		list(content: ARRAY[YODA_ELEMENT]): YODA_LIST
 			--some fancy comment
 			require
 				placeholder: True
@@ -100,6 +100,17 @@ class
 
 
 		snippet(content: STRING): YODA_SNIPPET
+			--some fancy comment
+			require
+				placeholder: True
+			do
+				--comment what is done
+			ensure
+				placeholder: True
+			end
+
+
+		bold(content: YODA_TEXT): YODA_TEXT
 			--some fancy comment
 			require
 				placeholder: True
