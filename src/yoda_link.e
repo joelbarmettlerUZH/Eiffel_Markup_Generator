@@ -46,6 +46,18 @@ class
 			end
 
 
+		make_mail(u_content: STRING)
+			--some fancy comment
+			require
+				placeholder: True
+			do
+				--comment what is done
+			ensure
+				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_link(?))
+				placeholder: True
+			end
+
+
 		render(render_obj: RENDERER; nesting: INTEGER): STRING
 			--some fancy comment
 			require else
