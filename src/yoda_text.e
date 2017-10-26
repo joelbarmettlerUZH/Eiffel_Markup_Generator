@@ -8,7 +8,7 @@ class
 	YODA_TEXT
 
 	inherit
-		YODA_ELEMENT
+		TEXT_INTERFACE
 
 	create
 		make
@@ -23,7 +23,7 @@ class
 	feature {ANY}
 		make(u_content: STRING)
 			--some fancy comment
-			require
+			require else
 				u_content_not_void: u_content /= void
 				u_content_not_empty: u_content.count > 0
 			do
@@ -32,7 +32,7 @@ class
 				--make instance of TEXT
 				--sets content = u_content
 				--set is_ordered = u_is_ordered
-			ensure
+			ensure then
 				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_text(?))
 				content_text_instantiated: content /= void
 				content_set: content = u_content
