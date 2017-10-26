@@ -33,8 +33,8 @@ class
 				--sets content = u_content
 				--set is_ordered = u_is_ordered
 			ensure
+				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_text(?))
 				content_text_instantiated: content /= void
-				is_ordered_set: is_ordered = u_is_ordered
 				content_set: content = u_content
 			end
 
