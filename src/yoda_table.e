@@ -1,8 +1,8 @@
 note
 	description: "Summary description for {YODA_TABLE}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	author: "Joel Barmettler"
+	date: "$25.10.17$"
+	revision: "$27.10.2017$"
 
 class
 	YODA_TABLE
@@ -23,6 +23,8 @@ class
 			--some fancy comment
 			require
 				placeholder: True
+				u_content /= void
+				u_content.count > 0
 			do
 				--comment what is done
 			ensure
@@ -33,14 +35,17 @@ class
 
 
 		render(render_obj: RENDERER; nesting: INTEGER): STRING
-			--some fancy comment
-			require else
-				placeholder: True
+			-- Apply YODA_TABLE render to renderer.
+			require
+				renderer_exists: renderer /= Void
+				nesting_exists: nesting /= Void
+				valid_number_of_nesting: nesting >= 0
 			do
-				--comment what is done
+				-- Calls Renderer.render_table(current, int).
 			ensure then
 				placeholder: True
 			end
+
 
 
 	invariant

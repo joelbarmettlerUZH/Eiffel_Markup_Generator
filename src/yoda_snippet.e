@@ -1,8 +1,8 @@
 note
 	description: "Summary description for {YODA_SNIPPET}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	author: "Joel Barmettler"
+	date: "$25.10.17$"
+	revision: "$27.10.2017$"
 
 class
 	YODA_SNIPPET
@@ -32,12 +32,14 @@ class
 
 
 
-		render(render_obj: RENDERER; nesting: INTEGER): STRING
-			--some fancy comment
-			require else
-				placeholder: True
+		render(renderer: RENDERER; nesting: INTEGER): STRING
+			-- Apply YODA_SNIPPET render to renderer.
+			require
+				renderer_exists: renderer /= Void
+				nesting_exists: nesting /= Void
+				valid_number_of_nesting: nesting >= 0
 			do
-				--comment what is done
+				-- Calls Renderer.render_snippet(current, int).
 			ensure then
 				placeholder: True = True
 			end
