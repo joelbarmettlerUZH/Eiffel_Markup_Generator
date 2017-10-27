@@ -24,10 +24,7 @@ deferred class
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			-- Apply YODA_ELEMENT render to renderer.
-			require else
-				renderer_exists: renderer /= Void
-				nesting_exists: nesting /= Void
-				valid_number_of_nesting: nesting >= 0
+			require 
 			deferred
 			end
 

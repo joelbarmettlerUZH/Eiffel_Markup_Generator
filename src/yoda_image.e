@@ -20,13 +20,13 @@ class
 
 	feature {ANY}
 		make(u_content: STRING)
-			require
+			require else
 				placeholder: True
 				String_not_void: u_content /= void
 				String_not_empty: u_content.count > 0
 			do
 				--comment what is done
-			ensure
+			ensure then
 				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_image(?))
 				placeholder: True
 			end
@@ -34,14 +34,12 @@ class
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			-- Apply YODA_IMAGE render to renderer.
-			require
+			require else
 				renderer_exists: renderer /= Void
-				nesting_exists: nesting /= Void
 				valid_number_of_nesting: nesting >= 0
 			do
 				-- Calls Renderer.render_image(current, int)
 			ensure then
-				result_is_YODA_LINK: {t: String} Result
 			end
 
 

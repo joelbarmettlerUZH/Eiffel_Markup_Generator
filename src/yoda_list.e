@@ -22,7 +22,7 @@ class
 	feature {ANY}
 		make(u_content: ARRAY[YODA_ELEMENT]; u_is_ordered: BOOLEAN)
 			--some fancy comment
-			require
+			require else
 				u_content_not_void: u_content /= void
 				u_content_not_empty: u_content.count > 0
 
@@ -33,7 +33,7 @@ class
 				--make instance of ARRAY
 				--sets content = u_content
 				--set is_ordered = u_is_ordered
-			ensure
+			ensure then
 				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_list(?))
 				content_array_instantiated: content /= void
 				is_ordered_set: is_ordered = u_is_ordered
@@ -42,9 +42,8 @@ class
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			-- Apply YODA_LIST render to renderer.
-			require
+			require else
 				renderer_exists: renderer /= Void
-				nesting_exists: nesting /= Void
 				valid_number_of_nesting: nesting >= 0
 			do
 				-- Calls Renderer.render_list(current, int).

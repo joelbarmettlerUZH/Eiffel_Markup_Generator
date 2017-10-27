@@ -21,11 +21,11 @@ class
 	feature {ANY}
 		make(u_content: STRING)
 			--some fancy comment
-			require
+			require else
 				placeholder: True
 			do
 				--comment what is done
-			ensure
+			ensure then
 				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_snippet(?))
 				placeholder: True
 			end
@@ -34,9 +34,8 @@ class
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			-- Apply YODA_SNIPPET render to renderer.
-			require
+			require else
 				renderer_exists: renderer /= Void
-				nesting_exists: nesting /= Void
 				valid_number_of_nesting: nesting >= 0
 			do
 				-- Calls Renderer.render_snippet(current, int).

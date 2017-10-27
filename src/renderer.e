@@ -34,7 +34,6 @@ deferred class
 			--Perform render operation on YODA_TEXT
 			require
 				text_exists: element /= Void
-				nesting_exists: nesting /= Void
 				valid_number_of_nesting: nesting >= 0
 			deferred
 			ensure
@@ -45,7 +44,6 @@ deferred class
 			--Perform render operation on YODA_TABLE
 			require
 				table_exists: element /= Void
-				nesting_exists: nesting /= Void
 				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
@@ -55,7 +53,6 @@ deferred class
 			--Perform render operation on YODA_LIST
 			require
 				list_exists: element /= Void
-				nesting_exists: nesting /= Void
 				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
@@ -65,7 +62,6 @@ deferred class
 			--Perform render operation on YODA_LINK
 			require
 				link_exists: element /= Void
-				nesting_exists: nesting /= Void
 				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
@@ -75,7 +71,6 @@ deferred class
 			--Perform render operation on YODA_IMAGE
 			require
 				image_exists: element /= Void
-				nesting_exists: nesting /= Void
 				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
@@ -84,7 +79,6 @@ deferred class
 			--Perform render operation on YODA_SNIPPET
 			require
 				snipped_exists: element /= Void
-				nesting_exists: nesting /= Void
 				valid_number_of_nesting: nesting >= 0
 			deferred
 			end

@@ -39,13 +39,13 @@ class
 
 		make_internal(u_content: STRING; u_linked_doc: YODA_DOCUMENT)
 			--some fancy comment
-			require
+			require else
 				placeholder: True
 				u_content_not_void: u_content /= void
 				u_linked_doc_not_void: u_linked_doc /= void
 			do
 				--comment what is done
-			ensure
+			ensure then
 				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_link(?))
 				placeholder: True
 			end
@@ -66,15 +66,13 @@ class
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			--Apply YODA_LINKE render to renderer.
-			require
+			require else
 				renderer_exists: renderer /= Void
-				nesting_exists: nesting /= Void
 				valid_number_of_nesting: nesting >= 0
 			do
 				-- Calls Renderer.render_link(current, int).
 			ensure then
 				placeholder: True
-				result_is_String: {t: String} Result
 			end
 
 	invariant
