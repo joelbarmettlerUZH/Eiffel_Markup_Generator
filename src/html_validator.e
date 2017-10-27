@@ -22,66 +22,73 @@ class
 			end
 
 
-		validata_text(element: YODA_TEXT): BOOLEAN
-			--some fancy comment
+		validate_text(element: YODA_TEXT): BOOLEAN
+			--validates a text element whether possible in html and returns a boolean
 			require
 				placeholder: True
+				element_not_empty: element /= void
+
 			do
-				--comment what is done
+				--check constraints of html text
 			ensure
 				placeholder: True
 			end
 
 
-		validata_table(element: YODA_TABLE): BOOLEAN
-			--some fancy comment
+		validate_table(element: YODA_TABLE): BOOLEAN
+			--validates a table element whether possible in html and returns a boolean
 			require
 				placeholder: True
+				element_not_empty: element /= void
 			do
-				--comment what is done
+				--check constraints of html table
 			ensure
 				placeholder: True
 			end
 
 
-		validata_list(element: YODA_LIST): BOOLEAN
-			--some fancy comment
+		validate_list(element: YODA_LIST): BOOLEAN
+			--validate a list element whether possible in html and returns a boolean
 			require
 				placeholder: True
+				element_not_empty: element /= void
 			do
-				--comment what is done
+				--check constraints of html list
 			ensure
 				placeholder: True
 			end
 
 
-		validata_link(element: YODA_LINK): BOOLEAN
-			--some fancy comment
+		validate_link(element: YODA_LINK): BOOLEAN
+			--validates a link element whether possible in html and returns a boolean
 			require
 				placeholder: True
+				element_not_empty: element /= void
 			do
-				--comment what is done
+				--check constraints of html link
 			ensure
 				placeholder: True
 			end
 
 
-		validata_image(element: YODA_IMAGE): BOOLEAN
-			--some fancy comment
+		validate_image(element: YODA_IMAGE): BOOLEAN
+			--validates an image element heter possible in html and returns a boolean
 			require
 				placeholder: True
+				element_not_empty: element /= void
 			do
-				--comment what is done
+				--check constraints of html image
 			ensure
 				placeholder: True
 			end
 
-		validata_snippet(element: YODA_IMAGE): BOOLEAN
-			--some fancy comment
+		validate_snippet(element: YODA_IMAGE): BOOLEAN
+			--validates a snippet image
 			require
 				placeholder: True
+				element_not_empty: element /= void
 			do
-				--comment what is done
+				--ceck constraints of html snippet
 			ensure
 				placeholder: True
 			end

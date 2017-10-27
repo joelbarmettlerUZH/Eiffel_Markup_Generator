@@ -30,21 +30,8 @@ feature {NONE}
 feature
 	render(render_obj: RENDERER; nesting: INTEGER): STRING
 		do
-			--add_style(component.render)
+		deferred
 		end
-
-feature
-	style_render(render_obj: RENDERER; nesting: INTEGER): STRING
-		require else
-			placeholder: True
-		do
-			--calls render_obj with self and nesting as arguments
-			--recieves STRING with rendered text inc. tags.
-		ensure then
-			placeholder: True
-		end
-
-
 
 
 invariant

@@ -12,12 +12,13 @@ class
 	feature {ANY}
 		--name and elements shall be public, allow access for everybody
 		elements: LINKED_LIST[YODA_ELEMENT]
+		renderer_instances: ARRAY[RENDERER]
+		renderer_names: ARRAY[STRING]
 		name: STRING
-
 
 	feature {ANY}
 		make(u_name: STRING)
-			--some fancy comment
+			--creates instance of document, uses name for it
 			require
 				placeholder: True
 			do
@@ -39,7 +40,8 @@ class
 
 
 		render(output_format: STRING): STRING
-			--some fancy comment
+			--zbsp string = website und ruft auf alle unterdocumente render auf
+			--braucht instanz von renderers (in einem array gespeichert)sobald renderer gebaucht wird
 			require
 				placeholder: True
 			do

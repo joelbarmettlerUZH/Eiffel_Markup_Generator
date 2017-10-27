@@ -7,6 +7,7 @@ note
 deferred class
 	VALIDATOR
 
+--shared features are deferred
 	feature
 		validate_image(element: YODA_IMAGE): BOOLEAN
 			--some fancy comment

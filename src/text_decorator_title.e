@@ -10,7 +10,7 @@ class
 inherit
 	TEXT_DECORATOR
 		redefine
-			style_render
+			render
 		end
 
 create
@@ -38,10 +38,14 @@ feature {NONE}
 		end
 
 feature
-	style_render(render_obj: RENDERER; nesting: INTEGER): STRING
-
-	do
-		--call title renderer
-	end
+	render(render_obj: RENDERER; nesting: INTEGER): STRING
+		-- Apply TEXT_DECORATOR_TITLE render to renderer.
+		require
+			renderer_exists: renderer /= Void
+			valid_number_of_nesting: nesting >= 0
+		do
+			-- Calls Renderer.render_title(current, int)
+		ensure
+		end
 
 end
