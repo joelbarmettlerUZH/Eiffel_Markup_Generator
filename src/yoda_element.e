@@ -29,6 +29,5 @@ deferred class
 			end
 
 	invariant
-		placeholder: True
 		validation_languages_list_instantiated: validation_languages /= void
 end
