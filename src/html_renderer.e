@@ -20,88 +20,76 @@ class
 
 	feature {ANY}
 		make()
-			-- Create HTML_Renderer.
+			--some fancy comment
 			require
 				placeholder: True
 			do
-				-- Create HTML_Renderer.
+				--comment what is done
 			ensure
 				placeholder: True
 			end
 
 
 		render_text(element: YODA_TEXT; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT.
+			--some fancy comment
 			require
-				text_exists: element /= Void
-				nesting_exists: nesting /= Void
-				valid_number_of_nesting: nesting >= 0
+				placeholder: True
 			do
-				-- Surround element.Content with HTML-tags.
+				--comment what is done
 			ensure
 				placeholder: True
 			end
 
 
 		render_table(element: YODA_TABLE; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TABLE.
+			--some fancy comment
 			require
-				table_exists: element /= Void
-				nesting_exists: nesting /= Void
-				valid_number_of_nesting: nesting >= 0
+				placeholder: True
 			do
-				-- Surround element.Content with HTML-tags.
+				--comment what is done
 			ensure
 				placeholder: True
 			end
 
 
 		render_list(element: YODA_LIST; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_LIST.
+			--some fancy comment
 			require
-				list_exists: element /= Void
-				nesting_exists: nesting /= Void
-				valid_number_of_nesting: nesting >= 0
+				placeholder: True
 			do
-				-- Surround element.Content with HTML-tags.
+				--comment what is done
 			ensure
 				placeholder: True
 			end
 
 
 		render_link(element: YODA_LINK; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_LINK.
+			--some fancy comment
 			require
-				link_exists: element /= Void
-				nesting_exists: nesting /= Void
-				valid_number_of_nesting: nesting >= 0
+				placeholder: True
 			do
-				-- Surround element.Content with HTML-tags.
+				--comment what is done
 			ensure
 				placeholder: True
 			end
 
 
 		render_image(element: YODA_IMAGE; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_IMAGE.
+			--some fancy comment
 			require
-				image_exists: element /= Void
-				nesting_exists: nesting /= Void
-				valid_number_of_nesting: nesting >= 0
+				placeholder: True
 			do
-				-- Surround element.Content with HTML-tags.
+				--comment what is done
 			ensure
 				placeholder: True
 			end
 
-		render_snippet(element: YODA_SNIPPET; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_SNIPPET.
+		render_image(element: YODA_SNIPPET; nesting: INTEGER): STRING
+			--some fancy comment
 			require
-				snipped_exists: element /= Void
-				nesting_exists: nesting /= Void
-				valid_number_of_nesting: nesting >= 0
+				placeholder: True
 			do
-				-- Surround element.Content with HTML-tags.
+				--comment what is done
 			ensure
 				placeholder: True
 			end

@@ -22,13 +22,13 @@ deferred class
 			end
 
 
-		render(renderer: RENDERER; nesting: INTEGER): STRING
-			-- Apply YODA_ELEMENT render to renderer.
+		render(render_obj: RENDERER; nesting: INTEGER): STRING
+			--some fancy comment
 			require else
-				renderer_exists: renderer /= Void
-				nesting_exists: nesting /= Void
-				valid_number_of_nesting: nesting >= 0
+				placeholder: True
 			deferred
+			ensure then
+				placeholder: True
 			end
 
 

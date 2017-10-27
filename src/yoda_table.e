@@ -33,13 +33,11 @@ class
 
 
 		render(render_obj: RENDERER; nesting: INTEGER): STRING
-			-- Apply YODA_TABLE render to renderer.
-			require
-				renderer_exists: renderer /= Void
-				nesting_exists: nesting /= Void
-				valid_number_of_nesting: nesting >= 0
+			--some fancy comment
+			require else
+				placeholder: True
 			do
-				-- Calls Renderer.render_table(current, int).
+				--comment what is done
 			ensure then
 				placeholder: True
 			end
