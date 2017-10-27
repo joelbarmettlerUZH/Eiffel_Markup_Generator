@@ -41,11 +41,13 @@ class
 			end
 
 		render(render_obj: RENDERER; nesting: INTEGER): STRING
-			--some fancy comment
-			require else
-				placeholder: True
+			-- Apply YODA_LIST render to renderer.
+			require
+				renderer_exists: renderer /= Void
+				nesting_exists: nesting /= Void
+				valid_number_of_nesting: nesting >= 0
 			do
-				--calls render_obj with self and nesting as arguments
+				-- Calls Renderer.render_list(current, int).
 				--recieves STRING with rendered text inc. tags.
 			ensure then
 				placeholder: True
