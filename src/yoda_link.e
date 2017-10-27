@@ -73,7 +73,7 @@ class
 				--comment what is done
 			ensure then
 				placeholder: True
-				result_is_String: {t: String} Result
+
 			end
 
 	invariant

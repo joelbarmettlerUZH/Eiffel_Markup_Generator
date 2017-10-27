@@ -40,7 +40,6 @@ class
 			do
 				--comment what is done
 			ensure then
-				result_is_YODA_LINK: {t: String} Result
 			end
 
 
