@@ -8,40 +8,21 @@ deferred class
 	RENDERER
 
 	feature {ANY}
---		render_multiple_elements(elements: ARRAY[YODA_ELEMENT]; render_obj: RENDERER; nesting: INTEGER): STRING
---			--some fancy comment
---			require
---				placeholder: True
---			do
---				--describe what is done
---			ensure
---				placeholder: True
---			end
+		YODA_tag: ARRAY[STRING]
+			-- Stores YODAs own tags.
 
+	feature {ANY}
 
-
---		render(element: YODA_ELEMENT): STRING
---			--some fancy comment
---			require
---				placeholder: True
---			deferred
---			ensure
---				placeholder: True
---			end
---
-
-		render_text(element: YODA_TEXT; nesting: INTEGER): STRING
-			--Perform render operation on YODA_TEXT
+		render_YODA_text(element: YODA_TEXT; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_TEXT.
 			require
 				text_exists: element /= Void
 				valid_number_of_nesting: nesting >= 0
 			deferred
-			ensure
-				placeholder: True
 			end
 
-		render_table(element: YODA_TABLE; nesting: INTEGER): STRING
-			--Perform render operation on YODA_TABLE
+		render_YODA_table(element: YODA_TABLE; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_TABLE.
 			require
 				table_exists: element /= Void
 				valid_number_of_nesting: nesting >= 0
@@ -49,8 +30,8 @@ deferred class
 			end
 
 
-		render_list(element: YODA_LIST; nesting: INTEGER): STRING
-			--Perform render operation on YODA_LIST
+		render_YODA_list(element: YODA_LIST; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_LIST.
 			require
 				list_exists: element /= Void
 				valid_number_of_nesting: nesting >= 0
@@ -58,8 +39,8 @@ deferred class
 			end
 
 
-		render_link(element: YODA_LINK; nesting: INTEGER): STRING
-			--Perform render operation on YODA_LINK
+		render_YODA_link(element: YODA_LINK; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_LINK.
 			require
 				link_exists: element /= Void
 				valid_number_of_nesting: nesting >= 0
@@ -67,23 +48,21 @@ deferred class
 			end
 
 
-		render_image(element: YODA_IMAGE; nesting: INTEGER): STRING
-			--Perform render operation on YODA_IMAGE
+		render_YODA_image(element: YODA_IMAGE; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_IMAGE.
 			require
 				image_exists: element /= Void
 				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
 
-		render_snipped(element: YODA_SNIPPET; nesting: INTEGER): STRING
-			--Perform render operation on YODA_SNIPPET
+		render_YODA_snippet(element: YODA_SNIPPET; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_SNIPPET.
 			require
 				snipped_exists: element /= Void
 				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
 
-	invariant
-		placeholder: True
 
 end

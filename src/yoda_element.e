@@ -24,11 +24,9 @@ deferred class
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			-- Apply YODA_ELEMENT render to renderer.
-			require 
 			deferred
 			end
 
 	invariant
-		placeholder: True
 		validation_languages_list_instantiated: validation_languages /= void
 end
