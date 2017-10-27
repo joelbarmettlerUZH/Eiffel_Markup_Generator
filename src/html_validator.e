@@ -22,7 +22,44 @@ class
 			end
 
 
-		validata_text(element: YODA_TEXT): BOOLEAN
+		validate_text(element: YODA_TEXT): BOOLEAN
+			--validates a text element whether possible in html and returns a boolean
+			require
+				placeholder: True
+				element_not_empty: element /= void
+
+			do
+				--check constraints of html text
+			ensure
+				placeholder: True
+			end
+
+
+		validate_table(element: YODA_TABLE): BOOLEAN
+			--validates a table element whether possible in html and returns a boolean
+			require
+				placeholder: True
+				element_not_empty: element /= void
+			do
+				--check constraints of html table
+			ensure
+				placeholder: True
+			end
+
+
+		validate_list(element: YODA_LIST): BOOLEAN
+			--some fancy comment
+			require
+				placeholder: True
+				element_not_empty: element /= void
+			do
+				--comment what is done
+			ensure
+				placeholder: True
+			end
+
+
+		validate_link(element: YODA_LINK): BOOLEAN
 			--some fancy comment
 			require
 				placeholder: True
@@ -33,7 +70,7 @@ class
 			end
 
 
-		validata_table(element: YODA_TABLE): BOOLEAN
+		validate_image(element: YODA_IMAGE): BOOLEAN
 			--some fancy comment
 			require
 				placeholder: True
@@ -43,40 +80,7 @@ class
 				placeholder: True
 			end
 
-
-		validata_list(element: YODA_LIST): BOOLEAN
-			--some fancy comment
-			require
-				placeholder: True
-			do
-				--comment what is done
-			ensure
-				placeholder: True
-			end
-
-
-		validata_link(element: YODA_LINK): BOOLEAN
-			--some fancy comment
-			require
-				placeholder: True
-			do
-				--comment what is done
-			ensure
-				placeholder: True
-			end
-
-
-		validata_image(element: YODA_IMAGE): BOOLEAN
-			--some fancy comment
-			require
-				placeholder: True
-			do
-				--comment what is done
-			ensure
-				placeholder: True
-			end
-
-		validata_snippet(element: YODA_IMAGE): BOOLEAN
+		validate_snippet(element: YODA_IMAGE): BOOLEAN
 			--some fancy comment
 			require
 				placeholder: True

@@ -12,19 +12,19 @@ deferred class
 
 	feature {ANY}
 		validate(element: YODA_ELEMENT; validation_function: PREDICATE[VALIDATOR,YODA_ELEMENT]): BOOLEAN
+			--some fancy comments
 			require
 				element_not_void: element /= void
 			do
 				--validation through the yoda_element and
 				--the specific validation_function predicate is done, boolean gets returned
 			ensure
-
+			--some fancy comments
 			end
 
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			-- Apply YODA_ELEMENT render to renderer.
-			require 
 			deferred
 			end
 
