@@ -42,11 +42,11 @@ class
 		bold(u_content: STRING): STRING
 			--some fancy comment
 			require
-				placeholder: True
+				u_content_not_empty: not u_content.is_empty
 			do
 				--comment what is done
 			ensure
-				placeholder: True
+				result_is_String: {t: String} Result
 			end
 
 
@@ -54,10 +54,12 @@ class
 			--some fancy comment
 			require
 				placeholder: True
+				u_content_not_empty: not u_content.is_empty
 			do
 				--comment what is done
 			ensure
 				placeholder: True
+				result_is_String: {t: String} Result
 			end
 
 
@@ -65,10 +67,13 @@ class
 			--some fancy comment
 			require
 				placeholder: True
+				u_content_not_empty: not u_content.is_empty
+				placeholder: True
 			do
 				--comment what is done
 			ensure
 				placeholder: True
+				result_is_String: {t: String} Result
 			end
 
 
@@ -76,13 +81,16 @@ class
 			--some fancy comment
 			require else
 				placeholder: True
+				render_obj_not_null: render_obj /= void
 			do
 				--comment what is done
 			ensure then
 				placeholder: True
+				result_is_String: {t: String} Result
 			end
 
 
 	invariant
 		placeholder: True
+		content_text_instantiated: content /= void
 end

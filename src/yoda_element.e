@@ -12,27 +12,27 @@ deferred class
 
 	feature {ANY}
 		validate(element: YODA_ELEMENT; validation_function: PREDICATE[VALIDATOR,YODA_ELEMENT]): BOOLEAN
-			--some fancy comment
 			require
-				placeholder: True
+				element_not_void: element /= void
 			do
-				--comment what is done
+				--validation through the yoda_element and
+				--the specific validation_function predicate is done, boolean gets returned
 			ensure
-				placeholder: True
+
 			end
 
 
 		render(render_obj: RENDERER; nesting: INTEGER): STRING
-			--some fancy comment
 			require else
-				placeholder: True
+				render_obj_not_void: render_obj /= void
+				--no nesting check yet
+
 			deferred
 			ensure then
-				placeholder: True
+				validation_languages_not_empty: not validation_languages.is_empty
 			end
-
 
 	invariant
 		placeholder: True
-
+		validation_languages_list_instantiated: validation_languages /= void
 end

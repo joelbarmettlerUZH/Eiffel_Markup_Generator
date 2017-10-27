@@ -23,6 +23,8 @@ class
 			--some fancy comment
 			require
 				placeholder: True
+				u_content /= void
+				u_content.count > 0
 			do
 				--comment what is done
 			ensure

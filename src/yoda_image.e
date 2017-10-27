@@ -20,9 +20,10 @@ class
 
 	feature {ANY}
 		make(u_content: STRING)
-			--some fancy comment
 			require
 				placeholder: True
+				String_not_void: u_content /= void
+				String_not_empty: u_content.count > 0
 			do
 				--comment what is done
 			ensure
@@ -34,15 +35,16 @@ class
 		render(render_obj: RENDERER; nesting: INTEGER): STRING
 			--some fancy comment
 			require else
-				placeholder: True
+				render_obj /= void
+
 			do
 				--comment what is done
 			ensure then
-				placeholder: True
+				result_is_YODA_LINK: {t: String} Result
 			end
 
 
 	invariant
-		placeholder: True
+		content_text_instantiated: content /= void
 
 end
