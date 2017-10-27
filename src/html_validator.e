@@ -48,44 +48,47 @@ class
 
 
 		validate_list(element: YODA_LIST): BOOLEAN
-			--some fancy comment
+			--validate a list element whether possible in html and returns a boolean
 			require
 				placeholder: True
 				element_not_empty: element /= void
 			do
-				--comment what is done
+				--check constraints of html list
 			ensure
 				placeholder: True
 			end
 
 
 		validate_link(element: YODA_LINK): BOOLEAN
-			--some fancy comment
+			--validates a link element whether possible in html and returns a boolean
 			require
 				placeholder: True
+				element_not_empty: element /= void
 			do
-				--comment what is done
+				--check constraints of html link
 			ensure
 				placeholder: True
 			end
 
 
 		validate_image(element: YODA_IMAGE): BOOLEAN
-			--some fancy comment
+			--validates an image element heter possible in html and returns a boolean
 			require
 				placeholder: True
+				element_not_empty: element /= void
 			do
-				--comment what is done
+				--check constraints of html image
 			ensure
 				placeholder: True
 			end
 
 		validate_snippet(element: YODA_IMAGE): BOOLEAN
-			--some fancy comment
+			--validates a snippet image
 			require
 				placeholder: True
+				element_not_empty: element /= void
 			do
-				--comment what is done
+				--ceck constraints of html snippet
 			ensure
 				placeholder: True
 			end
