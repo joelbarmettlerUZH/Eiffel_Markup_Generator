@@ -17,14 +17,13 @@ create
 	make_style
 
 feature
-	style_render(render_obj: RENDERER; nesting: INTEGER): STRING
-		-- Apply TEXT_DECORATOR_CODE render to renderer.
+	style_render(renderer: RENDERER; nesting: INTEGER): STRING
+		-- Apply render_code renderer to TEXT_DECORATOR_CODE.
 		require
 			renderer_exists: renderer /= Void
 			valid_number_of_nesting: nesting >= 0
 		do
 			-- Calls Renderer.render_code(current, int)
-		ensure
 		end
 
 end

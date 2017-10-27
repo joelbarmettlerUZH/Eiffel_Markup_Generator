@@ -129,4 +129,78 @@ class
 				-- return YODA_SNIPPET.content
 			end
 
+		render_bold(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_TEXT_INTERFACE.
+			require
+				bold_exists: element /= Void
+				valid_number_of_nesting: nesting >= 0
+			do
+				-- Surround element.Content with the corresponding HTML-tag bold.
+			ensure
+				valid_start_tag: return_string.has_prefix("<b>")
+				valid_end_tag: return_string.has_suffix("<\b>")
+			end
+
+		render_code(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_TEXT_INTERFACE.
+			require
+				code_exists: element /= Void
+				valid_number_of_nesting: nesting >= 0
+			do
+				-- Surround element.Content with the corresponding HTML-tag for code.
+			ensure
+				valid_start_tag: return_string.has_prefix("<code>")
+				valid_end_tag: return_string.has_suffix("<\code>")
+			end
+
+		render_italic(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_TEXT_INTERFACE.
+			require
+				italic_exists: element /= Void
+				valid_number_of_nesting: nesting >= 0
+			do
+				-- Surround element.Content with the corresponding HTML-tag for italic.
+			ensure
+				valid_start_tag: return_string.has_prefix("<i>")
+				valid_end_tag: return_string.has_suffix("<\i>")
+			end
+
+		render_qoute(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_TEXT_INTERFACE.
+			require
+				quote_exists: element /= Void
+				valid_number_of_nesting: nesting >= 0
+			do
+				-- Surround element.Content with the corresponding HTML-tag for quote.
+			ensure
+				valid_start_tag: return_string.has_prefix("<blockquote>")
+				valid_end_tag: return_string.has_suffix("<\blockquote>")
+			end
+
+		render_title(element: YODA_TEXT_INTERFACE; nesting: INTEGER; strength: INTEGER): STRING
+			-- Perform render operation on YODA_TEXT_INTERFACE.
+			require
+				quote_exists: element /= Void
+				valid_number_of_nesting: nesting >= 0
+				--stength is validated by the decorator
+			do
+				-- Surround element.Content with the corresponding HTML-tag for title with the corresponding strength.
+			ensure
+				valid_start_tag: return_string.has_prefix("<h"+strength+">")
+				valid_end_tag: return_string.has_suffix("<\h"+strength+">")
+			end
+			end
+
+		render_underline(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_TEXT_INTERFACE.
+			require
+				underline_exists: element /= Void
+				valid_number_of_nesting: nesting >= 0
+			do
+				-- Surround element.Content with the corresponding HTML-tag for underline.
+			ensure
+				valid_start_tag: return_string.has_prefix("<u>")
+				valid_end_tag: return_string.has_suffix("<\u>")
+			end
+
 end

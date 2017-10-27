@@ -17,14 +17,13 @@ create
 	make_style
 
 feature
-	render(render_obj: RENDERER; nesting: INTEGER): STRING
-		-- Apply TEXT_DECORATOR_ITALIC render to renderer.
+	render(renderer: RENDERER; nesting: INTEGER): STRING
+		-- Apply render_italic renderer to TEXT_DECORATOR_ITALIC.
 		require
 			renderer_exists: renderer /= Void
 			valid_number_of_nesting: nesting >= 0
 		do
 			-- Calls Renderer.render_italic(current, int)
-		ensure
 		end
 
 end

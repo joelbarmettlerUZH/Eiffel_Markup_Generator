@@ -64,5 +64,54 @@ deferred class
 			deferred
 			end
 
+		render_bold(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_TEXT_INTERFACE.
+			require
+				bold_exists: element /= Void
+				valid_number_of_nesting: nesting >= 0
+			deferred
+			end
+
+		render_code(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_TEXT_INTERFACE.
+			require
+				code_exists: element /= Void
+				valid_number_of_nesting: nesting >= 0
+			deferred
+			end
+
+		render_italic(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_TEXT_INTERFACE.
+			require
+				italic_exists: element /= Void
+				valid_number_of_nesting: nesting >= 0
+			deferred
+			end
+
+		render_qoute(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_TEXT_INTERFACE.
+			require
+				quote_exists: element /= Void
+				valid_number_of_nesting: nesting >= 0
+			deferred
+			end
+
+		render_title(element: YODA_TEXT_INTERFACE; nesting: INTEGER; strength: INTEGER): STRING
+			-- Perform render operation on YODA_TEXT_INTERFACE.
+			require
+				quote_exists: element /= Void
+				valid_number_of_nesting: nesting >= 0
+				--stength is validated by the decorator
+			deferred
+			end
+
+		render_underline(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_TEXT_INTERFACE.
+			require
+				underline_exists: element /= Void
+				valid_number_of_nesting: nesting >= 0
+			deferred
+			end
+
 
 end

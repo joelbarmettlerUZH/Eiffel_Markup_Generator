@@ -14,10 +14,10 @@ inherit
 		end
 
 feature {NONE}
-	component: YODA_TEXT
+	component: YODA_TEXT_INTERFACE
 
 feature {NONE}
-	make_style(u_component: like component)
+	make_style(u_component: YODA_TEXT_INTERFACE)
 			-- Set `component' to `u_component'.
 		require
 			u_component_not_void: u_component /= Void
@@ -28,8 +28,7 @@ feature {NONE}
 		end
 
 feature
-	render(render_obj: RENDERER; nesting: INTEGER): STRING
-		do
+	render(renderer: RENDERER; nesting: INTEGER): STRING
 		deferred
 		end
 
