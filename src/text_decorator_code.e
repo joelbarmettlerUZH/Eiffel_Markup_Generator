@@ -10,7 +10,7 @@ class
 inherit
 	TEXT_DECORATOR
 		redefine
-			style_render
+			render
 		end
 
 create
@@ -18,9 +18,13 @@ create
 
 feature
 	style_render(render_obj: RENDERER; nesting: INTEGER): STRING
-
-	do
-		--call code renderer
-	end
+		-- Apply TEXT_DECORATOR_CODE render to renderer.
+		require
+			renderer_exists: renderer /= Void
+			valid_number_of_nesting: nesting >= 0
+		do
+			-- Calls Renderer.render_code(current, int)
+		ensure
+		end
 
 end

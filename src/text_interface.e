@@ -5,7 +5,7 @@ note
 	revision: "$27.10.2017$"
 
 deferred class
-	TEXT_INTERFACE
+	YODA_TEXT_INTERFACE
 
 	inherit
 		YODA_ELEMENT

@@ -8,7 +8,7 @@ class
 	YODA_TEXT
 
 	inherit
-		TEXT_INTERFACE
+		YODA_TEXT_INTERFACE
 
 	create
 		make
