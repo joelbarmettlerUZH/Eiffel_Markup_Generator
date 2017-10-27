@@ -1,9 +1,8 @@
 note
-	description: "Summary description for {YODA_DOCUMENT}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
-
+	description: "Document that contain elements."
+	author: "Joel Barmettler"
+	date: "$25.10.17$"
+	revision: "$27.10.2017$"
 class
 	YODA_DOCUMENT
 
@@ -14,7 +13,6 @@ class
 		--name and elements shall be public, allow access for everybody
 		elements: LINKED_LIST[YODA_ELEMENT]
 		name: STRING
-
 
 
 	feature {ANY}
@@ -53,5 +51,5 @@ class
 
 	invariant
 		placeholder: True
-
+		elements_never_void: elements /= void implies elements.count > 0
 end

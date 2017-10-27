@@ -1,8 +1,8 @@
 note
 	description: "Summary description for {TEXT_DECORATOR_BOLD}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	author: "Marius Högger"
+	date: "$26.10.2017$"
+	revision: "$27.10.2017$"
 
 class
 	TEXT_DECORATOR_BOLD

@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {YODA_ELEMENT}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "Deferred Yoda Element."
+	author: "Joel Barmettler"
+	date: "$25.10.17$"
+	revision: "$27.10.2017$"
 
 deferred class
 	YODA_ELEMENT

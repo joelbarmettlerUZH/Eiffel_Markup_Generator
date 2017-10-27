@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {YODA_LINK}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "Concrete element Yoda link."
+	author: "Joel Barmettler"
+	date: "$25.10.17$"
+	revision: "$27.10.2017$"
 
 class
 	YODA_LINK

@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {YODA_PROJECT}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "Yoda project that contains documents."
+	author: "Joel Barmettler"
+	date: "$25.10.17$"
+	revision: "$27.10.2017$"
 
 class
 	YODA_PROJECT

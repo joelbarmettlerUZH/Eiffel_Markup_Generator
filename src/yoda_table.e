@@ -1,8 +1,8 @@
 note
 	description: "Summary description for {YODA_TABLE}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	author: "Joel Barmettler"
+	date: "$25.10.17$"
+	revision: "$27.10.2017$"
 
 class
 	YODA_TABLE

@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {HTML_VALIDATOR}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "Concrete validator that validates the concrete elements in terms of the constraints given by html."
+	author: "Joel Barmettler"
+	date: "$25.10.17$"
+	revision: "$27.10.2017$"
 
 class
 	HTML_VALIDATOR

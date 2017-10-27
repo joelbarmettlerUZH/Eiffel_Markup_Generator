@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {HTML_RENDERER}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "Concrete renderer that converts the concrete elements into html."
+	author: "Joel Barmettler"
+	date: "$25.10.17$"
+	revision: "$27.10.2017$"
 
 class
 	HTML_RENDERER

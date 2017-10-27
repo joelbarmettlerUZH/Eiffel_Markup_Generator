@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {YODA_LIST}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "Concretete element Yoda list."
+	author: "Joel Barmettler"
+	date: "$25.10.17$"
+	revision: "$27.10.2017$"
 
 class
 	YODA_LIST

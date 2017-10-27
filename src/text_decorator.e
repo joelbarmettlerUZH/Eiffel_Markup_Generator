@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {TEXT_DECORATOR}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "Deferred component of the decorator."
+	author: "Marius Högger"
+	date: "$26.10.2017$"
+	revision: "$27.10.2017$"
 
 deferred class
 	TEXT_DECORATOR

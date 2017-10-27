@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {VALIDATOR}."
-	author: ""
-	date: "$Date$"
-	revision: "$Revision$"
+	description: "Deferred validator for each concrete element."
+	author: "Joel Barmettler"
+	date: "$25.10.17$"
+	revision: "$27.10.2017$"
 
 deferred class
 	VALIDATOR
