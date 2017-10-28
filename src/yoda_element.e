@@ -12,22 +12,28 @@ deferred class
 
 	feature {ANY}
 		validate(element: YODA_ELEMENT; validation_function: PREDICATE[VALIDATOR,YODA_ELEMENT]): BOOLEAN
-			--some fancy comments
+			--The validation commander iterates validates a provided element with the corresponding validation_function for all validation_languages
 			require
-				element_not_void: element /= void
+				element_not_void: attached element
+			local
+				is_valid: BOOLEAN
 			do
-				--validation through the yoda_element and
-				--the specific validation_function predicate is done, boolean gets returned
+				--Create the array validation_langauges with instances of all supported output-langauges
+				--create a is_valid boolean, set to True
+				--iterate thorugh the array
+				--for each array, call the provided validation function and pass the element as its argument
+				--the returned value is now either True or False, update is_valid via is_valid AND Result
+				--return is_valid
 			ensure
-			--some fancy comments
+				return_is_valid: Result = is_valid implies Result = True
 			end
 
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
-			-- Apply YODA_ELEMENT render to renderer.
+			-- deferred function that allows all elements to get visited by a Renderer
 			deferred
 			end
 
 	invariant
-		validation_languages_list_instantiated: validation_languages /= void
+		validation_languages_list_instantiated: attached validation_languages
 end

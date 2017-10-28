@@ -21,13 +21,12 @@ class
 
 	feature {ANY}
 		make(u_content: ARRAY[YODA_ELEMENT]; u_is_ordered: BOOLEAN)
-			--some fancy comment
+			--Creates the YODA_LIST, validates it and sets the feature variables
 			require else
 				u_content_not_void: u_content /= void
 				u_content_not_empty: u_content.count > 0
 
 			do
-
 				--validation
 				--comment what is done
 				--make instance of ARRAY

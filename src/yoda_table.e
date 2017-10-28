@@ -20,7 +20,7 @@ class
 
 	feature {ANY}
 		make(u_content: ARRAY2[YODA_ELEMENT])
-			--some fancy comment
+			--Creates the YODA_TABLE, validates it and sets the feature variables
 			require
 				placeholder: True
 				u_content /= void

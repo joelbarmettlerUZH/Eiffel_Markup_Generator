@@ -20,30 +20,31 @@ class
 
 	feature {ANY}
 		make(u_content: STRING)
-			require else
+			--Creates the YODA_IMAGE, validates it and sets the feature variables
+			require
 				placeholder: True
-				String_not_void: u_content /= void
+				String_not_void: attached u_content
 				String_not_empty: u_content.count > 0
 			do
-				--comment what is done
-			ensure then
+				--set content to u_content
+			ensure
 				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_image(?))
-				placeholder: True
+				content_set: content = u_content
 			end
 
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			-- Apply YODA_IMAGE render to renderer.
-			require else
-				renderer_exists: renderer /= Void
+			require
+				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
 			do
-				-- Calls Renderer.render_image(current, int)
-			ensure then
+				--Calls Renderer.render_image(current, int)
+				--returns the rendered string
 			end
 
 
 	invariant
-		content_text_instantiated: content /= void
+		content_text_instantiated: attached content
 
 end

@@ -22,7 +22,7 @@ class
 
 	feature {ANY}
 		make(u_content: STRING)
-			--some fancy comment
+			--Creates the YODA_TEXT, validates it and sets the feature variables
 			require else
 				u_content_not_void: u_content /= void
 				u_content_not_empty: u_content.count > 0

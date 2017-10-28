@@ -23,7 +23,7 @@ class
 
 	feature {ANY}
 		make(u_content, u_url: STRING)
-			--some fancy comment
+			--Creates the YODA_LINK, validates it and sets the feature variables
 			require
 				u_content_not_void: u_content /= void
 				u_url_not_void: u_url /= void
@@ -33,7 +33,7 @@ class
 				--comment what is done
 			ensure
 				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_link(?))
-				placeholder: True
+				content_set: content = u_content
 			end
 
 

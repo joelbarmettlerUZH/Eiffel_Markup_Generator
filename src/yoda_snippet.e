@@ -20,7 +20,7 @@ class
 
 	feature {ANY}
 		make(u_content: STRING)
-			--some fancy comment
+			--Creates the YODA_SNIPPET, validates it and sets the feature variables
 			require else
 				placeholder: True
 			do
