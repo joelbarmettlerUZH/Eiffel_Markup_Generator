@@ -21,6 +21,8 @@ class
 				--check if the text contains any from us defined tags like {{u}}.
 				--if it does, delete them
 				--return True when no exception occured allong the way
+			ensure
+				returnes_true: Result = True
 			end
 
 
@@ -33,6 +35,8 @@ class
 				--check if table has at least one entries
 				--raise acception otherwise
 				--return True when no exception occured allong the way
+			ensure
+				returnes_true: Result = True
 			end
 
 
@@ -45,6 +49,8 @@ class
 				--check if list has at least one entries
 				--raise acception otherwise
 				--return True when no exception occured allong the way
+			ensure
+				returnes_true: Result = True
 			end
 
 
@@ -63,6 +69,8 @@ class
 				--if it is, check whether it matches RegEx of a valid E-Mail
 				--if it does not, raise an exception
 				--return True when no exception occured allong the way
+			ensure
+				returnes_true: Result = True
 			end
 
 
@@ -77,6 +85,8 @@ class
 				--check whether the local image is on a relatively defined path
 				--if it is not, raise an exception
 				--return True when no exception occured allong the way
+			ensure
+				returnes_true: Result = True
 			end
 
 		validate_snippet(element: YODA_SNIPPET): BOOLEAN
@@ -87,6 +97,8 @@ class
 				--check whether snippet contains tags like </HTML> or </body> that would lead to messed up output
 				--if so, throw an exception
 				--return True when no exception occured allong the way
+			ensure
+				returnes_true: Result = True
 			end
 
 end
