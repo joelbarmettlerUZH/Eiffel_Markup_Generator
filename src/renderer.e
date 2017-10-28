@@ -13,7 +13,7 @@ deferred class
 
 	feature {ANY}
 
-		render_YODA_text_interface(element: YODA_TEXT; nesting: INTEGER): STRING
+		render_YODA_text_interface(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT.
 			require
 				text_exists: element /= Void
