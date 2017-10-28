@@ -20,8 +20,7 @@ class
 		make(u_name: STRING)
 			--creates instance of document, uses name for it
 			require
-				attached u_name
-				u_name_not_empty: u_name /= void
+				u_name_exists: attached u_name
 			do
 				--class variable name = u_name
 				--instanciate document
@@ -33,7 +32,7 @@ class
 		add_element(element: YODA_ELEMENT)
 			--adds a Yoda element to the class variable elements: linked list
 			require
-				element_not_empty: element /= void
+				element_exists: attached element
 			do
 				--add element to list of elements
 			ensure
@@ -43,7 +42,7 @@ class
 
 		render(output_format: STRING): STRING
 			require
-				output_format_not_void: output_format /= void
+				output_format_exists: attached output_format
 				output_format_not_empty: not output_format.is_empty
 			do
 				--instanciation of needed renderer calls sub renderer if existing
