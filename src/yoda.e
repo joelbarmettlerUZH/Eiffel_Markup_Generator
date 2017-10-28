@@ -14,14 +14,14 @@ class
 		text(content: STRING): YODA_TEXT
 			--Factory that creates a TEXT object and returns it to the user
 			require
-				text_not_void: content /= void
+				text_not_void: attached content
 				text_not_empty: not content.is_empty
 			local
 				text: YODA_TEXT
 			do
 				--creates an instance of YODA_TEXT via YODA_TEXT.make and returns it
 			ensure
-				result_not_void: Result =/ void
+				result_not_void: attached Result
 				result_is_YODA_TEXT: {t: YODA_TEXT} Result
 			end
 
@@ -29,14 +29,14 @@ class
 		table(content: ARRAY2[YODA_ELEMENT]): YODA_TABLE
 			--Factory that creates a TABLE object and returns it to the user
 			require
-				array_not_void: content /= void
+				array_not_void: attached content
 				array_not_empty: not content.is_empty
 			local
 				table: 	YODA_TABLE
 			do
 				--creates an instance of YODA_TABLE via YODA_TABLE.make and returns it
 			ensure
-				result_not_void: Result =/ void
+				result_not_void: attached Result
 				result_is_YODA_TABLE: {t: YODA_TABLE} Result
 			end
 
@@ -44,14 +44,14 @@ class
 		list(content: ARRAY[YODA_ELEMENT]): YODA_LIST
 			--Factory that creates a LIST object and returns it to the user
 			require
-				array_not_void: content /= void
+				array_not_void: attached content
 				array_not_empty: not content.is_empty
 			local
 				list: YODA_LIST
 			do
 				--creates an instance of YODA_LIST via YODA_LIST.make and returns it
 			ensure
-				result_not_void: Result =/ void
+				result_not_void: attached Result
 				result_is_YODA_LIST: {t: YODA_LIST} Result
 			end
 
@@ -59,7 +59,7 @@ class
 		link_intern(content: STRING; linked_doc: YODA_DOCUMENT): YODA_LINK
 			--Factory that creates an internal LINK object and returns it to the user
 			require
-				string_not_void: content /= void
+				string_not_void: attached content
 				string_not_empty: not content.is_empty
 				linked_doc_not_void: linked_doc =/ void
 				linked_doc_correct_type: {t: YODA_DOCUMENT} linked_doc
@@ -68,7 +68,7 @@ class
 			do
 				--creates an instance of YODA_LINK via YODA_LINK.make_internal and returns it
 			ensure
-				result_not_void: Result =/ void
+				result_not_void: attached Result
 				result_is_YODA_LINK: {t: YODA_LINK} Result
 			end
 
@@ -76,7 +76,7 @@ class
 		link_extern(content, url: STRING): YODA_LINK
 			--Factory that creates an external LINK object and returns it to the user
 			require
-				string_not_void: content /= void
+				string_not_void: attached content
 				string_not_empty: not content.is_empty
 				linked_doc_not_void: linked_doc =/ void
 				linked_doc_correct_type: {t: YODA_DOCUMENT} linked_doc
@@ -85,7 +85,7 @@ class
 			do
 				--creates an instance of YODA_LINK via YODA_LINK.make and returns it
 			ensure
-				result_not_void: Result =/ void
+				result_not_void: attached Result
 				result_is_YODA_LINK: {t: YODA_LINK} Result
 			end
 
@@ -93,14 +93,14 @@ class
 		email(mail_address: STRING): YODA_LINK
 			--Factory that creates an email LINK object and returns it to the user
 			require
-				string_not_void: content /= void
+				string_not_void: attached content
 				string_not_empty: not content.is_empty
 			local
 				link: YODA_LINK
 			do
 				--creates an instance of YODA_LINK via YODA_LINK.make_email and returns it
 			ensure
-				result_not_void: Result =/ void
+				result_not_void: attached Result
 				result_is_YODA_LINK: {t: YODA_LINK} Result
 			end
 
@@ -108,14 +108,14 @@ class
 		image(content: STRING): YODA_IMAGE
 			--Factory that creates an IMAGE object and returns it to the user
 			require
-				string_not_void: content /= void
+				string_not_void: attached content
 				string_not_empty: not content.is_empty
 			local
 				image: YODA_IMAGE
 			do
 				--creates an instance of YODA_IMAGE via YODA_IMAGE.make and returns it
 			ensure
-				result_not_void: Result =/ void
+				result_not_void: attached Result
 				result_is_YODA_LINK: {t: YODA_IMAGE} Result
 			end
 
@@ -123,14 +123,14 @@ class
 		snippet(content: STRING): YODA_SNIPPET
 			--Factory that creates a SNIPPET object and returns it to the user
 			require
-				string_not_void: content /= void
+				string_not_void: attached content
 				string_not_empty: not content.is_empty
 			local
 				snippet: YODA_SNIPPET
 			do
 				--creates an instance of YODA_SNIPPET via YODA_SNIPPET.make and returns it
 			ensure
-				result_not_void: Result =/ void
+				result_not_void: attached Result
 				result_is_YODA_LINK: {t: YODA_SNIPPET} Result
 			end
 
@@ -138,14 +138,14 @@ class
 		bold(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates a text decorator of type YODA_TEXT_INTERFACE which decorates a casual yoda text object
 			require
-				element_existing: content /= void
+				element_existing: attached content
 				element_type_YODA_TEXT: {t: YODA_TEXT_INTERFACE} content
 			local
 				decorator: YODA_TEXT_INTERFACE
 			do
 				--creates an instance of YODA_TEXT via TEXT_DECORATOR_BOLD.make_style and returns it
 			ensure
-				result_not_void: Result =/ void
+				result_not_void: attached Result
 				result_is_YODA_LINK: {t: YODA_TEXT_INTERFACE} Result
 			end
 
@@ -153,14 +153,14 @@ class
 		code(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates a text decorator of type YODA_TEXT_INTERFACE which decorates a casual yoda text object
 			require
-				element_existing: content /= void
+				element_existing: attached content
 				element_type_YODA_TEXT: {t: YODA_TEXT_INTERFACE} content
 			local
 				decorator: YODA_TEXT_INTERFACE
 			do
 				--creates an instance of YODA_TEXT via TEXT_DECORATOR_CODE.make_style and returns it
 			ensure
-				result_not_void: Result =/ void
+				result_not_void: attached Result
 				result_is_YODA_LINK: {t: YODA_TEXT_INTERFACE} Result
 			end
 
@@ -168,14 +168,14 @@ class
 		italic(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates a text decorator of type YODA_TEXT_INTERFACE which decorates a casual yoda text object
 			require
-				element_existing: content /= void
+				element_existing: attached content
 				element_type_YODA_TEXT: {t: YODA_TEXT_INTERFACE} content
 			local
 				decorator: YODA_TEXT_INTERFACE
 			do
 				--creates an instance of YODA_TEXT via TEXT_DECORATOR_ITALIC.make_style and returns it
 			ensure
-				result_not_void: Result =/ void
+				result_not_void: attached Result
 				result_is_YODA_LINK: {t: YODA_TEXT_INTERFACE} Result
 			end
 
@@ -183,42 +183,42 @@ class
 		quote(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates a text decorator of type YODA_TEXT_INTERFACE which decorates a casual yoda text object
 			require
-				element_existing: content /= void
+				element_existing: attached content
 				element_type_YODA_TEXT: {t: YODA_TEXT_INTERFACE} content
 			local
 				decorator: YODA_TEXT_INTERFACE
 			do
 				--creates an instance of YODA_TEXT via TEXT_DECORATOR_QUOTE.make_style and returns it
 			ensure
-				result_not_void: Result =/ void
+				result_not_void: attached Result
 				result_is_YODA_LINK: {t: YODA_TEXT_INTERFACE} Result
 			end
 
 		underline(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates a text decorator of type YODA_TEXT_INTERFACE which decorates a casual yoda text object
 			require
-				element_existing: content /= void
+				element_existing: attached content
 				element_type_YODA_TEXT: {t: YODA_TEXT_INTERFACE} content
 			local
 				decorator: YODA_TEXT_INTERFACE
 			do
 				--creates an instance of YODA_TEXT via TEXT_DECORATOR_UNDERLINE.make_style and returns it
 			ensure
-				result_not_void: Result =/ void
+				result_not_void: attached Result
 				result_is_YODA_LINK: {t: YODA_TEXT_INTERFACE} Result
 			end
 
 		title(content: YODA_TEXT_INTERFACE; strength: INTEGER): YODA_TEXT_INTERFACE
 			--Factory that creates a text decorator of type YODA_TEXT_INTERFACE which decorates a casual yoda text object
 			require
-				element_existing: content /= void
+				element_existing: attached content
 				element_type_YODA_TEXT: {t: YODA_TEXT_INTERFACE} content
 			local
 				decorator: YODA_TEXT_INTERFACE
 			do
 				--creates an instance of YODA_TEXT via TEXT_DECORATOR_TITLE.make_style_with_attribute and returns it
 			ensure
-				result_not_void: Result =/ void
+				result_not_void: attached Result
 				result_is_YODA_LINK: {t: YODA_TEXT_INTERFACE} Result
 			end
 
@@ -227,45 +227,51 @@ class
 		b(content: STRING): STRING
 			--takes a String, puts corresponding tags to it
 			require
-				content_not_void: content /= void
+				content_not_void: attached content
 				content_not_empty: not content.is_empty
 			local
 				bold_text: STRING
 			do
-				--puts bold around STRING
-
+				--puts our self-defined BOLD-Tags {{b}} around STRING and returns it
 			ensure
+				result_not_void: attached Result
 				bold_text_not_empty: not bold_text.is_empty
+				valid_start_tag: return_string.has_prefix("{{b}}")
+				valid_end_tag: return_string.has_suffix ("{{/b}}")
 			end
 
 
 		i(content: STRING): STRING
 			--takes a String, puts corresponding tags to it
 			require
-				content_not_void: content /= void
+				content_not_void: attached content
 				content_not_empty: not content.is_empty
 			local
 				italic_text: STRING
 			do
-				--puts italic around STRING
-
+				--puts our self-defined ITALIC-Tags {{i}} around STRING and returns it
 			ensure
+				result_not_void: attached Result
 				italic_text_not_empty: not italic_text.is_empty
+				valid_start_tag: return_string.has_prefix("{{i}}")
+				valid_end_tag: return_string.has_suffix ("{{/i}}")
 			end
 
 
 		u(content: STRING): STRING
 			--takes a String, puts corresponding tags to it
 			require
-				content_not_void: content /= void
+				content_not_void: attached content
 				content_not_empty: not content.is_empty
 			local
 				underline_text: STRING
 			do
-				--puts underline around STRING
-
+				--puts our self-defined BOLD-Tags {{u}} around STRING and returns it
 			ensure
+				result_not_void: attached Result
 				underline_text_not_empty: not underline_text.is_empty
+				valid_start_tag: return_string.has_prefix("{{u}}")
+				valid_end_tag: return_string.has_suffix ("{{/u}}")
 			end
 
 end
