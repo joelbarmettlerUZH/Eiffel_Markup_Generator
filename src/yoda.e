@@ -14,7 +14,7 @@ class
 		text(content: STRING): YODA_TEXT
 			--Factory that creates a TEXT object and returns it to the user
 			require
-				text_not_void: attached content
+				text_content_exists: attached content
 				text_not_empty: not content.is_empty
 			local
 				text: YODA_TEXT
@@ -29,7 +29,8 @@ class
 		table(content: ARRAY2[YODA_ELEMENT]): YODA_TABLE
 			--Factory that creates a TABLE object and returns it to the user
 			require
-				array_not_void: attached content
+
+				table_content_exists: attached content
 				array_not_empty: not content.is_empty
 			local
 				table: 	YODA_TABLE
@@ -44,7 +45,7 @@ class
 		list(content: ARRAY[YODA_ELEMENT]): YODA_LIST
 			--Factory that creates a LIST object and returns it to the user
 			require
-				array_not_void: attached content
+				list_content_exists: attached content
 				array_not_empty: not content.is_empty
 			local
 				list: YODA_LIST
@@ -59,9 +60,9 @@ class
 		link_intern(content: STRING; linked_doc: YODA_DOCUMENT): YODA_LINK
 			--Factory that creates an internal LINK object and returns it to the user
 			require
-				string_not_void: attached content
+				link_intern_content_exists: attached content
 				string_not_empty: not content.is_empty
-				linked_doc_not_void: linked_doc =/ void
+				linked_doc_exists: attached linked_doc
 				linked_doc_correct_type: {t: YODA_DOCUMENT} linked_doc
 			local
 				link: YODA_LINK
@@ -76,9 +77,9 @@ class
 		link_extern(content, url: STRING): YODA_LINK
 			--Factory that creates an external LINK object and returns it to the user
 			require
-				string_not_void: attached content
-				string_not_empty: not content.is_empty
-				linked_doc_not_void: linked_doc =/ void
+				content_exists: attached content
+				url_exists: attached url
+				linked_doc_exists: attached linked_doc
 				linked_doc_correct_type: {t: YODA_DOCUMENT} linked_doc
 			local
 				link: YODA_LINK
@@ -93,7 +94,7 @@ class
 		email(mail_address: STRING): YODA_LINK
 			--Factory that creates an email LINK object and returns it to the user
 			require
-				string_not_void: attached content
+				mail_address_exists: attached content
 				string_not_empty: not content.is_empty
 			local
 				link: YODA_LINK
@@ -108,7 +109,7 @@ class
 		image(content: STRING): YODA_IMAGE
 			--Factory that creates an IMAGE object and returns it to the user
 			require
-				string_not_void: attached content
+				image_content_exists: attached content
 				string_not_empty: not content.is_empty
 			local
 				image: YODA_IMAGE
@@ -123,7 +124,7 @@ class
 		snippet(content: STRING): YODA_SNIPPET
 			--Factory that creates a SNIPPET object and returns it to the user
 			require
-				string_not_void: attached content
+				snippet_content_exists: attached content
 				string_not_empty: not content.is_empty
 			local
 				snippet: YODA_SNIPPET
@@ -138,7 +139,7 @@ class
 		bold(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates a text decorator of type YODA_TEXT_INTERFACE which decorates a casual yoda text object
 			require
-				element_existing: attached content
+				bold_content_exists: attached content
 				element_type_YODA_TEXT: {t: YODA_TEXT_INTERFACE} content
 			local
 				decorator: YODA_TEXT_INTERFACE
@@ -153,7 +154,7 @@ class
 		code(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates a text decorator of type YODA_TEXT_INTERFACE which decorates a casual yoda text object
 			require
-				element_existing: attached content
+				code_content_exists: attached content
 				element_type_YODA_TEXT: {t: YODA_TEXT_INTERFACE} content
 			local
 				decorator: YODA_TEXT_INTERFACE
@@ -168,7 +169,7 @@ class
 		italic(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates a text decorator of type YODA_TEXT_INTERFACE which decorates a casual yoda text object
 			require
-				element_existing: attached content
+				italic_content_exists: attached content
 				element_type_YODA_TEXT: {t: YODA_TEXT_INTERFACE} content
 			local
 				decorator: YODA_TEXT_INTERFACE
@@ -183,7 +184,7 @@ class
 		quote(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates a text decorator of type YODA_TEXT_INTERFACE which decorates a casual yoda text object
 			require
-				element_existing: attached content
+				quote_content_exists: attached content
 				element_type_YODA_TEXT: {t: YODA_TEXT_INTERFACE} content
 			local
 				decorator: YODA_TEXT_INTERFACE
@@ -197,7 +198,7 @@ class
 		underline(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates a text decorator of type YODA_TEXT_INTERFACE which decorates a casual yoda text object
 			require
-				element_existing: attached content
+				underline_content_exists: attached content
 				element_type_YODA_TEXT: {t: YODA_TEXT_INTERFACE} content
 			local
 				decorator: YODA_TEXT_INTERFACE
@@ -211,7 +212,7 @@ class
 		title(content: YODA_TEXT_INTERFACE; strength: INTEGER): YODA_TEXT_INTERFACE
 			--Factory that creates a text decorator of type YODA_TEXT_INTERFACE which decorates a casual yoda text object
 			require
-				element_existing: attached content
+				title_content_exists: attached content
 				element_type_YODA_TEXT: {t: YODA_TEXT_INTERFACE} content
 			local
 				decorator: YODA_TEXT_INTERFACE
@@ -223,11 +224,11 @@ class
 			end
 
 
-			--stringfactories b(),i(),u()
+
 		b(content: STRING): STRING
 			--takes a String, puts corresponding tags to it
 			require
-				content_not_void: attached content
+				content_exists: attached content
 				content_not_empty: not content.is_empty
 			local
 				bold_text: STRING
@@ -244,7 +245,7 @@ class
 		i(content: STRING): STRING
 			--takes a String, puts corresponding tags to it
 			require
-				content_not_void: attached content
+				content_exists: attached content
 				content_not_empty: not content.is_empty
 			local
 				italic_text: STRING
@@ -261,7 +262,7 @@ class
 		u(content: STRING): STRING
 			--takes a String, puts corresponding tags to it
 			require
-				content_not_void: attached content
+				content_not_empty: attached content
 				content_not_empty: not content.is_empty
 			local
 				underline_text: STRING

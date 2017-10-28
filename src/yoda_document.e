@@ -20,38 +20,35 @@ class
 		make(u_name: STRING)
 			--creates instance of document, uses name for it
 			require
-				placeholder: True
+				u_name_exists: attached u_name
 			do
-				--comment what is done
+				--class variable name = u_name
+				--instanciate document
 			ensure
-				placeholder: True
+				name_not_empty: name = u_name
 			end
 
 
 		add_element(element: YODA_ELEMENT)
-			--some fancy comment
+			--adds a Yoda element to the class variable elements: linked list
 			require
-				placeholder: True
+				element_exists: attached element
 			do
-				--comment what is done
+				--add element to list of elements
 			ensure
-				placeholder: True
+				elements_not_empty: not elements.is_empty
 			end
 
 
 		render(output_format: STRING): STRING
-			--zbsp string = website und ruft auf alle unterdocumente render auf
-			--braucht instanz von renderers (in einem array gespeichert)sobald renderer gebaucht wird
 			require
-				placeholder: True
+				output_format_exists: attached output_format
+				output_format_not_empty: not output_format.is_empty
 			do
-				--comment what is done
-			ensure
-				placeholder: True
+				--instanciation of needed renderer calls sub renderer if existing
 			end
 
 
 	invariant
-		placeholder: True
-		elements_never_void: elements /= void implies elements.count > 0
+		name_never_void: name /= void implies name.count > 0
 end

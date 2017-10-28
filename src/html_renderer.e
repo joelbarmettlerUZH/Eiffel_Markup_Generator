@@ -10,26 +10,17 @@ class
 	inherit
 		RENDERER
 
-	create
-		make
-
 	feature {ANY}
 		corresponding_HTML_tag: ARRAY[STRING]
 			-- Store the HTML equivalents for all YODA tags.
 
 
 	feature {ANY}
-		make()
-			-- Create HTML_Renderer.
-			do
-				-- Create HTML_Renderer.
-			end
-
 
 		render_YODA_text_interface(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
 			require
-				text_exists: element /= Void
+				text_exists: attached element
 				valid_number_of_nesting: nesting >= 0
 			local
 				return_string: STRING
@@ -50,7 +41,7 @@ class
 		render_YODA_table(element: YODA_TABLE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TABLE.
 			require
-				table_exists: element /= Void
+				table_exists: attached element
 				valid_number_of_nesting: nesting >= 0
 			local
 				return_string: STRING
@@ -71,7 +62,7 @@ class
 		render_YODA_list(element: YODA_LIST; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_LIST.
 			require
-				list_exists: element /= Void
+				list_exists: attached element
 				valid_number_of_nesting: nesting >= 0
 			local
 				return_string: STRING
@@ -92,8 +83,11 @@ class
 		render_YODA_link(element: YODA_LINK; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_LINK.
 			require
-				link_exists: element /= Void
+				link_exists: attached element
 				valid_number_of_nesting: nesting >= 0
+			local
+				return_string: STRING
+				content: STRING
 			do
 				-- Surround element.Content with the corresponding HTML-tag.
 			ensure
@@ -105,7 +99,7 @@ class
 		render_YODA_image(element: YODA_IMAGE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_IMAGE.
 			require
-				image_exists: element /= Void
+				image_exists: attached element
 				valid_number_of_nesting: nesting >= 0
 			local
 				return_string: STRING
@@ -123,7 +117,7 @@ class
 		render_YODA_snippet(element: YODA_SNIPPET; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_SNIPPET.
 			require
-				snipped_exists: element /= Void
+				snippet_exists: attached element
 				valid_number_of_nesting: nesting >= 0
 			do
 				-- return YODA_SNIPPET.content
@@ -132,8 +126,11 @@ class
 		render_bold(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
 			require
-				bold_exists: element /= Void
+				bold_exists: attached element
 				valid_number_of_nesting: nesting >= 0
+			local
+				return_string: STRING
+				content: STRING
 			do
 				-- Surround element.Content with the corresponding HTML-tag bold.
 			ensure
@@ -144,8 +141,11 @@ class
 		render_code(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
 			require
-				code_exists: element /= Void
+				code_exists: attached element
 				valid_number_of_nesting: nesting >= 0
+			local
+				return_string: STRING
+				content: STRING
 			do
 				-- Surround element.Content with the corresponding HTML-tag for code.
 			ensure
@@ -156,8 +156,11 @@ class
 		render_italic(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
 			require
-				italic_exists: element /= Void
+				italic_exists: attached element
 				valid_number_of_nesting: nesting >= 0
+			local
+				return_string: STRING
+				content: STRING
 			do
 				-- Surround element.Content with the corresponding HTML-tag for italic.
 			ensure
@@ -168,8 +171,11 @@ class
 		render_qoute(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
 			require
-				quote_exists: element /= Void
+				quote_exists: attached element
 				valid_number_of_nesting: nesting >= 0
+			local
+				return_string: STRING
+				content: STRING
 			do
 				-- Surround element.Content with the corresponding HTML-tag for quote.
 			ensure
@@ -180,22 +186,27 @@ class
 		render_title(element: YODA_TEXT_INTERFACE; nesting: INTEGER; strength: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
 			require
-				quote_exists: element /= Void
+				title_exists: attached element
 				valid_number_of_nesting: nesting >= 0
 				--stength is validated by the decorator
+			local
+				return_string: STRING
+				content: STRING
 			do
 				-- Surround element.Content with the corresponding HTML-tag for title with the corresponding strength.
 			ensure
 				valid_start_tag: return_string.has_prefix("<h"+strength+">")
 				valid_end_tag: return_string.has_suffix("<\h"+strength+">")
 			end
-			end
 
 		render_underline(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
 			require
-				underline_exists: element /= Void
+				underline_exists: attached element
 				valid_number_of_nesting: nesting >= 0
+			local
+				return_string: STRING
+				content: STRING
 			do
 				-- Surround element.Content with the corresponding HTML-tag for underline.
 			ensure
