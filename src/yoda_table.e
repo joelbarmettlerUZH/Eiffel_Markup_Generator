@@ -22,14 +22,13 @@ class
 		make(u_content: ARRAY2[YODA_ELEMENT])
 			--Creates the YODA_TABLE, validates it and sets the feature variables
 			require
-				placeholder: True
-				u_content /= void
+				u_content_exists: attached u_content
 				u_content.count > 0
 			do
-				--comment what is done
+				--instantiates a table
+				--sets feature variables
 			ensure
 				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_table(?))
-				placeholder: True
 			end
 
 
@@ -37,17 +36,18 @@ class
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			-- Apply YODA_TABLE render to renderer.
 			require else
-				renderer_exists: renderer /= Void
+				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
-			do
-				-- Calls Renderer.render_table(current, int).
-			ensure then
-				placeholder: True
+			local
+    			return_string: STRING
+  			do
+    			-- Set return_string = Renderer.render_YODA_table(current, int).
+    			-- Return return_string.	
 			end
 
 
 
 	invariant
-		placeholder: True
+		content_exists: attached content
 
 end

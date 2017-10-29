@@ -23,9 +23,8 @@ class
 		make(u_content: ARRAY[YODA_ELEMENT]; u_is_ordered: BOOLEAN)
 			--Creates the YODA_LIST, validates it and sets the feature variables
 			require else
-				u_content_not_void: u_content /= void
+				u_content_not_void: attached u_content
 				u_content_not_empty: u_content.count > 0
-
 			do
 				--validation
 				--comment what is done
@@ -42,13 +41,13 @@ class
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			-- Apply YODA_LIST render to renderer.
 			require else
-				renderer_exists: renderer /= Void
+				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
+			local
+    			return_string: STRING
 			do
-				-- Calls Renderer.render_list(current, int).
-				--recieves STRING with rendered text inc. tags.
-			ensure then
-				placeholder: True
+				-- Set return_string = Renderer.render_YODA_list(current, int).
+    			-- Return return_string.
 			end
 
 

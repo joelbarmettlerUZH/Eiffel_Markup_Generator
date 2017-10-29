@@ -24,7 +24,7 @@ class
 		make(u_content: STRING)
 			--Creates the YODA_TEXT, validates it and sets the feature variables
 			require else
-				u_content_not_void: u_content /= void
+				u_content_not_void: attached u_content
 				u_content_not_empty: u_content.count > 0
 			do
 				--validation
@@ -34,62 +34,23 @@ class
 				--set is_ordered = u_is_ordered
 			ensure then
 				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_text(?))
-				content_text_instantiated: content /= void
 				content_set: content = u_content
-			end
-
-
-		bold(u_content: STRING): STRING
-			--some fancy comment
-			require
-				u_content_not_empty: not u_content.is_empty
-			do
-				--comment what is done
-			ensure
-
-			end
-
-
-		italic(u_content: STRING): STRING
-			--some fancy comment
-			require
-				placeholder: True
-				u_content_not_empty: not u_content.is_empty
-			do
-				--comment what is done
-			ensure
-				placeholder: True
-
-			end
-
-
-		underline(u_content: STRING): STRING
-			--some fancy comment
-			require
-				placeholder: True
-				u_content_not_empty: not u_content.is_empty
-				placeholder: True
-			do
-				--comment what is done
-			ensure
-				placeholder: True
-
 			end
 
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			-- Apply YODA_TEXT render to renderer.
 			require else
-				renderer_exists: renderer /= Void
+				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
-			do
-				-- Calls Renderer.render_text(current, int).
-			ensure then
-				placeholder: True
+			local
+    			return_string: STRING
+ 			do
+    			-- Set return_string = Renderer.render_YODA_text_interface(current, int).
+    			-- Return return_string.
 			end
 
 
 	invariant
-		placeholder: True
-		content_text_instantiated: content /= void
+		content_text_instantiated: attached content
 end

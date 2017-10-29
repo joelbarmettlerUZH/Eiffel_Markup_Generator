@@ -22,7 +22,6 @@ class
 		make(u_content: STRING)
 			--Creates the YODA_IMAGE, validates it and sets the feature variables
 			require
-				placeholder: True
 				String_not_void: attached u_content
 				String_not_empty: u_content.count > 0
 			do
@@ -35,12 +34,16 @@ class
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			-- Apply YODA_IMAGE render to renderer.
-			require
+			require else
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
+				local
+    				return_string: STRING
 			do
 				--Calls Renderer.render_image(current, int)
 				--returns the rendered string
+			ensure  then
+    			result_exists: attached result
 			end
 
 
