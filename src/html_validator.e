@@ -14,7 +14,7 @@ class
 		validate_text(element: YODA_TEXT): BOOLEAN
 			--validates a YODA_TEXT whether it's content is conforming with the HTML text rules. Returns True if so, False otherwise
 			require
-				element_not_empty: element /= void
+				element_not_empty: attached element
 			do
 				--check if the text does contain any closing preventing-tags that would mess up our structure.
 				--if it does, raise an exception
@@ -29,7 +29,7 @@ class
 		validate_table(element: YODA_TABLE): BOOLEAN
 			--validates a YODA_TABLE whether it's content is conforming with the HTML text rules. Returns True if so, False otherwise
 			require
-				element_not_empty: element /= void
+				element_not_empty: attached element
 			do
 				--check if all table entries are of valid type
 				--check if table has at least one entries
@@ -43,7 +43,7 @@ class
 		validate_list(element: YODA_LIST): BOOLEAN
 			--validates a YODA_LIST whether it's content is conforming with the HTML text rules. Returns True if so, False otherwise
 			require
-				element_not_empty: element /= void
+				element_not_empty: attached element
 			do
 				--check if all table entries are of valid type
 				--check if list has at least one entries
@@ -57,7 +57,7 @@ class
 		validate_link(element: YODA_LINK): BOOLEAN
 			--validates a YODA_LINK whether it's content is conforming with the HTML text rules. Returns True if so, False otherwise
 			require
-				element_not_empty: element /= void
+				element_not_empty: attached element
 			do
 				--check whether the link is external
 				--if it does, see whether it corresponds to a RegEx of a valid Link
@@ -77,7 +77,7 @@ class
 		validate_image(element: YODA_IMAGE): BOOLEAN
 			--validates a YODA_IMAGE whether it's content is conforming with the HTML text rules. Returns True if so, False otherwise
 			require
-				element_not_empty: element /= void
+				element_not_empty: attached element
 			do
 				--check whether the image is a valid link on the internet via RegEx
 				--If it is not, raise an exception
@@ -92,7 +92,7 @@ class
 		validate_snippet(element: YODA_SNIPPET): BOOLEAN
 			--validates a YODA_SNIPPET whether it's content is conforming with the HTML text rules. Returns True if so, False otherwise
 			require
-				element_not_empty: element /= void
+				element_not_empty: attached element
 			do
 				--check whether snippet contains tags like </HTML> or </body> that would lead to messed up output
 				--if so, throw an exception
