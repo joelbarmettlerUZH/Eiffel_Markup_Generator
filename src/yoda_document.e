@@ -24,6 +24,12 @@ class
 			do
 				--class variable name = u_name
 				--instanciate document
+				name := u_name
+				create elements.make
+				create renderer_instances.make_empty
+				create renderer_names.make_empty
+				renderer_instances.force (create {HTML_RENDERER}, 1)
+				renderer_names.force ("HTML", 1)
 			ensure
 				name_not_empty: name = u_name
 			end
@@ -46,6 +52,7 @@ class
 				output_format_not_empty: not output_format.is_empty
 			do
 				--instanciation of needed renderer calls sub renderer if existing
+				Result := "TEST: YODA DOCUMENT RENDERED"
 			end
 
 
