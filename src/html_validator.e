@@ -11,15 +11,31 @@ class
 		VALIDATOR
 
 	feature {ANY}
+		local
+			--prohibited_sub_string: ARRAY[STRING]
+			prohibited_sub_strings := << "</b>", "</c>" >>
+			-- Store the prohibited HTML tags as well as our own tags like {{b}} which aren't allowed in text-strings.
+			-- NOTE: not complete yet
+	feature {ANY}
 		validate_text(element: YODA_TEXT): BOOLEAN
 			--validates a YODA_TEXT whether it's content is conforming with the HTML text rules. Returns True if so, False otherwise
 			require else
 				element_not_empty: attached element
 			do
-				--check if the text does contain any closing preventing-tags that would mess up our structure.
-				--if it does, raise an exception
-				--check if the text contains any from us defined tags like {{u}}.
-				--if it does, delete them
+				--check if the text does contain any closing preventing-tags or own tags ({{b}} that would mess up our structure.
+				across prohibited_sub_strings as  prohib
+				-- loop over all prohibited tags
+				loop
+					from
+					until
+						-- as long as the prohibited tag is part of the text-string
+						not element.content.has_substring(prohib)
+					loop
+						-- remove the sub-string (the prohibited tag)
+						pos := element.content.first_substring_index(prohib)
+						len := prohib.count
+						element.content.remove_substring(pos,pos+len)
+				end
 				--return True when no exception occured allong the way
 			ensure then
 				returnes_true: Result = True
