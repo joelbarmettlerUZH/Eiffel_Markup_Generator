@@ -12,11 +12,6 @@ deferred class
 
 
 	feature {ANY}
-		make(u_content: STRING)
-			--some fancy comment
-			deferred
-			end
-
 		render(render_obj: RENDERER; nesting: INTEGER): STRING
 			--some fancy comment
 			deferred
