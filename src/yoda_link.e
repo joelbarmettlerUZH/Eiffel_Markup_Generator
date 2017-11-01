@@ -12,7 +12,8 @@ class
 
 	create
 		make,
-		make_internal
+		make_internal,
+		make_mail
 
 	feature {ANY}
 		--name and documents shall be public, allow access for everybody
@@ -32,7 +33,7 @@ class
 			do
 				--comment what is done
 			ensure
-				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_link(?))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_list(CURRENT))
 				content_set: content = u_content
 			end
 

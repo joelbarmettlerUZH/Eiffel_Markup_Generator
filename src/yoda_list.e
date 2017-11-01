@@ -32,7 +32,7 @@ class
 				--sets content = u_content
 				--set is_ordered = u_is_ordered
 			ensure then
-				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_list(?))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_list(CURRENT))
 				content_array_instantiated: content /= void
 				is_ordered_set: is_ordered = u_is_ordered
 				content_set: content = u_content

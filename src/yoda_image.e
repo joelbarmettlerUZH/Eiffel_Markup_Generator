@@ -27,7 +27,7 @@ class
 			do
 				--set content to u_content
 			ensure
-				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_image(?))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_list(CURRENT))
 				content_set: content = u_content
 			end
 

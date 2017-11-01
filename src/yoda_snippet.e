@@ -26,7 +26,7 @@ class
 			do
 				--comment what is done
 			ensure then
-				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_snippet(?))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_list(CURRENT))
 				placeholder: True
 			end
 

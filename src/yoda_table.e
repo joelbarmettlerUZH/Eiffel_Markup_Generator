@@ -28,7 +28,7 @@ class
 				--instantiates a table
 				--sets feature variables
 			ensure
-				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_table(?))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_list(CURRENT))
 			end
 
 
