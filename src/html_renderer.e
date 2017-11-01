@@ -19,9 +19,6 @@ class
 
 		render_YODA_text_interface(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
-			require
-				text_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			local
 				return_string: STRING
 				content: STRING
@@ -32,7 +29,7 @@ class
 				-- Add content to return_string
 				-- Add <\p> to return_string
 				-- Return return_string
-			ensure
+			ensure then
 				valid_start_tag: return_string.has_prefix("<p>")
 				valid_end_tag: return_string.has_suffix ("<\p>")
 			end
@@ -40,9 +37,6 @@ class
 
 		render_YODA_table(element: YODA_TABLE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TABLE.
-			require
-				table_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			local
 				return_string: STRING
 				content: STRING
@@ -53,7 +47,7 @@ class
 				-- Add content to return_string
 				-- Add <\table> to return_string
 				-- Return return_string
-			ensure
+			ensure then
 				valid_start_tag: return_string.has_prefix("<table>")
 				valid_end_tag: return_string.has_suffix ("<\table>")
 			end
@@ -61,9 +55,6 @@ class
 
 		render_YODA_list(element: YODA_LIST; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_LIST.
-			require
-				list_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			local
 				return_string: STRING
 				content: STRING
@@ -74,7 +65,7 @@ class
 				-- Add content to return_string
 				-- Add <\ul> to return_string
 				-- Return return_string
-			ensure
+			ensure then
 				valid_start_tag: return_string.has_prefix("<ul>")
 				valid_end_tag: return_string.has_suffix("<\ul>")
 			end
@@ -82,15 +73,12 @@ class
 
 		render_YODA_link(element: YODA_LINK; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_LINK.
-			require
-				link_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			local
 				return_string: STRING
 				content: STRING
 			do
 				-- Surround element.Content with the corresponding HTML-tag.
-			ensure
+			ensure then
 				valid_start_tag: return_string.has_prefix("<link href='")
 				valid_end_tag: return_string.has_suffix("'>")
 			end
@@ -98,9 +86,6 @@ class
 
 		render_YODA_image(element: YODA_IMAGE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_IMAGE.
-			require
-				image_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			local
 				return_string: STRING
 				content: STRING
@@ -109,109 +94,89 @@ class
 				-- Add element.Content to return_string.
 				-- Add > to return_string
 				-- Return return_string
-			ensure
+			ensure then
 				valid_start_tag: return_string.has_prefix("<img src='")
 				valid_end_tag: return_string.has_suffix("'>")
 			end
 
 		render_YODA_snippet(element: YODA_SNIPPET; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_SNIPPET.
-			require
-				snippet_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			do
 				-- return YODA_SNIPPET.content
 			end
 
 		render_bold(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
-			require
-				bold_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			local
 				return_string: STRING
 				content: STRING
 			do
 				-- Surround element.Content with the corresponding HTML-tag bold.
-			ensure
+			ensure then
 				valid_start_tag: return_string.has_prefix("<b>")
 				valid_end_tag: return_string.has_suffix("<\b>")
 			end
 
 		render_code(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
-			require
-				code_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			local
 				return_string: STRING
 				content: STRING
 			do
 				-- Surround element.Content with the corresponding HTML-tag for code.
-			ensure
+			ensure then
 				valid_start_tag: return_string.has_prefix("<code>")
 				valid_end_tag: return_string.has_suffix("<\code>")
 			end
 
 		render_italic(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
-			require
-				italic_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			local
 				return_string: STRING
 				content: STRING
 			do
 				-- Surround element.Content with the corresponding HTML-tag for italic.
-			ensure
+			ensure then
 				valid_start_tag: return_string.has_prefix("<i>")
 				valid_end_tag: return_string.has_suffix("<\i>")
 			end
 
 		render_qoute(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
-			require
-				quote_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			local
 				return_string: STRING
 				content: STRING
 			do
 				-- Surround element.Content with the corresponding HTML-tag for quote.
-			ensure
+			ensure then
 				valid_start_tag: return_string.has_prefix("<blockquote>")
 				valid_end_tag: return_string.has_suffix("<\blockquote>")
 			end
 
 		render_title(element: YODA_TEXT_INTERFACE; nesting: INTEGER; strength: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
-			require
-				title_exists: attached element
-				valid_number_of_nesting: nesting >= 0
-				--stength is validated by the decorator
 			local
 				return_string: STRING
 				content: STRING
 			do
 				-- Surround element.Content with the corresponding HTML-tag for title with the corresponding strength.
-			ensure
-				valid_start_tag: return_string.has_prefix("<h"+strength+">")
-				valid_end_tag: return_string.has_suffix("<\h"+strength+">")
+				Result := "TEST: RENDERING TITLE"
+			ensure then
+				valid_start_tag: Result.has_prefix("<h"+strength+">")
+				valid_end_tag: Result.has_suffix("<\h"+strength+">")
 			end
 
 		render_underline(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
-			require
-				underline_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			local
 				return_string: STRING
 				content: STRING
 			do
 				-- Surround element.Content with the corresponding HTML-tag for underline.
-			ensure
-				valid_start_tag: return_string.has_prefix("<u>")
-				valid_end_tag: return_string.has_suffix("<\u>")
+				Result := "TEST: RENDERING UNTERLINE"
+			ensure then
+				valid_start_tag: Result.has_prefix("<u>")
+				valid_end_tag: Result.has_suffix("<\u>")
 			end
 
 end
