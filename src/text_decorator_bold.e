@@ -19,7 +19,7 @@ create
 feature
 	render(renderer: RENDERER; nesting: INTEGER): STRING
 		-- Apply render_bold renderer to TEXT_DECORATOR_BOLD.
-		require
+		require else
 			renderer_exists: renderer /= Void
 			valid_number_of_nesting: nesting >= 0
 		do

@@ -8,7 +8,7 @@ deferred class
 	TEXT_DECORATOR
 
 inherit
-	TEXT_INTERFACE
+	YODA_TEXT_INTERFACE
 		redefine
 			render
 		end

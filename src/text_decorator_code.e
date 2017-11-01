@@ -25,5 +25,15 @@ feature
 		do
 			-- Calls Renderer.render_code(current, int)
 		end
+		
+
+	render(renderer: RENDERER; nesting: INTEGER): STRING
+		-- Apply render_title renderer to TEXT_DECORATOR_TITLE.
+		require else
+			renderer_exists: renderer /= Void
+			valid_number_of_nesting: nesting >= 0
+		do
+			-- Calls Renderer.render_title(current, nesting: int, strength: int)
+		end
 
 end

@@ -40,7 +40,7 @@ feature {NONE}
 feature
 	render(renderer: RENDERER; nesting: INTEGER): STRING
 		-- Apply render_title renderer to TEXT_DECORATOR_TITLE.
-		require
+		require else
 			renderer_exists: renderer /= Void
 			valid_number_of_nesting: nesting >= 0
 		do
