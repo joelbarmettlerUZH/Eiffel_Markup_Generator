@@ -14,7 +14,7 @@ class
 		make
 
 	feature {ANY}
-		test: YODA_PROJECT
+		yoda: YODA
 
 	feature {NONE} -- Initialization
 
@@ -22,6 +22,8 @@ class
 				-- Run application.
 			do
 				--| Add your code here
+				create yoda
+				yoda.text("Hallo")
 				print ("Hello Eiffel World!%N")
 
 			end
