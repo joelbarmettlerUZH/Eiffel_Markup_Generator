@@ -28,8 +28,8 @@ class
 				create elements.make
 				create renderer_instances.make_empty
 				create renderer_names.make_empty
-				renderer_instances.force (create {HTML_RENDERER}, 1)
-				renderer_names.force ("HTML", 1)
+				renderer_instances.force (create {HTML_RENDERER}, renderer_instances.count)
+				renderer_names.force ("HTML", renderer_names.count)
 			ensure
 				name_not_empty: name = u_name
 			end
