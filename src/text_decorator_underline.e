@@ -23,7 +23,9 @@ feature
 			renderer_exists: renderer /= Void
 			valid_number_of_nesting: nesting >= 0
 		do
-			-- Calls Renderer.render_underline(current, int)
+    		Result := renderer.render_underline(current, nesting)
+		ensure then
+    		result_exists: attached result
 		end
 
 end

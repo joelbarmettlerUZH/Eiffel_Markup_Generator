@@ -13,7 +13,7 @@ inherit
 			render
 		end
 
-feature {NONE}
+feature {ANY}
 	component: YODA_TEXT_INTERFACE
 
 feature {NONE}
@@ -22,7 +22,7 @@ feature {NONE}
 		require
 			u_component_not_void: u_component /= Void
 		do
-			--component := u_component
+			component := u_component
 		ensure
 			component_set: component = u_component
 		end
