@@ -7,10 +7,6 @@ class
 	YODA
 
 	feature {ANY}
-		project: YODA_PROJECT
-		document: YODA_DOCUMENT
-		element: YODA_ELEMENT
-
 		text(content: STRING): YODA_TEXT
 			--Factory that creates a TEXT object and returns it to the user
 			require
