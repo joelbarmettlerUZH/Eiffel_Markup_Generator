@@ -12,8 +12,15 @@ deferred class
 			-- Stores YODAs own tags.
 
 	feature {ANY}
+		render_YODA_text_interface(element: TEXT_DECORATOR; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_TEXT.
+			require
+				text_exists: attached element
+				valid_number_of_nesting: nesting >= 0
+			deferred
+			end
 
-		render_YODA_text_interface(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+		render_YODA_text(element: YODA_TEXT; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT.
 			require
 				text_exists: attached element
@@ -96,7 +103,7 @@ deferred class
 			deferred
 			end
 
-		render_title(element: YODA_TEXT_INTERFACE; nesting: INTEGER; strength: INTEGER): STRING
+		render_title(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
 			require
 				quote_exists: attached element
