@@ -10,10 +10,10 @@ class
 	inherit
 		VALIDATOR
 
-	feature {ANY}
-		local
+	--feature {ANY}
+		--local
 			--prohibited_sub_string: ARRAY[STRING]
-			prohibited_sub_strings := << "</b>", "</c>" >>
+			--prohibited_sub_strings := << "</b>", "</c>" >>
 			-- Store the prohibited HTML tags as well as our own tags like {{b}} which aren't allowed in text-strings.
 			-- NOTE: not complete yet
 	feature {ANY}
@@ -25,16 +25,15 @@ class
 				--check if the text does contain any closing preventing-tags or own tags ({{b}} that would mess up our structure.
 				across prohibited_sub_strings as  prohib
 				-- loop over all prohibited tags
+				from
+				until
+					-- as long as the prohibited tag is part of the text-string
+					not element.content.has_substring(prohib)
 				loop
-					from
-					until
-						-- as long as the prohibited tag is part of the text-string
-						not element.content.has_substring(prohib)
-					loop
-						-- remove the sub-string (the prohibited tag)
-						pos := element.content.first_substring_index(prohib)
-						len := prohib.count
-						element.content.remove_substring(pos,pos+len)
+					-- remove the sub-string (the prohibited tag)
+					pos := element.content.first_substring_index(prohib)
+					len := prohib.count
+					element.content.remove_substring(pos,pos+len)
 				end
 				--return True when no exception occured allong the way
 			ensure then
