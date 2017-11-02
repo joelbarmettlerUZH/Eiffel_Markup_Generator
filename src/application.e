@@ -23,7 +23,7 @@ class
 			do
 				--| Add your code here
 				create yoda
-				yoda.text("Hallo")
+				print(yoda.text("Hallo").render (create {HTML_RENDERER}, 0))
 				print ("Hello Eiffel World!%N")
 
 			end
