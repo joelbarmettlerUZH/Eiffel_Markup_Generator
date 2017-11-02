@@ -30,8 +30,8 @@ feature {NONE}
 			u_attribute_not_void: u_attribute > 0
 			u_attribute_not_void: u_attribute < 7
 		do
-			--make (u_component)
-			--strength := u_attribute
+			component := u_component
+			strength := u_attribute
 		ensure
 			component_set: component = u_component
 			attribute_set: strength = u_attribute
@@ -44,7 +44,9 @@ feature
 			renderer_exists: renderer /= Void
 			valid_number_of_nesting: nesting >= 0
 		do
-			-- Calls Renderer.render_title(current, nesting: int, strength: int)
+    		Result := renderer.render_title(current, nesting)
+		ensure then
+    		result_exists: attached result
 		end
 
 end

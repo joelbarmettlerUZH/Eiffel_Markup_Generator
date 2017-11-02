@@ -17,18 +17,39 @@ class
 
 	feature {ANY}
 
-		render_YODA_text_interface(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+		render_YODA_text_interface(element: TEXT_DECORATOR; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
 			local
-				return_string: STRING
 				content: STRING
 			do
-				-- Add <p> to return_string.
-				-- Set content = element.Content.
+				-- What to do here??
 				-- Loop through YODA-tag and replace in scan element.Content for each YODA_tag the corresponding HTML tag and update content.
 				-- Add content to return_string
 				-- Add <\p> to return_string
 				-- Return return_string
+			ensure then
+				valid_start_tag: return_string.has_prefix("<p>")
+				valid_end_tag: return_string.has_suffix ("<\p>")
+			end
+
+		render_YODA_text(element: YODA_TEXT; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_TEXT_INTERFACE.
+			local
+				content: STRING
+				i: INTEGER
+			do
+				content := element.content
+				content := "<p><pre>"+content+"</pre></p>"
+				YODA_tag := <<"{{b}}", "{{/b}}", "{{u}}", "{{/u}}", "{{i}}", "{{/i}}">>
+				corresponding_HTML_tag := <<"<b>", "</b>", "<u>", "</u>", "<i>", "</i>">>
+				from i := 0
+				until i = YODA_tag.count
+				loop
+					if content.has_substring (YODA_tag @ i) then
+						content.replace_substring_all (YODA_tag @ i, "</pre>"+corresponding_HTML_tag @ i+"<pre>")
+					end
+				end
+				Result := content
 			ensure then
 				valid_start_tag: return_string.has_prefix("<p>")
 				valid_end_tag: return_string.has_suffix ("<\p>")
@@ -153,7 +174,7 @@ class
 				valid_end_tag: return_string.has_suffix("<\blockquote>")
 			end
 
-		render_title(element: YODA_TEXT_INTERFACE; nesting: INTEGER; strength: INTEGER): STRING
+		render_title(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
 			local
 				return_string: STRING

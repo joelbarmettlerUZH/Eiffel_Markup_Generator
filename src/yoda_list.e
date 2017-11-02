@@ -26,11 +26,8 @@ class
 				u_content_not_void: attached u_content
 				u_content_not_empty: u_content.count > 0
 			do
-				--validation
-				--comment what is done
-				--make instance of ARRAY
-				--sets content = u_content
-				--set is_ordered = u_is_ordered
+				content := u_content
+				is_ordered := u_is_ordered
 			ensure then
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_list(CURRENT))
 				content_array_instantiated: content /= void
@@ -43,11 +40,11 @@ class
 			require else
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
-			local
-    			return_string: STRING
 			do
-				-- Set return_string = Renderer.render_YODA_list(current, int).
-    			-- Return return_string.
+				Result := renderer.render_yoda_list (current, nesting)
+			ensure then
+    			result_exists: attached result
+    			content_not_changed: content.is_equal (old content)
 			end
 
 

@@ -16,8 +16,6 @@ class
 	feature {ANY}
 		--name and documents shall be public, allow access for everybody
 		content: STRING
-		is_quote, is_code, is_bold, is_italic, is_underline: BOOLEAN
-		strenght: INTEGER
 
 
 	feature {ANY}
@@ -27,13 +25,9 @@ class
 				u_content_not_void: attached u_content
 				u_content_not_empty: u_content.count > 0
 			do
-				--validation
-				--comment what is done
-				--make instance of TEXT
-				--sets content = u_content
-				--set is_ordered = u_is_ordered
+				content := u_content
 			ensure then
-				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_list(CURRENT))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_text(CURRENT))
 				content_set: content = u_content
 			end
 
@@ -43,14 +37,15 @@ class
 			require else
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
-			local
-    			return_string: STRING
  			do
-    			-- Set return_string = Renderer.render_YODA_text_interface(current, int).
-    			-- Return return_string.
+    			Result := renderer.render_yoda_text(current, nesting)
+			ensure then
+    			result_exists: attached result
+    			content_not_changed: content.is_equal (old content)
 			end
 
 
 	invariant
 		content_text_instantiated: attached content
 end
+
