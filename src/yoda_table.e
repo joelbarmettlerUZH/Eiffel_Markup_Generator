@@ -25,10 +25,9 @@ class
 				u_content_exists: attached u_content
 				u_content.count > 0
 			do
-				--instantiates a table
-				--sets feature variables
+				content := u_content
 			ensure
-				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_list(CURRENT))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_table(CURRENT))
 			end
 
 
@@ -38,11 +37,11 @@ class
 			require else
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
-			local
-    			return_string: STRING
   			do
-    			-- Set return_string = Renderer.render_YODA_table(current, int).
-    			-- Return return_string.	
+    			Result := renderer.render_yoda_table (current, nesting)
+			ensure then
+    			result_exists: attached result
+    			content_not_changed: content.is_equal (old content)
 			end
 
 

@@ -24,9 +24,9 @@ class
 			require else
 				placeholder: True
 			do
-				--comment what is done
+				content := u_content
 			ensure then
-				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_list(CURRENT))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_snippet(CURRENT))
 				placeholder: True
 			end
 
@@ -38,9 +38,10 @@ class
 				renderer_exists: renderer /= Void
 				valid_number_of_nesting: nesting >= 0
 			do
-				-- Calls Renderer.render_snippet(current, int).
+				Result := renderer.render_yoda_snippet (current, nesting)
 			ensure then
-				placeholder: True = True
+    			result_exists: attached result
+    			content_not_changed: content.is_equal (old content)
 			end
 
 

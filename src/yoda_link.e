@@ -18,59 +18,69 @@ class
 	feature {ANY}
 		--name and documents shall be public, allow access for everybody
 		content, url: STRING
-		linked_doc: YODA_DOCUMENT
+		linked_doc: detachable YODA_DOCUMENT
 		is_internal: BOOLEAN
 
 
 	feature {ANY}
 		make(u_content, u_url: STRING)
-			--Creates the YODA_LINK, validates it and sets the feature variables
+			--Creates the external YODA_LINK, validates it and sets the feature variables
 			require
 				u_content_not_void: attached u_content
 				u_url_not_void: attached u_url
 				u_content_count_not_zero: u_content.count > 0
 				u_url_count_not_zero: u_url.count > 0
 			do
-				--comment what is done
+				content := u_content
+				linked_doc := void
+				url := u_url
+				is_internal := False
 			ensure
-				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_list(CURRENT))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_link(CURRENT))
 				content_set: content = u_content
 			end
 
 
 		make_internal(u_content: STRING; u_linked_doc: YODA_DOCUMENT)
-			--some fancy comment
+			--Creates the internal YODA_LINK, validates it and sets the feature variables
 			require else
 				u_content_not_void: attached u_content
 				u_linked_doc_not_void: attached u_linked_doc
 			do
-				--comment what is done
+				content := u_content
+				linked_doc := u_linked_doc
+				url := ""
+				is_internal := False
 			ensure then
-				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_link(?))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_link(CURRENT))
 			end
 
 
 		make_mail(u_content: STRING)
-			--some fancy comment
+			--Creates the YODA_LINK as an E-Mail Mailto, validates it and sets the feature variables
 			require
 				u_content_not_void: attached u_content
 			do
-				--comment what is done
+				content := u_content
+				linked_doc := void
+				url := "mailto:"+u_content
+				is_internal := False
 			ensure
-				is_valid: validate(CURRENT, agent {VALIDATOR}.validate_link(?))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_link(CURRENT))
 			end
 
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
-			--Apply YODA_LINKE render to renderer.
+			--Apply YODA_LINK render to renderer.
 			require else
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
-			local
-   	 			return_string: STRING
 			do
-			 	-- Set return_string = Renderer.render_YODA_link(current, int).
-   				-- Return return_string.
+				Result := renderer.render_yoda_link (current, nesting)
+			ensure then
+    			result_exists: attached result
+    			content_not_changed: content.is_equal (old content)
+    			url_not_changed: url.is_equal (old url)
 			end
 
 	invariant
