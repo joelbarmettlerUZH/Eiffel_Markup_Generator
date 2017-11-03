@@ -13,20 +13,20 @@ class
 	create
 		make,
 		make_internal,
-		make_mail
+		make_email
 
 	feature {ANY}
 		--name and documents shall be public, allow access for everybody
-		content, url: STRING
+		content: YODA_ELEMENT
+		url: STRING
 
 
 	feature {ANY}
-		make(u_content, u_url: STRING)
+		make(u_content: YODA_ELEMENT; u_url: STRING)
 			--Creates the external YODA_LINK, validates it and sets the feature variables
 			require
 				u_content_not_void: attached u_content
 				u_url_not_void: attached u_url
-				u_content_count_not_zero: u_content.count > 0
 				u_url_count_not_zero: u_url.count > 0
 			do
 				content := u_content
@@ -37,28 +37,28 @@ class
 			end
 
 
-		make_internal(u_content: STRING; u_linked_doc: YODA_DOCUMENT)
+		make_internal(u_content: YODA_ELEMENT; u_linked_doc: YODA_DOCUMENT)
 			--Creates the internal YODA_LINK, validates it and sets the feature variables
 			require else
 				u_content_not_void: attached u_content
 				u_linked_doc_not_void: attached u_linked_doc
 			do
 				content := u_content
-				url := u_linked_doc.name
+				url := u_linked_doc.name + "{{doctype}}"
 			ensure then
-				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_link(CURRENT))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_intern_link(CURRENT))
 			end
 
 
-		make_mail(u_content: STRING)
+		make_email(u_content: STRING)
 			--Creates the YODA_LINK as an E-Mail Mailto, validates it and sets the feature variables
 			require
 				u_content_not_void: attached u_content
 			do
-				content := u_content
+				content := create {YODA_TEXT}.make(u_content)
 				url := "mailto:"+u_content
 			ensure
-				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_link(CURRENT))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_email(CURRENT))
 			end
 
 
