@@ -1,3 +1,4 @@
 ### EiffelStudio ###
 # The compilation directory
 EIFGENs
+*.log
