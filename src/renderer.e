@@ -8,17 +8,24 @@ deferred class
 	RENDERER
 
 	feature {ANY}
-		YODA_tag: ARRAY[STRING]
-			-- Stores YODAs own tags.
 
-	feature {ANY}
-		render_YODA_text_interface(element: TEXT_DECORATOR; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT.
-			require
-				text_exists: attached element
-				valid_number_of_nesting: nesting >= 0
-			deferred
+		spaces(n: INTEGER): STRING
+			local
+				str: STRING
+				i: INTEGER
+			do
+				str := "%T"
+				from
+					i := 1
+				until
+					i >= n
+				loop
+					str := str + "%T"
+					i := i + 1
+				end
+				Result := str
 			end
+
 
 		render_YODA_text(element: YODA_TEXT; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT.
