@@ -98,7 +98,7 @@ class
 			do
 
 				if  --check whether the link is external
-					element.is_internal = False
+					True
 				then
 					if --if it does, see whether it corresponds to a RegEx of a valid Link
 						--match(element.content, "^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$") = True

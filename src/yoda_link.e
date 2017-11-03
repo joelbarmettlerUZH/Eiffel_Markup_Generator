@@ -18,8 +18,6 @@ class
 	feature {ANY}
 		--name and documents shall be public, allow access for everybody
 		content, url: STRING
-		linked_doc: detachable YODA_DOCUMENT
-		is_internal: BOOLEAN
 
 
 	feature {ANY}
@@ -32,9 +30,7 @@ class
 				u_url_count_not_zero: u_url.count > 0
 			do
 				content := u_content
-				linked_doc := void
 				url := u_url
-				is_internal := False
 			ensure
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_link(CURRENT))
 				content_set: content = u_content
@@ -48,9 +44,7 @@ class
 				u_linked_doc_not_void: attached u_linked_doc
 			do
 				content := u_content
-				linked_doc := u_linked_doc
-				url := ""
-				is_internal := False
+				url := u_linked_doc.name
 			ensure then
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_link(CURRENT))
 			end
@@ -62,9 +56,7 @@ class
 				u_content_not_void: attached u_content
 			do
 				content := u_content
-				linked_doc := void
 				url := "mailto:"+u_content
-				is_internal := False
 			ensure
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_link(CURRENT))
 			end
