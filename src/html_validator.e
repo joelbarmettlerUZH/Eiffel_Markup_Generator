@@ -11,30 +11,39 @@ class
 		VALIDATOR
 
 	feature {ANY}
+
+		exc: EXCEPTIONS
+			local
+				e: EXCEPTIONS
+			do
+				create e
+				Result := e
+			end
+
 		prohibited_text_sub_strings: ARRAY[STRING]
 			--The validate_element function iterates over these sub_stings and removes them from the string
 			local
 				prohibited_sub_strings_array: ARRAY[STRING]
 			do
-				prohibited_sub_strings_array := << "</pre>", "{{b}}", "{{u}}", "{{i}}" >>
+				prohibited_sub_strings_array := << "<pre>", "</pre>" >>
 				Result := prohibited_sub_strings_array
 			ensure
 				result_not_void: attached Result
 			end
 
-	feature {ANY}
+
 		prohibited_snippet_sub_strings: ARRAY[STRING]
 			--The validate_element function iterates over these sub_stings and removes them from the string
 			local
 				prohibited_sub_strings_array: ARRAY[STRING]
 			do
-				prohibited_sub_strings_array := << "</HTML>", "</body>" >>
+				prohibited_sub_strings_array := << "<html>", "</html>", "<body>", "</body>" >>
 				Result := prohibited_sub_strings_array
 			ensure
 				result_not_void: attached Result
 			end
 
-	feature {ANY}
+
 		remove_probibited_sub_strings(content: STRING; prohibited_sub_strings: ARRAY[STRING])
 			require
 				prohibited_sub_strings_not_empty: attached prohibited_sub_strings
@@ -53,14 +62,14 @@ class
 						not content.has_substring(prohib.item)
 					loop
 							-- remove the sub-string (the prohibited tag)
-						string_position := content.substring_index(prohib.item,0)
+						string_position := content.substring_index(prohib.item,1)
 						string_length := prohib.item.count
-						content.remove_substring(string_position,string_position+string_length)
+						content.remove_substring(string_position,string_position+string_length-1)
 					end
 				end
 			end
 
-	feature {ANY}
+
 		validate_text(element: YODA_TEXT): BOOLEAN
 			--validates a YODA_TEXT whether it's content is conforming with the HTML text rules. Returns True if so
 			require else
@@ -72,7 +81,7 @@ class
 				prohibited_strings := prohibited_text_sub_strings
 					-- remove prohibited sub-strings
 				remove_probibited_sub_strings(element.content, prohibited_strings)
-
+				-- openting/closing tags for {{b}} etc. after opening first closing before next opening
 				Result := True
 
 			ensure then
@@ -119,18 +128,21 @@ class
 			require else
 				element_not_empty: attached element
 			do
+
+
 				if -- check if link contains "www."
-					not element.content.has_substring("www.")
+					not element.url.has_substring("www.")
 				then -- if not raise exception
-					-- TODO:
-					print("Invaild URL/Link")
 					-- raise exception
+					exc.raise("Validation Error 101 - Invaild URL/Link")
 				end
 				if -- check if link contains "https://" or "http://"
-					not (element.content.has_substring("https://") or element.content.has_substring("http://"))
+					not (element.url.has_substring("https://") or element.url.has_substring("http://"))
 				then -- if not prepend "https://"
-					element.content.prepend("https://")
+					element.url.prepend("http://")
 				end
+
+
 				--check whether the link is external
 				--if it does, see whether it corresponds to a RegEx of a valid Link
 				--	element.content <-> "^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$"
@@ -145,6 +157,27 @@ class
 				--if it is, check whether it matches RegEx of a valid E-Mail
 				--if it does not, raise an exception
 				--return True when no exception occured allong the way
+				Result := True
+			ensure then
+				returnes_true: Result = True
+			end
+
+		validate_intern_link(element: YODA_LINK): BOOLEAN
+			--validates a YODA_LINK whether it's content is conforming with the HTML text rules. Returns True if so, False otherwise
+			require else
+				element_not_empty: attached element
+			do
+				Result := True
+			ensure then
+				returnes_true: Result = True
+			end
+
+		validate_email(element: YODA_LINK): BOOLEAN
+			--validates a YODA_LINK whether it's content is conforming with the HTML text rules. Returns True if so, False otherwise
+			require else
+				element_not_empty: attached element
+			do
+				Result := True
 			ensure then
 				returnes_true: Result = True
 			end
@@ -161,9 +194,11 @@ class
 				--check whether the local image is on a relatively defined path
 				--if it is not, raise an exception
 				--return True when no exception occured allong the way
+				Result := True
 			ensure then
 				returnes_true: Result = True
 			end
+
 
 		validate_snippet(element: YODA_SNIPPET): BOOLEAN
 			--validates a YODA_SNIPPET whether it's content is conforming with the HTML text rules. Returns True if so, False otherwise
