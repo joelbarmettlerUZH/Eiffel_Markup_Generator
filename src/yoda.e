@@ -13,9 +13,7 @@ class
 				text_content_exists: attached content
 				text_not_empty: not content.is_empty
 			do
-				print("Enter Text Factory%N")
 				Result := create {YODA_TEXT}.make(content)
-				print("Left Text Factory%N")
 			ensure
 				result_not_void: attached Result
 				result_is_YODA_TEXT: attached {YODA_TEXT} Result
@@ -65,12 +63,16 @@ class
 				result_is_YODA_LIST: attached {YODA_LIST} Result
 			end
 
+		link(content: YODA_ELEMENT; url: STRING): YODA_LINK
+			do
+				Result := link_extern(content, url)
+			end
 
-		link_intern(content: STRING; linked_doc: YODA_DOCUMENT): YODA_LINK
+
+		link_intern(content: YODA_ELEMENT; linked_doc: YODA_DOCUMENT): YODA_LINK
 			--Factory that creates an internal LINK object and returns it to the user
 			require
 				link_intern_content_exists: attached content
-				string_not_empty: not content.is_empty
 				linked_doc_exists: attached linked_doc
 				linked_doc_correct_type: attached {YODA_DOCUMENT} linked_doc
 			do
@@ -81,11 +83,10 @@ class
 			end
 
 
-		link_extern(content, url: STRING): YODA_LINK
+		link_extern(content: YODA_ELEMENT; url: STRING): YODA_LINK
 			--Factory that creates an external LINK object and returns it to the user
 			require
 				content_exists: attached content
-				content_not_empty: not content.is_empty
 				url_exists: attached url
 				url_not_empty: not url.is_empty
 			do
@@ -102,7 +103,7 @@ class
 				mail_address_exists: attached mail_address
 				string_not_empty: not mail_address.is_empty
 			do
-				Result := create {YODA_LINK}.make_mail(mail_address)
+				Result := create {YODA_LINK}.make_email(mail_address)
 			ensure
 				result_not_void: attached Result
 				result_is_YODA_LINK: attached {YODA_LINK} Result
@@ -204,7 +205,7 @@ class
 				title_content_exists: attached content
 				element_type_YODA_TEXT: attached {YODA_TEXT_INTERFACE} content
 			do
-				Result := create {TEXT_DECORATOR_TITLE}.make_style(content)
+				Result := create {TEXT_DECORATOR_TITLE}.make_style_with_attribute(content,strength)
 			ensure
 				result_not_void: attached Result
 				result_is_YODA_LINK: attached {YODA_TEXT_INTERFACE} Result
