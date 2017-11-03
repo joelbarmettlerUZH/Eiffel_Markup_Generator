@@ -119,27 +119,24 @@ class
 			require else
 				element_not_empty: attached element
 			do
-
-				if  --check whether the link is external
-					True
-				then
-					if --if it does, see whether it corresponds to a RegEx of a valid Link
-						--match(element.content, "^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$") = True
-						True
-					then
-						if --if it does, add http:// to make it (when not already there), else raie an exception
-							--match(element.content, "^[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$") = True
-							True
-						then
-							--element.content.prepend ("https://")
-						end
-					else
-						-- raise exception
-					end
+				if -- check if link contains "www."
+					not element.content.has_substring("www.")
+				then -- if not raise exception
+					-- TODO:
+					print("Invaild URL/Link")
+					-- raise exception
 				end
-
-
-
+				if -- check if link contains "https://" or "http://"
+					not (element.content.has_substring("https://") or element.content.has_substring("http://"))
+				then -- if not prepend "https://"
+					element.content.prepend("https://")
+				end
+				--check whether the link is external
+				--if it does, see whether it corresponds to a RegEx of a valid Link
+				--	element.content <-> "^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$"
+				--if it does, add http:// to make it (when not already there), else raie an exception
+				--  element.content <-> "^[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$"
+				--	element.content.prepend ("https://")
 				--if it does, add http:// to make it (when not already there), else raie an exception
 				--check whether the link is internal
 				--if it does, check whether the provided file has a valid name (does not contain any points, like file.one etc.
