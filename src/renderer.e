@@ -14,11 +14,11 @@ deferred class
 				str: STRING
 				i: INTEGER
 			do
-				str := "%T"
+				str := "" --Markdown is not indented
 				from
 					i := 1
 				until
-					i >= n
+					i > n
 				loop
 					str := str + "%T"
 					i := i + 1

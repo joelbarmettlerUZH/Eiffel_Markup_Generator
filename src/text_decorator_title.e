@@ -35,6 +35,7 @@ feature {NONE}
 		ensure
 			component_set: component = u_component
 			attribute_set: strength = u_attribute
+			positive_strength: strength > 0
 		end
 
 feature
