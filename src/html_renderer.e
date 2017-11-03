@@ -10,194 +10,175 @@ class
 	inherit
 		RENDERER
 
-	feature {ANY}
-		corresponding_HTML_tag: ARRAY[STRING]
-			-- Store the HTML equivalents for all YODA tags.
-
 
 	feature {ANY}
-
-		render_YODA_text_interface(element: TEXT_DECORATOR; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT_INTERFACE.
-			local
-				content: STRING
-			do
-				-- What to do here??
-				-- Loop through YODA-tag and replace in scan element.Content for each YODA_tag the corresponding HTML tag and update content.
-				-- Add content to return_string
-				-- Add <\p> to return_string
-				-- Return return_string
-			ensure then
-				valid_start_tag: return_string.has_prefix("<p>")
-				valid_end_tag: return_string.has_suffix ("<\p>")
-			end
-
 		render_YODA_text(element: YODA_TEXT; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
 			local
+				corresponding_HTML_tag: ARRAY[STRING]
+				YODA_tag: ARRAY[STRING]
 				content: STRING
 				i: INTEGER
 			do
+				print("Enter render_text%N")
 				content := element.content
+				content.left_adjust
+				content.right_adjust
 				content := "<p><pre>"+content+"</pre></p>"
-				YODA_tag := <<"{{b}}", "{{/b}}", "{{u}}", "{{/u}}", "{{i}}", "{{/i}}">>
-				corresponding_HTML_tag := <<"<b>", "</b>", "<u>", "</u>", "<i>", "</i>">>
-				from i := 0
+				YODA_tag := <<"{{b}}", "{{/b}}", "{{u}}", "{{/u}}", "{{i}}", "{{/i}}", "%N">>
+				corresponding_HTML_tag := <<"<b>", "</b>", "<u>", "</u>", "<i>", "</i>", "</br">>
+				from i := 1
 				until i = YODA_tag.count
 				loop
+					print("Replacing Character "+YODA_tag @ i+"%N")
 					if content.has_substring (YODA_tag @ i) then
 						content.replace_substring_all (YODA_tag @ i, "</pre>"+corresponding_HTML_tag @ i+"<pre>")
 					end
+					i := i + 1
 				end
-				Result := content
+				print("Left render_text%N")
+				Result := spaces(nesting) + content
 			ensure then
-				valid_start_tag: return_string.has_prefix("<p>")
-				valid_end_tag: return_string.has_suffix ("<\p>")
+				valid_start_tag: result.has_substring ("<p>")
+				valid_end_tag: result.has_substring ("</p>")
 			end
 
 
 		render_YODA_table(element: YODA_TABLE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TABLE.
 			local
-				return_string: STRING
 				content: STRING
+				row, column: INTEGER
 			do
-				-- Add <table> to return_string.
-				-- Set content = element.Content.
-				-- Loop through all element.Content elements and surround each tablerow with <tr>...</tr> and each element with <th>...</th> and update content.
-				-- Add content to return_string
-				-- Add <\table> to return_string
-				-- Return return_string
+				content := spaces(nesting) + "<table>%N"
+				from column := 0
+				until column = element.content.width
+				loop
+					content := content + spaces(nesting+2) +"<th>" + element.content.item (0, column).render (create {HTML_RENDERER}, 0) + "</th>%N"
+					column := column + 1
+				end
+				from row := 1
+				until row = element.content.height
+				loop
+					content := content + spaces(nesting+1) +"<tr>%N"
+					from column := 0
+					until column = element.content.width
+					loop
+						content := content + spaces(nesting+2) +"<td>" + element.content.item (row, column).render (create {HTML_RENDERER}, 0) + "</td>%N"
+						column := column + 1
+					end
+				row := row + 1
+				end
+				Result := content + spaces(nesting) + "<table>%N"
 			ensure then
-				valid_start_tag: return_string.has_prefix("<table>")
-				valid_end_tag: return_string.has_suffix ("<\table>")
+				valid_start_tag: result.has_substring("<table>")
+				valid_end_tag: result.has_substring ("<\table>")
 			end
 
 
 		render_YODA_list(element: YODA_LIST; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_LIST.
 			local
-				return_string: STRING
 				content: STRING
 			do
-				-- Add <ul> to return_string.
-				-- Set content = element.Content.
-				-- Loop through all element.Content elements and surround each element with <li>...</li> and update content.
-				-- Add content to return_string
-				-- Add <\ul> to return_string
-				-- Return return_string
+				if element.is_ordered then
+					content := spaces(nesting) + "<ol>%N"
+				else
+					content := spaces(nesting) + "<ul>%N"
+				end
+				across element.content as  list_element
+				loop
+					content := content + spaces(nesting+1) + "<li>" +list_element.item.render (create {HTML_RENDERER}, 0) + "</li>%N"
+				end
+				if element.is_ordered then
+					content := content + spaces(nesting) + "</ol>%N"
+				else
+					content := content + spaces(nesting) + "</ul>%N"
+				end
+				Result := content
 			ensure then
-				valid_start_tag: return_string.has_prefix("<ul>")
-				valid_end_tag: return_string.has_suffix("<\ul>")
+				valid_start_tag: result.has_substring("<ul>")
+				valid_end_tag: result.has_substring("<\ul>")
 			end
 
 
 		render_YODA_link(element: YODA_LINK; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_LINK.
-			local
-				return_string: STRING
-				content: STRING
 			do
-				-- Surround element.Content with the corresponding HTML-tag.
+				Result := spaces(nesting) + "<a href:'" + element.url + "'> " + element.content + "</a>%N"
 			ensure then
-				valid_start_tag: return_string.has_prefix("<link href='")
-				valid_end_tag: return_string.has_suffix("'>")
+				valid_start_tag: result.has_substring("<a href='")
+				valid_end_tag: result.has_substring("</a>")
 			end
 
 
 		render_YODA_image(element: YODA_IMAGE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_IMAGE.
-			local
-				return_string: STRING
-				content: STRING
 			do
-				-- Add <img src= to return_string.
-				-- Add element.Content to return_string.
-				-- Add > to return_string
-				-- Return return_string
+				Result := spaces(nesting) + "<img src='" + element.content + "'>%N"
 			ensure then
-				valid_start_tag: return_string.has_prefix("<img src='")
-				valid_end_tag: return_string.has_suffix("'>")
+				valid_start_tag: result.has_substring("<img src='")
+				valid_end_tag: result.has_substring("'>")
 			end
 
 		render_YODA_snippet(element: YODA_SNIPPET; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_SNIPPET.
 			do
-				-- return YODA_SNIPPET.content
+				Result := spaces(nesting) + element.content + "%N"
 			end
 
-		render_bold(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+		render_bold(element: TEXT_DECORATOR; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
-			local
-				return_string: STRING
-				content: STRING
 			do
-				-- Surround element.Content with the corresponding HTML-tag bold.
+				Result := spaces(nesting) + "<b>" + element.component.render(create {HTML_RENDERER}, 0) + "</b>%N"
 			ensure then
-				valid_start_tag: return_string.has_prefix("<b>")
-				valid_end_tag: return_string.has_suffix("<\b>")
+				valid_start_tag: result.has_substring("<b>")
+				valid_end_tag: result.has_substring("<\b>")
 			end
 
-		render_code(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+		render_code(element: TEXT_DECORATOR; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
-			local
-				return_string: STRING
-				content: STRING
 			do
-				-- Surround element.Content with the corresponding HTML-tag for code.
+				Result := spaces(nesting) + "<code>" + element.component.render(create {HTML_RENDERER}, 0) + "</code>%N"
 			ensure then
-				valid_start_tag: return_string.has_prefix("<code>")
-				valid_end_tag: return_string.has_suffix("<\code>")
+				valid_start_tag: result.has_substring("<code>")
+				valid_end_tag: result.has_substring("<\code>")
 			end
 
-		render_italic(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+		render_italic(element: TEXT_DECORATOR; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
-			local
-				return_string: STRING
-				content: STRING
 			do
-				-- Surround element.Content with the corresponding HTML-tag for italic.
+				Result := spaces(nesting) + "<i>" + element.component.render(create {HTML_RENDERER}, 0) + "</i>%N"
 			ensure then
-				valid_start_tag: return_string.has_prefix("<i>")
-				valid_end_tag: return_string.has_suffix("<\i>")
+				valid_start_tag: result.has_substring("<i>")
+				valid_end_tag: result.has_substring("<\i>")
 			end
 
-		render_qoute(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+		render_qoute(element: TEXT_DECORATOR; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
-			local
-				return_string: STRING
-				content: STRING
 			do
-				-- Surround element.Content with the corresponding HTML-tag for quote.
+				Result := spaces(nesting) + "<blockquote>" + element.component.render(create {HTML_RENDERER}, 0) + "</blockquote>%N"
 			ensure then
-				valid_start_tag: return_string.has_prefix("<blockquote>")
-				valid_end_tag: return_string.has_suffix("<\blockquote>")
+				valid_start_tag: result.has_substring("<blockquote>")
+				valid_end_tag: result.has_substring("<\blockquote>")
 			end
 
-		render_title(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+		render_title(element: TEXT_DECORATOR_TITLE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
-			local
-				return_string: STRING
-				content: STRING
 			do
-				-- Surround element.Content with the corresponding HTML-tag for title with the corresponding strength.
-				Result := "TEST: RENDERING TITLE"
+				Result := spaces(nesting) + "<h>" + element.component.render(create {HTML_RENDERER}, 0) + "</h>%N"	--need to add strenght via element.strength
 			ensure then
-				valid_start_tag: Result.has_prefix("<h"+strength+">")
-				valid_end_tag: Result.has_suffix("<\h"+strength+">")
+				valid_start_tag: Result.has_substring("<h")
+				valid_end_tag: Result.has_substring("</h>")
 			end
 
-		render_underline(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
+		render_underline(element: TEXT_DECORATOR; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_TEXT_INTERFACE.
-			local
-				return_string: STRING
-				content: STRING
 			do
-				-- Surround element.Content with the corresponding HTML-tag for underline.
-				Result := "TEST: RENDERING UNTERLINE"
+				Result := spaces(nesting) + "<u>" + element.component.render(create {HTML_RENDERER}, 0) + "</u>%N"
 			ensure then
-				valid_start_tag: Result.has_prefix("<u>")
-				valid_end_tag: Result.has_suffix("<\u>")
+				valid_start_tag: Result.has_substring("<u>")
+				valid_end_tag: Result.has_substring("<\u>")
 			end
 
 end
