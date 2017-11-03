@@ -13,7 +13,9 @@ class
 				text_content_exists: attached content
 				text_not_empty: not content.is_empty
 			do
+				print("Enter Text Factory%N")
 				Result := create {YODA_TEXT}.make(content)
+				print("Left Text Factory%N")
 			ensure
 				result_not_void: attached Result
 				result_is_YODA_TEXT: attached {YODA_TEXT} Result
@@ -220,8 +222,8 @@ class
 			ensure
 				result_not_void: attached Result
 				bold_text_not_empty: not Result.is_empty
-				valid_start_tag: Result.has_prefix("{{b}}")
-				valid_end_tag: Result.has_suffix ("{{/b}}")
+				valid_start_tag: Result.has_substring("{{b}}")
+				valid_end_tag: Result.has_substring ("{{/b}}")
 			end
 
 
@@ -235,8 +237,8 @@ class
 			ensure
 				result_not_void: attached Result
 				italic_text_not_empty: not Result.is_empty
-				valid_start_tag: Result.has_prefix("{{i}}")
-				valid_end_tag: Result.has_suffix ("{{/i}}")
+				valid_start_tag: Result.has_substring("{{i}}")
+				valid_end_tag: Result.has_substring ("{{/i}}")
 			end
 
 
@@ -250,8 +252,8 @@ class
 			ensure
 				result_not_void: attached Result
 				underline_text_not_empty: not Result.is_empty
-				valid_start_tag: Result.has_prefix("{{u}}")
-				valid_end_tag: Result.has_suffix ("{{/u}}")
+				valid_start_tag: Result.has_substring("{{u}}")
+				valid_end_tag: Result.has_substring ("{{/u}}")
 			end
 
 end

@@ -25,7 +25,9 @@ class
 				u_content_not_void: attached u_content
 				u_content_not_empty: u_content.count > 0
 			do
+				print("Enter Text Make%N")
 				content := u_content
+				print("Left Text Make%N")
 			ensure then
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_text(CURRENT))
 				content_set: content = u_content
@@ -37,7 +39,7 @@ class
 			require else
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
- 			do
+			do
     			Result := renderer.render_yoda_text(current, nesting)
 			ensure then
     			result_exists: attached result
