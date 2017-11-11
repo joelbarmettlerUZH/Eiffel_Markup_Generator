@@ -136,6 +136,21 @@ class
 			end
 
 
+		snippet_from_file(content: STRING): YODA_SNIPPET
+			require
+				snippet_content_exists: attached content
+				string_not_empty: not content.is_empty
+			local
+				input_file: PLAIN_TEXT_FILE
+				file_content: STRING
+			do
+				create input_file.make_open_read (content)
+				input_file.read_stream (input_file.count)
+				file_content := input_file.last_string
+				Result := create {YODA_SNIPPET}.make (file_content)
+			end
+
+
 		bold(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates a text decorator of type YODA_TEXT_INTERFACE which decorates a casual yoda text object
 			require
