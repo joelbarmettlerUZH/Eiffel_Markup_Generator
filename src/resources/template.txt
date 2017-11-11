@@ -1,0 +1,9 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+  {{CONTENT}}
+  </body>
+</html>
