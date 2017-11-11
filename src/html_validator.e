@@ -129,13 +129,13 @@ class
 				element_not_empty: attached element
 			do
 
-
-				if -- check if link contains "www."
-					not element.url.has_substring("www.")
-				then -- if not raise exception
-					-- raise exception
-					exc.raise("Validation Error 101 - Invaild URL/Link")
-				end
+--I commented this out because it leads to trouble, not all link has a "www" in front of
+--				if -- check if link contains "www."
+--					not element.url.has_substring("www.")
+--				then -- if not raise exception
+--					 raise exception
+--					exc.raise("Validation Error 101 - Invaild URL/Link")
+--				end
 				if -- check if link contains "https://" or "http://"
 					not (element.url.has_substring("https://") or element.url.has_substring("http://"))
 				then -- if not prepend "https://"

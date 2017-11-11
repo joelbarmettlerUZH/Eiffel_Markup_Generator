@@ -113,7 +113,7 @@ class
 			do
 				doc_url := element.url
 				doc_url.replace_substring_all ("{{doctype}}", ".html")
-				Result := spaces(nesting) + "<a href='" + doc_url + "'> %N" + element.content.render(create {HTML_RENDERER},nesting+1) + "%N" + spaces(nesting) + "</a>%N"
+				Result := spaces(nesting) + "<a href='" + doc_url + "'> %N" + element.content.render(create {HTML_RENDERER},nesting+1) + spaces(nesting) + "</a>%N"
 			ensure then
 				valid_start_tag: result.has_substring("<a href='")
 				valid_end_tag: result.has_substring("</a>")
@@ -159,6 +159,8 @@ class
 			do
 				return_string := element.component.render(create {HTML_RENDERER}, 0)
 				return_string.replace_substring_all("%N", "")
+				return_string.replace_substring_all ("<p>", "")
+				return_string.replace_substring_all ("</p>", "")
 				Result := spaces(nesting) + "<code>" + return_string + "</code>%N"
 			ensure then
 				valid_start_tag: result.has_substring("<code>")
@@ -185,6 +187,8 @@ class
 			do
 				return_string := element.component.render(create {HTML_RENDERER}, 0)
 				return_string.replace_substring_all("%N", "")
+				return_string.replace_substring_all ("<p>", "")
+				return_string.replace_substring_all ("</p>", "")
 				Result := spaces(nesting) + "<blockquote>" + return_string + "</blockquote>%N"
 			ensure then
 				valid_start_tag: result.has_substring("<blockquote>")
