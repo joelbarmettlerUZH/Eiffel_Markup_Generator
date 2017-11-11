@@ -21,14 +21,16 @@ class
 	feature {ANY}
 		make(u_content: STRING)
 			--Creates the YODA_TEXT, validates it and sets the feature variables
-			require else
+			require
 				u_content_not_void: attached u_content
 				u_content_not_empty: u_content.count > 0
 			do
 				content := u_content
-			ensure then
+				name := "text"
+			ensure
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_text(CURRENT))
 				content_set: content = u_content
+				name_set: name.is_equal("text")
 			end
 
 

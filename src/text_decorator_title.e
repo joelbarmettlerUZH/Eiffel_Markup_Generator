@@ -32,10 +32,12 @@ feature {NONE}
 		do
 			component := u_component
 			strength := u_attribute
+			name := "title"
 		ensure
 			component_set: component = u_component
 			attribute_set: strength = u_attribute
 			positive_strength: strength > 0
+			name_set: name.is_equal ("title")
 		end
 
 feature

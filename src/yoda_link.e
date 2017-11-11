@@ -31,9 +31,11 @@ class
 			do
 				content := u_content
 				url := u_url
+				name := "external Link"
 			ensure
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_link(CURRENT))
 				content_set: content = u_content
+				name_set: name.is_equal("external Link")
 			end
 
 
@@ -45,8 +47,10 @@ class
 			do
 				content := u_content
 				url := u_linked_doc.name + "{{doctype}}"
+				name := "internal Link"
 			ensure then
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_intern_link(CURRENT))
+				name_set: name.is_equal("internal Link")
 			end
 
 
@@ -57,8 +61,10 @@ class
 			do
 				content := create {YODA_TEXT}.make(u_content)
 				url := "mailto:"+u_content
+				name := "eMail"
 			ensure
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_email(CURRENT))
+				name_set: name.is_equal("eMail")
 			end
 
 
@@ -74,6 +80,7 @@ class
     			content_not_changed: content.is_equal (old content)
     			url_not_changed: url.is_equal (old url)
 			end
+
 
 	invariant
 

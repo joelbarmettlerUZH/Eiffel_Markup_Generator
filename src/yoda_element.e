@@ -8,6 +8,9 @@ deferred class
 	YODA_ELEMENT
 
 	feature {ANY}
+		name: STRING
+
+	feature {ANY}
 		validation_langauges: ARRAY[VALIDATOR]
 			--The validation commander iterates validates a provided element with the corresponding validation_function for all validation_languages
 			local
@@ -25,4 +28,31 @@ deferred class
 			-- deferred function that allows all elements to get visited by a Renderer
 			deferred
 			end
+
+		as_string(nesting: INTEGER): STRING
+			require
+				valid_nesting: nesting >= 0
+			do
+				Result := spaces("-", nesting) + name + "%N"
+			end
+
+
+		spaces(repeat_str: STRING; n: INTEGER): STRING
+			local
+				i: INTEGER
+				str: STRING
+			do
+				str := ""
+				from
+					i := 1
+				until
+					i > n
+				loop
+					str := str + repeat_str
+					i := i + 1
+				end
+				Result := str
+			end
+
+
 end

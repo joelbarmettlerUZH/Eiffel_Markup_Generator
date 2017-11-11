@@ -10,6 +10,10 @@ class
 	inherit
 		YODA_ELEMENT
 
+	redefine
+		as_string
+	end
+
 	create
 		make
 
@@ -26,8 +30,10 @@ class
 				u_content.count > 0
 			do
 				content := u_content
+				name := "table"
 			ensure
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_table(CURRENT))
+				name_set: name.is_equal("table")
 			end
 
 
@@ -44,6 +50,28 @@ class
     			content_not_changed: content.is_equal (old content)
 			end
 
+
+		as_string(nesting: INTEGER): STRING
+			local
+				result_string: STRING
+				row, column: INTEGER
+			do
+				result_string := spaces("-", nesting)+ name + ":%N" + spaces(" ", nesting+1) + " " + spaces("-", content.width*5) + "%N"
+				from row := 1
+				until row > content.height
+				loop
+					result_string := result_string + spaces("-", nesting+1)
+					from column := 1
+					until column > content.width
+					loop
+						result_string := result_string + "|" + content[row, column].name
+						column := column + 1
+					end
+					result_string := result_string + "|%N" + spaces(" ", nesting+1) + " " + spaces("-", content.width*5) + "%N"
+					row := row + 1
+				end
+				Result := result_string
+			end
 
 
 	invariant

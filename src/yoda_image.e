@@ -26,9 +26,11 @@ class
 				String_not_empty: u_content.count > 0
 			do
 				content := u_content
+				name := "image"
 			ensure
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_image(CURRENT))
 				content_set: content = u_content
+				name_set: name.is_equal("image")
 			end
 
 

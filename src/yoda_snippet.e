@@ -21,13 +21,12 @@ class
 	feature {ANY}
 		make(u_content: STRING)
 			--Creates the YODA_SNIPPET, validates it and sets the feature variables
-			require else
-				placeholder: True
 			do
 				content := u_content
+				name := "snippet"
 			ensure then
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_snippet(CURRENT))
-				placeholder: True
+				name_set: name.is_equal("snippet")
 			end
 
 
