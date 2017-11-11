@@ -126,11 +126,12 @@ class
 				index.add_element (yoda.text ("You are free to link to other files in your project or online websites"))
 				index.add_element (yoda.title (yoda.text ("External link"), 3))
 				index.add_element (yoda.link_extern (yoda.text ("Make simple links arround texts"), "http://www.jedipedia.wikia.com/wiki/Yoda"))
-				index.add_element (yoda.title (yoda.text ("Local link"), 2))
+				index.add_element (yoda.title (yoda.text ("Local link"), 3))
 				index.add_element (yoda.link_intern (yoda.text ("Or, link to other documents like this link here"), about))
 				index.add_element (yoda.title (yoda.text ("Button as link"), 3))
 				index.add_element (yoda.link_extern (yoda.image ("http://icons.iconarchive.com/icons/iconsmind/outline/64/Play-Music-icon.png"), "https://www.youtube.com/watch?v=kDoY_zXf7uQ"))
 				about.add_element (yoda.title (yoda.text ("This is the about us page now :)"), 2))
+				about.add_element (yoda.snippet_from_file ("resources/snippet.txt"))
 				about.add_element (yoda.link_intern (yoda.text ("Take me back to main, my little padawan"), index))
 				yodalib.print_to_console
 				yodalib.save ("html", "Output", "resources/template.txt")
