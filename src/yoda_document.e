@@ -22,16 +22,15 @@ class
 			require
 				u_name_exists: attached u_name
 			do
-				--class variable name = u_name
-				--instanciate document
 				name := u_name
 				create elements.make
-				create renderer_instances.make_empty
-				create renderer_names.make_empty
-				renderer_instances.force (create {HTML_RENDERER}, renderer_instances.count)
-				renderer_names.force ("HTML", renderer_names.count)
+				renderer_names := <<"HTML">>
+				renderer_instances := <<create {HTML_RENDERER}>>
+
 			ensure
 				name_not_empty: name = u_name
+				renderer_instances_array_created: attached renderer_instances
+				renderer_names_array_created: attached renderer_names
 			end
 
 
@@ -40,9 +39,11 @@ class
 			require
 				element_exists: attached element
 			do
-				--add element to list of elements
+				elements.put_front (element)
 			ensure
-				elements_not_empty: not elements.is_empty
+				first_item_set: element.is_equal(elements.first)
+				one_more: elements.count = old elements.count + 1
+				has_element: elements.has(element)
 			end
 
 
@@ -50,9 +51,63 @@ class
 			require
 				output_format_exists: attached output_format
 				output_format_not_empty: not output_format.is_empty
+			local
+				return_string: STRING
+				renderer: RENDERER
+				i: INTEGER
 			do
+				renderer := create {HTML_RENDERER}
+				output_format.to_upper
+				return_string := ""
+				from
+					i := 1
+				until
+					i > renderer_names.count
+				loop
+					if renderer_names[i].is_equal (output_format) then
+						renderer := renderer_instances[i]
+					end
+					i := i + 1
+				end
+				across elements.new_cursor.reversed as element
+				loop
+					return_string := return_string + element.item.render (renderer, 0)
+				end
 				--instanciation of needed renderer calls sub renderer if existing
-				Result := "TEST: YODA DOCUMENT RENDERED"
+				Result := return_string
+			end
+
+		print_to_console
+			local
+				print_string: STRING
+			do
+				print_string := "**********************%N***DOCUMENT: " + name + "***%N**********************%N"
+				across elements.new_cursor.reversed as el
+				loop
+					print_string := print_string + el.item.as_string (1)
+				end
+				print(print_string + "%N")
+			end
+
+
+		save(output_format,folder,  template: STRING)
+			require
+				valid_template: True
+			local
+				input_file: PLAIN_TEXT_FILE
+				output_file: PLAIN_TEXT_FILE
+				file_content: STRING
+				rendered_string: STRING
+			do
+				create input_file.make_open_read (template)
+				input_file.read_stream (input_file.count)
+				file_content := input_file.last_string
+				rendered_string := current.render (output_format)
+				file_content.replace_substring_all ("{{CONTENT}}", rendered_string)
+				input_file.close
+				create output_file.make_open_write (folder + "/" + current.name + "." + output_format)
+				output_file.put_string (file_content)
+				output_file.close
 			end
 
 

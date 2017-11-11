@@ -21,13 +21,13 @@ class
 		make(u_name: STRING)
 			--Create a new Project with a user chosen Name, instantiate the "documents" Linked-List
 			require
-				name_not_empty: u_name /= VOID and then u_name.is_empty
+				name_not_empty: attached u_name
 			do
 				name := u_name
 				create documents.make
 			ensure
 				name_set: name = u_name
-				doc_array_created: documents /= void
+				doc_array_created: attached documents
 				doc_is_empty: documents.count = 0
 			end
 
@@ -35,28 +35,55 @@ class
 		add_document(doc: YODA_DOCUMENT)
 			--appends a YODA document to the projects documents-array
 			require
-				doc_not_void: doc /= Void
+				doc_not_void: attached doc
 			do
-				--comment what is done
+				documents.put_front(doc)
 			ensure
-				last_item_set: doc.is_equal(documents.last)
-				documents_grew: documents.count = old documents.count + 1
-				documents_has_doc: documents.has(doc)
+				first_item_set: doc.is_equal(documents.first)
+				one_more: documents.count = old documents.count + 1
+				has_doc: documents.has(doc)
 			end
 
 
-		render(output_format: STRING): STRING
+		render(output_format: STRING): ARRAY[STRING]
 			--calls render for it's documents
 			require else
+				output_format_exists: attached output_format
 				documents_not_empty: not documents.is_empty
+			local
+				return_array: ARRAY[STRING]
+				i: INTEGER
 			do
-				--comment what is done
+				create return_array.make_empty
+				from i := documents.count
+				until
+					i <= 0
+				loop
+					return_array.force (documents[i].render (output_format), return_array.count)
+					i := i - 1
+				end
+				Result := return_array
 			ensure then
 				documents_not_changed: documents.is_equal(old documents)
 			end
 
+		print_to_console
+			do
+				print("######################%N###PROJECT: " + name + "###%N######################%N")
+				across documents.new_cursor.reversed as el
+				loop
+					el.item.print_to_console
+				end
+			print("%N")
+			end
 
-	invariant
-		doc_never_void: documents /= void implies documents.count > 0
+
+		save(output_format, folder, template: STRING)
+			do
+				across documents.new_cursor.reversed as el
+				loop
+					el.item.save (output_format, folder, template)
+				end
+			end
 
 end
