@@ -14,6 +14,10 @@ deferred class
 			deferred
 			end
 
+		validate_extern_image(element: YODA_IMAGE): BOOLEAN
+			--Deferred validate function. Has no other purpose than ensuring this function is shared between all its children.
+			deferred
+			end
 
 		validate_link(element: YODA_LINK): BOOLEAN
 			--Deferred validate function. Has no other purpose than ensuring this function is shared between all its children.

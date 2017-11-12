@@ -123,6 +123,19 @@ class
 			end
 
 
+		image_extern(content: STRING): YODA_IMAGE
+			--Factory that creates an IMAGE object and returns it to the user
+			require
+				image_content_exists: attached content
+				string_not_empty: not content.is_empty
+			do
+				Result := create {YODA_IMAGE}.make_extern(content)
+			ensure
+				result_not_void: attached Result
+				result_is_YODA_LINK: attached {YODA_IMAGE} Result
+			end
+
+
 		snippet(content: STRING): YODA_SNIPPET
 			--Factory that creates a SNIPPET object and returns it to the user
 			require

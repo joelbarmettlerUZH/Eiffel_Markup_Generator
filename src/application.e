@@ -121,7 +121,7 @@ class
 				index.add_element (yoda.table (array_2_dim))
 				index.add_element (yoda.title (yoda.text ("Images"), 2))
 				index.add_element (yoda.text ("To show fancy stuff, you can link images online or offline"))
-				index.add_element (yoda.image ("https://www.sideshowtoy.com/wp-content/uploads/2014/05/400080-product-feature.jpg"))
+				index.add_element (yoda.image_extern ("https://www.sideshowtoy.com/wp-content/uploads/2014/05/400080-product-feature.jpg"))
 				index.add_element (yoda.image ("..\resources\yodaa.png"))
 				index.add_element (yoda.title (yoda.text ("Links"), 2))
 				index.add_element (yoda.text ("You are free to link to other files in your project or online websites"))

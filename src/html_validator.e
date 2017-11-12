@@ -214,6 +214,23 @@ class
 				returnes_true: Result = True
 			end
 
+		validate_extern_image(element: YODA_IMAGE): BOOLEAN
+			--validates a YODA_IMAGE whether it's content is conforming with the HTML text rules. Returns True if so, False otherwise
+			require else
+				element_not_empty: attached element
+				--element_content_not_empty: attached element.content
+			do
+				--check whether the image is a valid link on the internet via RegEx
+				--If it is not, raise an exception
+				--check whether the image is local
+				--check whether the local image is on a relatively defined path
+				--if it is not, raise an exception
+				--return True when no exception occured allong the way
+				Result := True
+			ensure then
+				returnes_true: Result = True
+			end
+
 
 		validate_snippet(element: YODA_SNIPPET): BOOLEAN
 			--validates a YODA_SNIPPET whether it's content is conforming with the HTML text rules. Returns True if so, False otherwise

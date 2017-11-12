@@ -11,7 +11,8 @@ class
 		YODA_ELEMENT
 
 	create
-		make
+		make,
+		make_extern
 
 	feature {ANY}
 		--name and documents shall be public, allow access for everybody
@@ -20,17 +21,31 @@ class
 
 	feature {ANY}
 		make(u_content: STRING)
-			--Creates the YODA_IMAGE, validates it and sets the feature variables
+			--Creates the YODA_IMAGE, validates it and sets the feature variables (for internal use/ local images)
 			require
 				String_not_void: attached u_content
 				String_not_empty: u_content.count > 0
 			do
 				content := u_content
-				name := "image"
+				name := "local image"
 			ensure
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_image(CURRENT))
 				content_set: content = u_content
-				name_set: name.is_equal("image")
+				name_set: name.is_equal("local image")
+			end
+
+		make_extern(u_content: STRING)
+			--Creates the YODA_IMAGE, validates it and sets the feature variables (for external use/ image url)
+			require
+				String_not_void: attached u_content
+				String_not_empty: u_content.count > 0
+			do
+				content := u_content
+				name := "extern image"
+			ensure
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_extern_image(CURRENT))
+				content_set: content = u_content
+				name_set: name.is_equal("extern image")
 			end
 
 
