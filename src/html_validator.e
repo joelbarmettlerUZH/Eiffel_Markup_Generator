@@ -81,7 +81,6 @@ class
 				prohibited_strings := prohibited_text_sub_strings
 					-- remove prohibited sub-strings
 				remove_probibited_sub_strings(element.content, prohibited_strings)
-				-- openting/closing tags for {{b}} etc. after opening first closing before next opening
 				Result := True
 
 			ensure then
@@ -114,7 +113,7 @@ class
 				--check if all table entries are of valid type
 					-- checked already in YODA_LIST since HTML allowes all elements as entries
 				--check if list has at least one entries
-					-- checked already in YODA_TLIST
+					-- checked already in YODA_LIST
 				--raise acception otherwise
 				--return True when no exception occured allong the way
 				Result := True
@@ -129,7 +128,7 @@ class
 				element_not_empty: attached element
 			do
 
---I commented this out because it leads to trouble, not all link has a "www" in front of
+--		I commented this out because it leads to trouble, not all link has a "www" in front of
 --				if -- check if link contains "www."
 --					not element.url.has_substring("www.")
 --				then -- if not raise exception
@@ -176,8 +175,23 @@ class
 			--validates a YODA_LINK whether it's content is conforming with the HTML text rules. Returns True if so, False otherwise
 			require else
 				element_not_empty: attached element
+			local
+				at_position: INTEGER
+				point_position: INTEGER
 			do
-				Result := True
+				-- check if link contains "@"
+				at_position := element.url.index_of ('@', 1)
+				if at_position=0 then
+					exc.raise("Validation Error 102 - eMail adress does not contain '@'")
+				else
+					-- check if link contains "." somewhere after the "@"
+					point_position := element.url.index_of ('.', at_position)
+					if point_position=0 then
+						exc.raise("Validation Error 102 - eMail adress does not contain a '.xy' suffix")
+					else
+						Result := True
+					end
+				end
 			ensure then
 				returnes_true: Result = True
 			end
@@ -187,6 +201,7 @@ class
 			--validates a YODA_IMAGE whether it's content is conforming with the HTML text rules. Returns True if so, False otherwise
 			require else
 				element_not_empty: attached element
+				--element_content_not_empty: attached element.content
 			do
 				--check whether the image is a valid link on the internet via RegEx
 				--If it is not, raise an exception
