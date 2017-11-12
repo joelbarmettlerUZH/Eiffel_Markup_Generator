@@ -14,6 +14,7 @@ class
 		--name and documents shall be public, allow access for everybody
 		documents: LINKED_LIST[YODA_DOCUMENT]
 		name: STRING
+		output_folder_name: STRING
 
 
 
@@ -24,9 +25,11 @@ class
 				name_not_empty: attached u_name
 			do
 				name := u_name
+				output_folder_name := "temp_output"
 				create documents.make
 			ensure
 				name_set: name = u_name
+				--folder_name_set: output_folder_name = "temp_output"
 				doc_array_created: attached documents
 				doc_is_empty: documents.count = 0
 			end
@@ -78,12 +81,25 @@ class
 			end
 
 
-		save(output_format, folder, template: STRING)
+		save(output_format, template: STRING)
+			local
+				output_folder: DIRECTORY
+				new_name: PATH
 			do
+				-- creat output_folder
+				create output_folder.make (output_folder_name)
+				if
+					not output_folder.exists
+				then
+					output_folder.create_dir
+				end
+				-- save containing documents
 				across documents.new_cursor.reversed as el
 				loop
-					el.item.save (output_format, folder, template)
+					el.item.save (output_format, output_folder.path.out , template)
 				end
+				create new_name.make_from_string (name+"_output")
+				output_folder.rename_path (new_name)
 			end
 
 end

@@ -122,7 +122,7 @@ class
 				index.add_element (yoda.title (yoda.text ("Images"), 2))
 				index.add_element (yoda.text ("To show fancy stuff, you can link images online or offline"))
 				index.add_element (yoda.image_extern ("https://www.sideshowtoy.com/wp-content/uploads/2014/05/400080-product-feature.jpg"))
-				index.add_element (yoda.image ("..\resources\yodaa.png"))
+				index.add_element (yoda.image ("C:\Users\MHoegger\Desktop\yodaa_test.png"))
 				index.add_element (yoda.title (yoda.text ("Links"), 2))
 				index.add_element (yoda.text ("You are free to link to other files in your project or online websites"))
 				index.add_element (yoda.title (yoda.text ("External link"), 3))
@@ -132,13 +132,13 @@ class
 				index.add_element (yoda.title (yoda.text ("email link"), 2))
 				index.add_element (yoda.email ("support@yoda.ch"))
 				index.add_element (yoda.title (yoda.text ("Button as link"), 3))
-				index.add_element (yoda.link_extern (yoda.image ("http://icons.iconarchive.com/icons/iconsmind/outline/64/Play-Music-icon.png"), "https://www.youtube.com/watch?v=kDoY_zXf7uQ"))
+				index.add_element (yoda.link_extern (yoda.image_extern ("http://icons.iconarchive.com/icons/iconsmind/outline/64/Play-Music-icon.png"), "https://www.youtube.com/watch?v=kDoY_zXf7uQ"))
 				about.add_element (yoda.title (yoda.text ("This is the about us page now :)"), 2))
 				about.add_element (yoda.snippet_from_file ("resources/snippet.txt"))
 				about.add_element (yoda.link_intern (yoda.text ("Take me back to main, my little padawan"), index))
 				--yodalib.render("html")
 				yodalib.print_to_console
-				yodalib.save ("html", "Output", "resources/template.txt")
+				yodalib.save ("html", "resources/template.txt")
 			end
 
 

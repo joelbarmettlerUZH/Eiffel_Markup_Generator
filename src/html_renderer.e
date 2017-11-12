@@ -122,8 +122,38 @@ class
 
 		render_YODA_image(element: YODA_IMAGE; nesting: INTEGER): STRING
 			-- Perform render operation on YODA_IMAGE.
+			local
+				input_file: RAW_FILE
+				output_file: RAW_FILE
+				output_path: PATH
+				file_name: STRING
+				output_folder: DIRECTORY
 			do
-				Result := spaces(nesting) + "<img src='" + element.content + "'>%N"
+				--print(element.name)
+				if	-- if intern image: copy immage to "resource" folder and change path acordingly
+					element.name.is_equal("local image")
+				then
+					create output_path.make_current
+					file_name := element.content.substring (element.content.last_index_of('\', element.content.count)+1, element.content.count)
+					create output_folder.make (".\temp_output\resources")
+					if
+						not output_folder.exists
+					then
+						output_folder.create_dir
+					end
+					output_path:=output_path.appended ("\temp_output\resources\" + file_name)
+					create input_file.make_open_read (element.content)
+					create output_file.make_with_path (output_path)
+					output_file.open_write
+					input_file.copy_to(output_file)
+					output_file.close
+
+					Result := spaces(nesting) + "<img src='" + ".\resources\"+ file_name + "'>%N"
+
+				else
+				-- if extern link use linke as content
+					Result := spaces(nesting) + "<img src='" + element.content + "'>%N"
+				end
 			ensure then
 				valid_start_tag: result.has_substring("<img src='")
 				valid_end_tag: result.has_substring("'>")

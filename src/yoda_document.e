@@ -90,7 +90,7 @@ class
 			end
 
 
-		save(output_format,folder,  template: STRING)
+		save(output_format, folder,  template: STRING)
 			require
 				valid_template: True
 			local
