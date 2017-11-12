@@ -83,8 +83,8 @@ class
 --				print((yoda.snippet("<html>%N%T<head>%N%T%T<title>Page Title</title>%N%T</head>%N%T<body>%N%T<h1>This is a Heading</h1>%N%T<p>This is a paragraph.</p>%N%T</body>%N</html>")).render (create {HTML_RENDERER}, 2))
 
 				--table oh gott
-				create array_2_dim.make_filled (yoda.text("table entry!"), 2, 4)
---				print((yoda.table(array_2_dim)).render (create {HTML_RENDERER}, 1))
+				create array_2_dim.make_filled (yoda.text("</table>table entry!"), 2, 4)
+				print((yoda.table(array_2_dim)).render (create {HTML_RENDERER}, 1))
 --				create array_2_dim_2.make_filled (yoda.text("table entry!"), 1, 1)
 --				print((yoda.table(array_2_dim_2)).render (create {HTML_RENDERER}, 1))
 --				create array_2_dim_3.make_filled (yoda.text("table entry!"), 5, 4)
@@ -122,16 +122,20 @@ class
 				index.add_element (yoda.title (yoda.text ("Images"), 2))
 				index.add_element (yoda.text ("To show fancy stuff, you can link images online or offline"))
 				index.add_element (yoda.image ("https://www.sideshowtoy.com/wp-content/uploads/2014/05/400080-product-feature.jpg"))
+				index.add_element (yoda.image ("..\resources\yodaa.png"))
 				index.add_element (yoda.title (yoda.text ("Links"), 2))
 				index.add_element (yoda.text ("You are free to link to other files in your project or online websites"))
 				index.add_element (yoda.title (yoda.text ("External link"), 3))
 				index.add_element (yoda.link_extern (yoda.text ("Make simple links arround texts"), "http://www.jedipedia.wikia.com/wiki/Yoda"))
 				index.add_element (yoda.title (yoda.text ("Local link"), 2))
 				index.add_element (yoda.link_intern (yoda.text ("Or, link to other documents like this link here"), about))
+				index.add_element (yoda.title (yoda.text ("email link"), 2))
+				index.add_element (yoda.email ("support@yoda.ch"))
 				index.add_element (yoda.title (yoda.text ("Button as link"), 3))
 				index.add_element (yoda.link_extern (yoda.image ("http://icons.iconarchive.com/icons/iconsmind/outline/64/Play-Music-icon.png"), "https://www.youtube.com/watch?v=kDoY_zXf7uQ"))
 				about.add_element (yoda.title (yoda.text ("This is the about us page now :)"), 2))
 				about.add_element (yoda.link_intern (yoda.text ("Take me back to main, my little padawan"), index))
+				--yodalib.render("html")
 				yodalib.print_to_console
 				yodalib.save ("html", "Output", "resources/template.txt")
 			end
