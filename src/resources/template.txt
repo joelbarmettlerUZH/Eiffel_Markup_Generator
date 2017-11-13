@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<link rel="stylesheet" href="main.css" />
+		<link rel="stylesheet" href="www.zusammenfassung.schule/yoda/main.css" />
   </head>
   <body>
   {{CONTENT}}
