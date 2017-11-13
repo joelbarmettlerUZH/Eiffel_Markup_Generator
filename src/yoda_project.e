@@ -14,7 +14,6 @@ class
 		--name and documents shall be public, allow access for everybody
 		documents: LINKED_LIST[YODA_DOCUMENT]
 		name: STRING
-		output_folder_name: STRING
 
 
 
@@ -25,11 +24,9 @@ class
 				name_not_empty: attached u_name
 			do
 				name := u_name
-				output_folder_name := "temp_output"
 				create documents.make
 			ensure
 				name_set: name = u_name
-				--folder_name_set: output_folder_name = "temp_output"
 				doc_array_created: attached documents
 				doc_is_empty: documents.count = 0
 			end
@@ -71,6 +68,7 @@ class
 			end
 
 		print_to_console
+			-- print a list of all documents (and elements of documents) of the project to the console
 			do
 				print("######################%N###PROJECT: " + name + "###%N######################%N")
 				across documents.new_cursor.reversed as el
@@ -82,24 +80,43 @@ class
 
 
 		save(output_format, template: STRING)
+			-- save writes all document in the project into the given template, according to output_format
+			-- stores those file in a new folder
 			local
 				output_folder: DIRECTORY
 				new_name: PATH
+				project_folder: DIRECTORY
+				output_folder_name: STRING
 			do
 				-- creat output_folder
+				output_folder_name := "temp_output"
 				create output_folder.make (output_folder_name)
 				if
 					not output_folder.exists
 				then
 					output_folder.create_dir
+				else
+					output_folder.delete_content
+					output_folder.delete
+					output_folder.create_dir
 				end
 				-- save containing documents
 				across documents.new_cursor.reversed as el
 				loop
-					el.item.save (output_format, output_folder.path.out , template)
+					el.item.save_document (output_format, output_folder.path.out , template)
 				end
 				create new_name.make_from_string (name+"_output")
-				output_folder.rename_path (new_name)
+				create project_folder.make_with_path (new_name)
+				if
+					not project_folder.exists
+				then
+					output_folder.rename_path (new_name)
+				else
+					project_folder.delete_content
+					project_folder.delete
+					output_folder.rename_path (new_name)
+				end
+
 			end
 
 end

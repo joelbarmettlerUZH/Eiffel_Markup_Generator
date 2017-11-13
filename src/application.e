@@ -139,6 +139,7 @@ class
 				--yodalib.render("html")
 				yodalib.print_to_console
 				yodalib.save ("html", "resources/template.txt")
+				index.save ("html", "resources/template.txt")
 			end
 
 
