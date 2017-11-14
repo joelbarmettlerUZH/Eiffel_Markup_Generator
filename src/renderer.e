@@ -128,4 +128,13 @@ deferred class
 			end
 
 
+		render_anchor(element: YODA_ANCHOR; nesting: INTEGER): STRING
+			-- Perform render operation on YODA_TEXT_INTERFACE.
+			require
+				underline_exists: attached element
+				valid_number_of_nesting: nesting >= 0
+			deferred
+			end
+
+
 end

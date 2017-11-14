@@ -31,6 +31,12 @@ deferred class
 			end
 
 
+		validate_anchor(element: YODA_LINK): BOOLEAN
+			--Deferred validate function. Has no other purpose than ensuring this function is shared between all its children.
+			deferred
+			end
+
+
 		validate_email(element: YODA_LINK): BOOLEAN
 			--Deferred validate function. Has no other purpose than ensuring this function is shared between all its children.
 			deferred

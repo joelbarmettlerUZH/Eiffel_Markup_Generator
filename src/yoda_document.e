@@ -56,10 +56,14 @@ class
 				return_string: STRING
 				renderer: RENDERER
 				i: INTEGER
+				next_id: INTEGER
 			do
+				next_id := 1
 				renderer := create {HTML_RENDERER}
 				output_format.to_upper
 				return_string := ""
+				--instanciation of needed renderer calls sub renderer if existing
+				Result := return_string
 				from
 					i := 1
 				until
@@ -70,9 +74,11 @@ class
 					end
 					i := i + 1
 				end
+				next_id := 1
 				across elements.new_cursor.reversed as element
 				loop
 					return_string := return_string + element.item.render (renderer, 0)
+					next_id := next_id + 1
 				end
 				--instanciation of needed renderer calls sub renderer if existing
 				Result := return_string

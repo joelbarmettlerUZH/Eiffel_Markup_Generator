@@ -12,7 +12,7 @@ deferred class
 
 
 	feature {ANY}
-		render(render_obj: RENDERER; nesting: INTEGER): STRING
+		render(renderer: RENDERER; nesting: INTEGER): STRING
 			--some fancy comment
 			deferred
 			end

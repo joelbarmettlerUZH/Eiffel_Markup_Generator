@@ -97,6 +97,32 @@ class
 			end
 
 
+		link_anchor(u_content: YODA_ELEMENT; u_linked_anchor: YODA_ANCHOR): YODA_LINK
+			require
+				u_content_exists: attached u_content
+				anchor_exists: attached u_linked_anchor
+				u_linked_anchor_correct_type: attached {YODA_ANCHOR} u_linked_anchor
+			do
+				Result := create {YODA_LINK}.make_anchor (u_content, u_linked_anchor)
+			ensure
+				result_not_void: attached Result
+				result_is_YODA_LINK: attached {YODA_LINK} Result
+			end
+
+
+		anchor(id: STRING): YODA_ANCHOR
+			--Factory that creates an ANCHOR object and returns it to the user
+			require
+				id_exists: attached id
+				id_not_empty: not id.is_empty
+			do
+				Result := create {YODA_ANCHOR}.make(id)
+			ensure
+				result_not_void: attached Result
+				result_is_YODA_LINK: attached {YODA_ANCHOR} Result
+			end
+
+
 		email(mail_address: STRING): YODA_LINK
 			--Factory that creates an email LINK object and returns it to the user
 			require

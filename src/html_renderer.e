@@ -20,7 +20,7 @@ class
 				content: STRING
 				i: INTEGER
 			do
-				content := element.content
+				content := element.content.out
 				content.left_adjust
 				content.right_adjust
 				YODA_tag := <<"<", ">", "{{b}}", "{{/b}}", "{{u}}", "{{/u}}", "{{i}}", "{{/i}}", "{{n}}", "%N" >>
@@ -159,17 +159,17 @@ class
 					output_file.open_write
 					input_file.copy_to(output_file)
 					output_file.close
-					
+
 					-- write relative path for HTML
-					Result := spaces(nesting) + "<img src='" + ".\resources\"+ input_file_name + "'>%N"
+					Result := spaces(nesting) + "<img src='" + ".\resources\"+ input_file_name + "'><br>%N"
 
 				else
 				-- if extern link use linke as content
-					Result := spaces(nesting) + "<img src='" + element.content + "'>%N"
+					Result := spaces(nesting) + "<img src='" + element.content + "'><br>%N"
 				end
 			ensure then
 				valid_start_tag: result.has_substring("<img src='")
-				valid_end_tag: result.has_substring("'>")
+				valid_end_tag: result.has_substring("'><br>")
 			end
 
 		render_YODA_snippet(element: YODA_SNIPPET; nesting: INTEGER): STRING
@@ -262,6 +262,17 @@ class
 			ensure then
 				valid_start_tag: Result.has_substring("<u>")
 				valid_end_tag: Result.has_substring("</u>")
+			end
+
+
+		render_anchor(element: YODA_ANCHOR; nesting: INTEGER): STRING
+			local
+				doc_url: STRING
+			do
+				Result := spaces(nesting) + "<span id='" + element.id.out + "'></span>%N"
+			ensure then
+				valid_start_tag: result.has_substring("id='")
+				valid_end_tag: result.has_substring(">")
 			end
 
 end

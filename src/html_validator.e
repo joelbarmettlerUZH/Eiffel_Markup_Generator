@@ -171,6 +171,18 @@ class
 				returnes_true: Result = True
 			end
 
+
+		validate_anchor(element: YODA_LINK): BOOLEAN
+			--validates a YODA_LINK whether it's content is conforming with the HTML text rules. Returns True if so, False otherwise
+			require else
+				element_not_empty: attached element
+			do
+				Result := True
+			ensure then
+				returnes_true: Result = True
+			end
+
+
 		validate_email(element: YODA_LINK): BOOLEAN
 			--validates a YODA_LINK whether it's content is conforming with the HTML text rules. Returns True if so, False otherwise
 			require else

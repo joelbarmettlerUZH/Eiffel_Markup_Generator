@@ -13,7 +13,8 @@ class
 	create
 		make,
 		make_internal,
-		make_email
+		make_email,
+		make_anchor
 
 	feature {ANY}
 		--name and documents shall be public, allow access for everybody
@@ -51,6 +52,21 @@ class
 			ensure then
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_intern_link(CURRENT))
 				name_set: name.is_equal("internal Link")
+			end
+
+
+		make_anchor(u_content: YODA_ELEMENT; u_linked_anchor: YODA_ANCHOR)
+			--Creates the internal YODA_LINK, validates it and sets the feature variables
+			require else
+				u_content_not_void: attached u_content
+				u_linked_anchor_not_void: attached u_linked_anchor
+			do
+				content := u_content
+				url := "#"+u_linked_anchor.id
+				name := "anchor Link"
+			ensure then
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_anchor(CURRENT))
+				name_set: name.is_equal("anchor Link")
 			end
 
 
