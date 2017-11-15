@@ -17,14 +17,15 @@ class
 		make_anchor
 
 	feature {ANY}
-		--name and documents shall be public, allow access for everybody
+		--Content and url public, allow access for everybody
 		content: YODA_ELEMENT
 		url: STRING
 
 
 	feature {ANY}
 		make(u_content: YODA_ELEMENT; u_url: STRING)
-			--Creates the external YODA_LINK, validates it and sets the feature variables
+			--Creates the external YODA_LINK, validates it and sets the feature variables.
+			--Validator gets called in order to ensure that a link remains valid for all languages.
 			require
 				u_content_not_void: attached u_content
 				u_url_not_void: attached u_url
@@ -42,6 +43,7 @@ class
 
 		make_internal(u_content: YODA_ELEMENT; u_linked_doc: YODA_DOCUMENT)
 			--Creates the internal YODA_LINK, validates it and sets the feature variables
+			--Validator gets called in order to ensure that a link remains valid for all languages.
 			require else
 				u_content_not_void: attached u_content
 				u_linked_doc_not_void: attached u_linked_doc
@@ -56,7 +58,8 @@ class
 
 
 		make_anchor(u_content: YODA_ELEMENT; u_linked_anchor: YODA_ANCHOR)
-			--Creates the internal YODA_LINK, validates it and sets the feature variables
+			--Creates the anchor that marks a hypertext link, validates it and sets the feature variables
+			--Validator gets called in order to ensure that a link remains valid for all languages.
 			require else
 				u_content_not_void: attached u_content
 				u_linked_anchor_not_void: attached u_linked_anchor
@@ -72,6 +75,7 @@ class
 
 		make_email(u_content: STRING)
 			--Creates the YODA_LINK as an E-Mail Mailto, validates it and sets the feature variables
+			--Validator gets called in order to ensure that a link remains valid for all languages.
 			require
 				u_content_not_void: attached u_content
 			do
@@ -85,7 +89,9 @@ class
 
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
-			--Apply YODA_LINK render to renderer.
+			--Applies YODA_LINK render to a class of type renderer as for example HTML_RENDERER.
+			--renderer.render_yoda_link(current, nesting) returns a String that replaces the YODA_tags with the corresponding HTML tags
+			--and assigns it to the Result.
 			require else
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
@@ -101,7 +107,5 @@ class
 	invariant
 
 		content_text_instantiated: attached content
-		--linked_doc_instantiate: linked_doc: YODA_DOCUMENT
-
 
 end

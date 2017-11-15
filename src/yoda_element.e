@@ -1,5 +1,5 @@
 note
-	description: "Deferred Yoda Element."
+	description: "Deferred Yoda Element acts as parent class for all YODA_* classes."
 	author: "Joel Barmettler"
 	date: "$25.10.17$"
 	revision: "$27.10.2017$"
@@ -11,8 +11,9 @@ deferred class
 		name: STRING
 
 	feature {ANY}
+		--array of validators that act as validation languages, needs to be extendet by marksdown
+		--validator or other extensible markup languages
 		validation_langauges: ARRAY[VALIDATOR]
-			--The validation commander iterates validates a provided element with the corresponding validation_function for all validation_languages
 			local
 				languages_array: ARRAY[VALIDATOR]
 			do

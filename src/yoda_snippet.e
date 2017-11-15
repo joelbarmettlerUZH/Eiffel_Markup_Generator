@@ -14,13 +14,14 @@ class
 		make
 
 	feature {ANY}
-		--name and documents shall be public, allow access for everybody
+		--content public, allow access for everybody
 		content: STRING
 
 
 	feature {ANY}
 		make(u_content: STRING)
 			--Creates the YODA_SNIPPET, validates it and sets the feature variables
+			--Validator gets called in order to ensure that a snippet remains valid for all languages.
 			do
 				content := u_content
 				name := "snippet"
@@ -32,7 +33,9 @@ class
 
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
-			-- Apply YODA_SNIPPET render to renderer.
+			--Applies YODA_Snippet render to a class of type renderer as for example HTML_RENDERER.
+			--renderer.render_yoda_snippet(current, nesting) returns a String that replaces the YODA_tags with the corresponding HTML tags
+			--and assigns it to the Result.
 			require else
 				renderer_exists: renderer /= Void
 				valid_number_of_nesting: nesting >= 0

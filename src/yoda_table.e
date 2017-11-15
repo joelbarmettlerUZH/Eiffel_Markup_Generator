@@ -1,5 +1,5 @@
 note
-	description: "Summary description for {YODA_TABLE}."
+	description: "Concrete class of table."
 	author: "Joel Barmettler"
 	date: "$25.10.17$"
 	revision: "$27.10.2017$"
@@ -24,7 +24,8 @@ class
 
 	feature {ANY}
 		make(u_content: ARRAY2[YODA_ELEMENT])
-			--Creates the YODA_TABLE, validates it and sets the feature variables
+			--Creates the external YODA_LINK, validates it and sets the feature variables.
+			--Validator gets called in order to ensure that a link remains valid for all languages.
 			require
 				u_content_exists: attached u_content
 				u_content.count > 0
@@ -39,7 +40,9 @@ class
 
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
-			-- Apply YODA_TABLE render to renderer.
+			--Applies YODA_TABLE render to a class of type renderer as for example HTML_RENDERER.
+			--renderer.render_yoda_table(current, nesting) returns a String that replaces the YODA_tags with the corresponding HTML tags
+			--and assigns it to the Result.
 			require else
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
@@ -52,6 +55,10 @@ class
 
 
 		as_string(nesting: INTEGER): STRING
+			--Inserts the right amount of spacing and new lines in order to have a clear overview of each row and column in the returned
+			--representation of the table.
+			require
+				valid_number_of_nesting: nesting >= 0
 			local
 				result_string: STRING
 				row, column: INTEGER
@@ -71,6 +78,8 @@ class
 					row := row + 1
 				end
 				Result := result_string
+			ensure
+    			result_exists: attached Result
 			end
 
 

@@ -18,7 +18,7 @@ class
 		make
 
 	feature {ANY}
-		--name and documents shall be public, allow access for everybody
+		--content and is_ordered public, allow access for everybody
 		content: ARRAY[YODA_ELEMENT]
 		is_ordered: BOOLEAN
 
@@ -26,6 +26,7 @@ class
 	feature {ANY}
 		make(u_content: ARRAY[YODA_ELEMENT]; u_is_ordered: BOOLEAN)
 			--Creates the YODA_LIST, validates it and sets the feature variables
+			--Validator gets called in order to ensure that a list remains valid for all languages.
 			require else
 				u_content_not_void: attached u_content
 				u_content_not_empty: u_content.count > 0
@@ -42,7 +43,10 @@ class
 			end
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
-			-- Apply YODA_LIST render to renderer.
+			--Applies YODA_LIST render to a class of type renderer as for example HTML_RENDERER.
+			--renderer.render_yoda_list(current, nesting) returns a String that replaces the YODA_tags with the corresponding HTML tags
+			--such that it is possible to distinguish for the renderer wether it is a ordered or unordered list
+			--and assigns it to the Result.
 			require else
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
@@ -54,6 +58,9 @@ class
 			end
 
 		as_string(nesting: INTEGER): STRING
+			--Uses spaces function from parent class in order to concatenate the right amount
+			--of spaces. Futher it loops through current array of elements to concatenate the resulted
+			--string with the nested string representation.
 			local
 				result_string: STRING
 			do

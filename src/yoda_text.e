@@ -2,7 +2,7 @@ note
 	description: "Concrete element Yoda text."
 	author: "Joel Barmettler"
 	date: "$25.10.17$"
-	revision: "$27.10.2017$"
+	revision: "$15.11.2017$"
 
 class
 	YODA_TEXT
@@ -14,13 +14,13 @@ class
 		make
 
 	feature {ANY}
-		--name and documents shall be public, allow access for everybody
+		--content of text is public, allow access for everybody
 		content: STRING
 
 
 	feature {ANY}
 		make(u_content: STRING)
-			--Creates the YODA_TEXT, validates it and sets the feature variables
+			--Creates the YODA_TEXT that will be created in the factory of the YODA class, validates it and sets the content and name variables
 			require
 				u_content_not_void: attached u_content
 				u_content_not_empty: u_content.count > 0
@@ -35,7 +35,9 @@ class
 
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
-			-- Apply YODA_TEXT render to renderer.
+			--Applies YODA_TEXT render to a class of type renderer as for example HTML_RENDERER.
+			--renderer.render_yoda_text(current, nesting) returns a String that replaces the YODA_tags with the corresponding HTML tags
+			--and assigns it to the Result.
 			require else
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
