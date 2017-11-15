@@ -10,7 +10,7 @@ class
 		make
 
 	feature {ANY}
-		--name and elements shall be public, allow access for everybody
+		--A document is characterized by the elements it contains, its specific user-given name and the information about what output langauges are supported.
 		elements: LINKED_LIST[YODA_ELEMENT]
 		renderer_instances: ARRAY[RENDERER]
 		renderer_names: ARRAY[STRING]
@@ -18,12 +18,15 @@ class
 
 	feature {ANY}
 		make(u_name: STRING)
-			--creates instance of document, uses name for it
+			--The make procedure sets the name of the document and instanciates the two arrays that represent the possible render outputs.
+			--When a new output-language gets supported, the yoda-developers need to add, for each new language, the name of the language
+			--to the renderer_names and an instance of the langauge renderer to renderer_instances.
 			require
 				u_name_exists: attached u_name
 			do
 				name := u_name
 				create elements.make
+				--Each inddex in renderer_names and renderer_instances has to correspond, so the HTML_RENDERER and the String HTML have both index 0.
 				renderer_names := <<"HTML">>
 				renderer_instances := <<create {HTML_RENDERER}>>
 
@@ -35,7 +38,7 @@ class
 
 
 		add_element(element: YODA_ELEMENT)
-			--adds a Yoda element to the class variable elements: linked list
+			--This procedure takes a yoda_element and adds appends it to the linked-list of elements that this document currently holds.
 			require
 				element_exists: attached element
 			do
@@ -48,7 +51,11 @@ class
 
 
 		render(output_format: STRING): STRING
-			-- renders all content, mean it creats the output-string according to the give output_format
+			--The render-procedure takes the wished output_format from the user. It then loops through the renderer_names and finds the one name that corresponds to the users wished output format
+			--If the users wished output format is not in the supported languages, it choses the HTML_Renderer by default.
+			--Next, the renderer loops over the array of elements and, for each element, calls its render-function with the corresponding RENDERER instance.
+			--The return value from each element is a string with its representation in the chosen language, this string-representation is added to an overall string
+			--named return_string which, after the loop, contains all individual element-representation. This return_string is finally returned to the user.
 			require
 				output_format_exists: attached output_format
 				output_format_not_empty: not output_format.is_empty
@@ -59,11 +66,13 @@ class
 				next_id: INTEGER
 			do
 				next_id := 1
+				--by default, assume the wished language is HTML. Gets overwritten when the user specifies another supported language
 				renderer := create {HTML_RENDERER}
 				output_format.to_upper
 				return_string := ""
 				--instanciation of needed renderer calls sub renderer if existing
 				Result := return_string
+				--find the wished output-language
 				from
 					i := 1
 				until
@@ -75,6 +84,7 @@ class
 					i := i + 1
 				end
 				next_id := 1
+				--render each elemet with the defined renderer, add the returned string representation to the return_string
 				across elements.new_cursor.reversed as element
 				loop
 					return_string := return_string + element.item.render (renderer, 0)
@@ -85,7 +95,7 @@ class
 			end
 
 		print_to_console
-			-- print a list of all elements used in the document to the console
+			--The print_to_console procedure loops over the elements and calls their printing representation for the console
 			local
 				print_string: STRING
 			do
@@ -98,7 +108,13 @@ class
 			end
 
 		save(output_format,  template: STRING)
-			-- for external use, called by user
+			--The save procedure allows the user to save a document to the disk. For this reason, the user specifies an output format like he does in "render"
+			--but als a template in which the produces string gets injected. The save-procedure creates a temp_output folder in which the elmenets can save their used content
+			--from the disk, like images. He then calls the save_document procedure in itself, which does the actual saving part. Afterwords, the folder gets renamed with a name
+			--corresponding to the document name.
+			--In fact, we have two save funtions. The function that does the actual rendering and saving is the save_document function. The purpose of this save function here
+			--is that the user shall be allowed to only render one document without the whole project, and therefore such a temp_output folder is needed, which is created and renamed
+			--by this function here.
 			require
 				valid_template: True
 			local
@@ -107,7 +123,7 @@ class
 				new_name: PATH
 				document_folder: DIRECTORY
 			do
-				-- creat output_folder
+				-- creat temporary output_folder
 				output_folder_name := "temp_output"
 				create output_folder.make (output_folder_name)
 				if
@@ -136,7 +152,10 @@ class
 			end
 
 		save_document(output_format, folder,  template: STRING)
-			-- for internal use, called by project
+			--The save_document procedure does the actual saving part. The procedure needs an output format, a folder and a template. The output_format and template is user-chosen, the folder
+			--is chosen by the save procedure from either document or project. The save_document procedure opens the template and replaces the {{CONTENT}} tag inside the template with
+			--the string-representation of the document, which is produced by the render function of the document. The save_document procedure then saves the document with the correct
+			--filename and filetype into the specified folder.
 			require
 				valid_template: True
 			local
@@ -145,12 +164,16 @@ class
 				file_content: STRING
 				rendered_string: STRING
 			do
+				--open template
 				create input_file.make_open_read (template)
 				input_file.read_stream (input_file.count)
 				file_content := input_file.last_string
+				--render document
 				rendered_string := current.render (output_format)
+				--replace content tag by rendered content
 				file_content.replace_substring_all ("{{CONTENT}}", rendered_string)
 				input_file.close
+				--output the file with documentname + filetype to the given folder
 				create output_file.make_open_write (folder + "/" + current.name + "." + output_format)
 				output_file.put_string (file_content)
 				output_file.close

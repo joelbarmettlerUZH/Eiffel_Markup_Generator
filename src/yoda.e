@@ -310,6 +310,7 @@ class
 				result_is_YODA_LINK: attached {YODA_TEXT_INTERFACE} Result
 			end
 
+
 		underline(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates an instance of YODA_TEXT_INTERFACE that surrounds some text with a styling attribute, in this case "unterline", and return it to the user
 			--The interacion is simple: yoda.underline( yoda.text("Some text") )
@@ -338,9 +339,10 @@ class
 			end
 
 
-		--are they even usefull?
 		b(content: STRING): STRING
-			--takes a String, puts corresponding tags to it
+			--This little function takes a content String from the user and returns it surrounded with yoda-specific bold-tags that tells the renderer to make the text
+			--in between bold.
+			--The Interaction looks as follwos: yoda.text( "Yoda, make" + yoda.b(" THIS ") + "bold please")
 			require
 				content_exists: attached content
 				content_not_empty: not content.is_empty
@@ -355,7 +357,9 @@ class
 
 
 		i(content: STRING): STRING
-			--takes a String, puts corresponding tags to it
+			--This little function takes a content String from the user and returns it surrounded with yoda-specific italic-tags that tells the renderer to make the text
+			--in between italic.
+			--The Interaction looks as follwos: yoda.text( "Yoda, make" + yoda.b(" THIS ") + "italic please")
 			require
 				content_exists: attached content
 				content_not_empty: not content.is_empty
@@ -370,7 +374,9 @@ class
 
 
 		u(content: STRING): STRING
-			--takes a String, puts corresponding tags to it
+			--This little function takes a content String from the user and returns it surrounded with yoda-specific underline-tags that tells the renderer to make the text
+			--in between underline.
+			--The Interaction looks as follwos: yoda.text( "Yoda, make" + yoda.b(" THIS ") + "underline please")
 			require
 				content_not_empty: attached content
 				content_not_empty: not content.is_empty

@@ -1,8 +1,8 @@
 note
-	description: "Yoda project that contains documents."
+	description: "A Yoda Project serves as a container for Yoda Documents. It allows the user to render/save all documents at once into a seperate output folder"
 	author: "Joel Barmettler"
 	date: "$25.10.17$"
-	revision: "$27.10.2017$"
+	revision: "$15.11.2017$"
 
 class
 	YODA_PROJECT
@@ -11,7 +11,7 @@ class
 		make
 
 	feature {ANY}
-		--name and documents shall be public, allow access for everybody
+		--A Yoda Project has a name (which defines the name of the output folder) as well as a linked list of yoda documents it contains.
 		documents: LINKED_LIST[YODA_DOCUMENT]
 		name: STRING
 
@@ -19,7 +19,7 @@ class
 
 	feature {ANY}
 		make(u_name: STRING)
-			--Create a new Project with a user chosen Name, instantiate the "documents" Linked-List
+			--Creates a new Yoda Project with a user chosen Name and instanciates an empty linked list where the yoda documents will be stored
 			require
 				name_not_empty: attached u_name
 			do
@@ -33,7 +33,7 @@ class
 
 
 		add_document(doc: YODA_DOCUMENT)
-			--appends a YODA document to the projects documents-array
+			--the add_document procedure takes a yoda document and appends it to the linnked list of documents.
 			require
 				doc_not_void: attached doc
 			do
@@ -46,7 +46,12 @@ class
 
 
 		render(output_format: STRING): ARRAY[STRING]
-			--calls render for it's documents
+			--The render function takes a string output_format that defines in what language the output shall be assembled.
+			--It is required that the documents linked list is not empty.
+			--For every document in the linked list, the document-render function is called with the output format as an argument
+			--From the document rendering, a string is returned which gets inserted at the end of an array of strings
+			--after the loop finished, this array contains string-representations of each document in the right order
+			--Finally, this array is returned to the user.
 			require else
 				output_format_exists: attached output_format
 				documents_not_empty: not documents.is_empty
@@ -55,10 +60,12 @@ class
 				i: INTEGER
 			do
 				create return_array.make_empty
+				--loop over all documents
 				from i := documents.count
 				until
 					i <= 0
 				loop
+					--render document and save result string to return_array at corresponding position i
 					return_array.force (documents[i].render (output_format), return_array.count)
 					i := i - 1
 				end
@@ -68,7 +75,8 @@ class
 			end
 
 		print_to_console
-			-- print a list of all documents (and elements of documents) of the project to the console
+			--This procedure allows the user to print all documents that he's got in the current project, as well as all the elements these documents contain
+			--So the procedure just prints the name of the project and then calls, for each document, its print_to_console procedure again
 			do
 				print("######################%N###PROJECT: " + name + "###%N######################%N")
 				across documents.new_cursor.reversed as el
@@ -80,7 +88,8 @@ class
 
 
 		save(output_format, template: STRING)
-			-- save writes all document in the project into the given template, according to output_format
+			--The save-procedure creates a temporary output folder temp_output (deletes old one first when already existing) in which the elements will store their resources when being rendered
+			--Then, for every document in the project, the project is being saved with the save_document procedure, and the temp folder is renamed with the corresponding project name
 			-- stores those file in a new folder
 			local
 				output_folder: DIRECTORY
@@ -88,7 +97,7 @@ class
 				project_folder: DIRECTORY
 				output_folder_name: STRING
 			do
-				-- creat output_folder
+				-- creat temp folder
 				output_folder_name := "temp_output"
 				create output_folder.make (output_folder_name)
 				if
@@ -100,11 +109,12 @@ class
 					output_folder.delete
 					output_folder.create_dir
 				end
-				-- save containing documents
+				-- save documents to temp folder
 				across documents.new_cursor.reversed as el
 				loop
 					el.item.save_document (output_format, output_folder.path.out , template)
 				end
+				--rename temp folder to projectname_output folder
 				create new_name.make_from_string (name+"_output")
 				create project_folder.make_with_path (new_name)
 				if

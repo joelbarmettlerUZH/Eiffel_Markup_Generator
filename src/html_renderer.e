@@ -1,8 +1,8 @@
 note
-	description: "Concrete renderer that converts the concrete elements into html."
+	description: "HTML Render class that receives YODA_ELEMENTS and returns a string of their representation in HTML"
 	author: "Joel Barmettler"
 	date: "$25.10.17$"
-	revision: "$27.10.2017$"
+	revision: "$15.11.2017$"
 
 class
 	HTML_RENDERER
@@ -13,7 +13,8 @@ class
 
 	feature {ANY}
 		render_YODA_text(element: YODA_TEXT; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT_INTERFACE.
+			--The render_YODA_Text function takes a YODA_TEXT element and replaces all yoda stling tags with the corresponding html-tag.
+			--Then, it returns the content of the yoda_text surrounded with paragraph tags.
 			local
 				corresponding_HTML_tag: ARRAY[STRING]
 				YODA_tag: ARRAY[STRING]
@@ -23,6 +24,8 @@ class
 				content := element.content.out
 				content.left_adjust
 				content.right_adjust
+				--Replace not-allowed symbols like "<" with a code that tells HTML to display a "<" but not interpret it.
+				--also, replace all yoda syling tags with the corresponding one.
 				YODA_tag := <<"<", ">", "{{b}}", "{{/b}}", "{{u}}", "{{/u}}", "{{i}}", "{{/i}}", "{{n}}", "%N" >>
 				corresponding_HTML_tag := << "&lt;", "&gt;", "<b>", "</b>", "<u>", "</u>", "<i>", "</i>", "</br>", "</br>">>
 				from i := 1
@@ -42,12 +45,16 @@ class
 
 
 		render_YODA_table(element: YODA_TABLE; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TABLE.
+			--To render an table, the have to perform a first loop that surround all elemets the first row in the ARRAY2 with table header th tags. Then, for every following row,
+			--surround each row element with td tags. Between each new row, add table row tr tags. Always keep track of the nesting and increase nesting for new rows and new
+			--elements in the row. The initial nesting of the table itself is handed to the renderer, so we build up on this one.
 			local
 				content: STRING
 				row, column: INTEGER
 			do
+				--The content string is the one we want to return. First, add the table tag to it with the right number of spaces in front
 				content := spaces(nesting) + "<table>%N"
+				--Then, loop over the first row of the table, surround the whole row with th tags and each element with th tags, then render each element itself.
 				content := content + spaces(nesting+1) +"<tr>%N"
 				from column := 1
 				until column > element.content.width
@@ -55,6 +62,8 @@ class
 					content := content + spaces(nesting+2) +"<th>%N" + element.content.item (1, column).render (create {HTML_RENDERER}, nesting+3) + spaces(nesting+2) + "</th>%N"
 					column := column + 1
 				end
+				--Next, render all the rest of the table with two loops, one going over all the rows starting from row 2 (first is already rendered as header), the other
+				--one going over the elements of that row.
 				content := content + spaces(nesting+1) +"</tr>%N"
 				from row := 2
 				until row > element.content.height
@@ -69,8 +78,10 @@ class
 				content := content + spaces(nesting+1) +"</tr>%N"
 				row := row + 1
 				end
+				--Even though the table may contain text, we remove paragraph tags cause the table content is styled individually.
 				content.replace_substring_all ("<p>", "")
 				content.replace_substring_all ("</p>", "")
+				--Close the table with the table-close tag
 				Result := content + spaces(nesting) + "</table>%N"
 			ensure then
 				valid_start_tag: result.has_substring("<table>")
@@ -79,24 +90,29 @@ class
 
 
 		render_YODA_list(element: YODA_LIST; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_LIST.
+			-- To render a list, we have to first differentiate between the ordered or unordered list, in order to set the right list-tag. Then, we loop
+			--over the list elements, render them and surround the outcome with list tags.
 			local
 				content: STRING
 			do
+				--Depending on ordered/unordered, set ol or ul tag.
 				if element.is_ordered then
 					content := spaces(nesting) + "<ol>%N"
 				else
 					content := spaces(nesting) + "<ul>%N"
 				end
+				--loop over elements, render them and surround with list tag. Keep track of the nesting structure.
 				across element.content as  list_element
 				loop
 					content := content + spaces(nesting+1) + "<li>%N" +list_element.item.render (create {HTML_RENDERER}, nesting+2) + spaces(nesting+1) + "</li>%N"
 				end
+				--again close with the right closing tag.
 				if element.is_ordered then
 					content := content + spaces(nesting) + "</ol>%N"
 				else
 					content := content + spaces(nesting) + "</ul>%N"
 				end
+				--Even though the list may contain text, we remove paragraph tags cause the table content is styled individually.
 				content.replace_substring_all ("<p>", "")
 				content.replace_substring_all ("</p>", "")
 				Result := content
@@ -107,7 +123,12 @@ class
 
 
 		render_YODA_link(element: YODA_LINK; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_LINK.
+			--A link consists of some content that is clickable and a place it links to. When we were dealing with internal links, the url of the element is just
+			--some name of another document. At the stage where this internal link was created, it is not determined yet what document-type this document will be.
+			--Therefore, we marked the internal link with a yoda specific {{doctype}} tag that not just symbolizes that a link to another document was used, but also
+			--serves as a placeholder where the doctype-ending, ".html", is going to be. We assume that, when the user renders a file as HTML, he also wants to link
+			--on oter HTML files, therefore we link to the other document as a HTML document.
+			--Finally, we simply add the url after the href and render the clickable content between the link tags.
 			local
 				doc_url: STRING
 			do
@@ -121,7 +142,7 @@ class
 
 
 		render_YODA_image(element: YODA_IMAGE; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_IMAGE.
+			--
 			local
 				input_file: RAW_FILE
 				output_file: RAW_FILE
@@ -173,7 +194,8 @@ class
 			end
 
 		render_YODA_snippet(element: YODA_SNIPPET; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_SNIPPET.
+			--This function renders a snippet. Nothing is parsed, the whole responsibility lies on the user. The snippet content is just inserted returned with replacing
+			--every newline character by a newline with the right amount of nesting spaces.
 			local
 				snippet_content: STRING
 			do
@@ -183,7 +205,7 @@ class
 			end
 
 		render_bold(element: TEXT_DECORATOR; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT_INTERFACE.
+			-- The bold renderer renders the text element it contains and surrounds it with html bold tags.
 			local
 				return_string: STRING
 			do
@@ -196,7 +218,7 @@ class
 			end
 
 		render_code(element: TEXT_DECORATOR; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT_INTERFACE.
+			-- The code renderer renders the text element it contains and surrounds it with html code tags.
 			local
 				return_string: STRING
 			do
@@ -211,7 +233,7 @@ class
 			end
 
 		render_italic(element: TEXT_DECORATOR; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT_INTERFACE.
+			-- The italic renderer renders the text element it contains and surrounds it with html italic tags.
 			local
 				return_string: STRING
 			do
@@ -224,7 +246,7 @@ class
 			end
 
 		render_qoute(element: TEXT_DECORATOR; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT_INTERFACE.
+			-- The quote renderer renders the text element it contains and surrounds it with html quote tags.
 			local
 				return_string: STRING
 			do
@@ -239,7 +261,7 @@ class
 			end
 
 		render_title(element: TEXT_DECORATOR_TITLE; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT_INTERFACE.
+			-- The title renderer renders the text element it contains and surrounds it with html title tags.
 			local
 				return_string: STRING
 			do
@@ -252,7 +274,7 @@ class
 			end
 
 		render_underline(element: TEXT_DECORATOR; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT_INTERFACE.
+			-- The underline renderer renders the text element it contains and surrounds it with html underline tags.
 			local
 				return_string: STRING
 			do
@@ -266,6 +288,7 @@ class
 
 
 		render_anchor(element: YODA_ANCHOR; nesting: INTEGER): STRING
+			-- Renders a span element with the id corresponding to the anchors set id, returns it as a string with the right nesting amount
 			do
 				Result := spaces(nesting) + "<span id='" + element.id.out + "'></span>%N"
 			ensure then
