@@ -266,8 +266,6 @@ class
 
 
 		render_anchor(element: YODA_ANCHOR; nesting: INTEGER): STRING
-			local
-				doc_url: STRING
 			do
 				Result := spaces(nesting) + "<span id='" + element.id.out + "'></span>%N"
 			ensure then
