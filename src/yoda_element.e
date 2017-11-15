@@ -11,9 +11,10 @@ deferred class
 		name: STRING
 
 	feature {ANY}
-		--array of validators that act as validation languages, needs to be extendet by marksdown
-		--validator or other extensible markup languages
+
 		validation_langauges: ARRAY[VALIDATOR]
+			--array of validators that act as validation languages, needs to be extendet by marksdown
+			--validator or other extensible markup languages
 			local
 				languages_array: ARRAY[VALIDATOR]
 			do
@@ -26,11 +27,12 @@ deferred class
 
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
-			-- deferred function that allows all elements to get visited by a Renderer
+			--deferred function that allows all elements to get visited by a Renderer
 			deferred
 			end
 
 		as_string(nesting: INTEGER): STRING
+			--adds amount of nesting and concatenates the strings with a new line at the end.
 			require
 				valid_nesting: nesting >= 0
 			do

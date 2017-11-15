@@ -57,7 +57,7 @@ class
 		as_string(nesting: INTEGER): STRING
 			--Inserts the right amount of spacing and new lines in order to have a clear overview of each row and column in the returned
 			--representation of the table.
-			require
+			require else
 				valid_number_of_nesting: nesting >= 0
 			local
 				result_string: STRING
@@ -78,7 +78,7 @@ class
 					row := row + 1
 				end
 				Result := result_string
-			ensure
+			ensure then
     			result_exists: attached Result
 			end
 
