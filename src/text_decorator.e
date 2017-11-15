@@ -2,7 +2,7 @@ note
 	description: "Deferred component of the decorator."
 	author: "Marius Högger"
 	date: "$26.10.2017$"
-	revision: "$27.10.2017$"
+	revision: "$15.11.2017$"
 
 deferred class
 	TEXT_DECORATOR
@@ -20,6 +20,7 @@ feature {ANY}
 
 feature {NONE}
 	make_style(u_component: YODA_TEXT_INTERFACE)
+		--Creates a new instance of a decorator with the given YODA_ELEMENT as sontent, also sets it's name to "style"
 			-- Set `component' to `u_component'.
 		require
 			u_component_not_void: u_component /= Void
@@ -33,11 +34,13 @@ feature {NONE}
 
 feature
 	render(renderer: RENDERER; nesting: INTEGER): STRING
+		--Defined here to be used by all subclasses
 		deferred
 		end
 
 
 	as_string(nesting: INTEGER): STRING
+		--Creates the default string representation of the decorator. This string is used to show the content of a project/document
 		do
 			Result := spaces("-", nesting) + name + "(" + component.name + ")%N"
 		end

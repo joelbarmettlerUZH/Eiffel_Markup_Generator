@@ -92,7 +92,7 @@ class
 --				array_2_dim_3[1,1]:=yoda.table(array_2_dim)
 --				array_2_dim_3[2,1]:=yoda.image_extern("https://www.uzh.ch/logo.jpg")
 --				print((yoda.table(array_2_dim_3)).render (create {HTML_RENDERER}, 1))
-				
+
 				create index.make ("index")
 				create about.make ("about")
 				create yodalib.make ("YODALIB")

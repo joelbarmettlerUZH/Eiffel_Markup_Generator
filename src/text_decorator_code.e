@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {TEXT_DECORATOR_CODE}."
+	description: "Applies styling to content to emphasise content/string is code. (Actual implementations are in the _RENDERER classes)"
 	author: "Marius Högger"
 	date: "$26.10.2017$"
-	revision: "$27.10.2017$"
+	revision: "$15.11.2017$"
 
 class
 	TEXT_DECORATOR_CODE
@@ -18,7 +18,7 @@ create
 
 feature
 	render(renderer: RENDERER; nesting: INTEGER): STRING
-		-- Apply render_title renderer to TEXT_DECORATOR_TITLE.
+		--Apply render_code renderer to TEXT_DECORATOR_TITLE.
 		require else
 			renderer_exists: renderer /= Void
 			valid_number_of_nesting: nesting >= 0

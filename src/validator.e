@@ -2,7 +2,7 @@ note
 	description: "Deferred validator for each concrete element."
 	author: "Joel Barmettler"
 	date: "$25.10.17$"
-	revision: "$27.10.2017$"
+	revision: "$15.11.2017$"
 
 deferred class
 	VALIDATOR

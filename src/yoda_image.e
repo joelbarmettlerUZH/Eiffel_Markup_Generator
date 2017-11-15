@@ -2,7 +2,7 @@ note
 	description: "Concrete element Yoda image."
 	author: "Joel Barmettler"
 	date: "$25.10.17$"
-	revision: "$27.10.2017$"
+	revision: "$15.11.2017$"
 
 class
 	YODA_IMAGE
@@ -21,7 +21,7 @@ class
 
 	feature {ANY}
 		make(u_content: STRING)
-			--Creates the YODA_IMAGE, validates it and sets the feature variables (for internal use/ local images)
+			--Creates the YODA_IMAGE with a local image, validates it and sets the feature variables
 			require
 				String_not_void: attached u_content
 				String_not_empty: u_content.count > 0
@@ -35,7 +35,7 @@ class
 			end
 
 		make_extern(u_content: STRING)
-			--Creates the YODA_IMAGE, validates it and sets the feature variables (for external use/ image url)
+			--Creates the YODA_IMAGE with a extern image(URL), validates it and sets the feature variables
 			require
 				String_not_void: attached u_content
 				String_not_empty: u_content.count > 0
@@ -50,7 +50,7 @@ class
 
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
-			-- Apply YODA_IMAGE render to renderer.
+			--Apply render_YODA_IMAGE renderer to YODA_IMAGE.
 			require else
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0

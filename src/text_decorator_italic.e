@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {TEXT_DECORATOR_ITALIC}."
+	description: "Applies the styling to make the content italic. (Actual implementations are in the _RENDERER classes)"
 	author: "Marius Högger"
 	date: "$26.10.2017$"
-	revision: "$27.10.2017$"
+	revision: "$15.11.2017$"
 
 class
 	TEXT_DECORATOR_ITALIC
@@ -18,7 +18,7 @@ create
 
 feature
 	render(renderer: RENDERER; nesting: INTEGER): STRING
-		-- Apply render_italic renderer to TEXT_DECORATOR_ITALIC.
+		--Apply render_italic renderer to TEXT_DECORATOR_ITALIC.
 		require else
 			renderer_exists: renderer /= Void
 			valid_number_of_nesting: nesting >= 0

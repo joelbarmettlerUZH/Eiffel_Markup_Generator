@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {TEXT_DECORATOR_QUOTE}."
+	description: "Applies the styling to make the content look like a quote. (Actual implementations are in the _RENDERER classes)"
 	author: "Marius Högger"
 	date: "$26.10.2017$"
-	revision: "$27.10.2017$"
+	revision: "$15.11.2017$"
 
 class
 	TEXT_DECORATOR_QUOTE
