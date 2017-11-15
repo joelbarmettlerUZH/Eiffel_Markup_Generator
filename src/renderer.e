@@ -10,6 +10,9 @@ deferred class
 	feature {ANY}
 
 		spaces(n: INTEGER): STRING
+			--When rendering a certain output language, we need to have the right number of indentations, corresponding to the nesting factor of an element.
+			--In html, an element that is nested into another one has one more indentation, so one more tab.
+			--This short function here takes the number of indentation, n, and returns a string with n Tabs in it, so n*%T
 			local
 				str: STRING
 				i: INTEGER
@@ -28,7 +31,7 @@ deferred class
 
 
 		render_YODA_text(element: YODA_TEXT; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT.
+			--Takes a YODA_TEXT element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				text_exists: attached element
 				valid_number_of_nesting: nesting >= 0
@@ -36,7 +39,7 @@ deferred class
 			end
 
 		render_YODA_table(element: YODA_TABLE; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TABLE.
+			--Takes a YODA_TABLE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				table_exists: attached element
 				valid_number_of_nesting: nesting >= 0
@@ -45,7 +48,7 @@ deferred class
 
 
 		render_YODA_list(element: YODA_LIST; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_LIST.
+			--Takes a YODA_TEXT element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				list_exists: attached element
 				valid_number_of_nesting: nesting >= 0
@@ -54,7 +57,7 @@ deferred class
 
 
 		render_YODA_link(element: YODA_LINK; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_LINK.
+			--Takes a YODA_TEXT element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				link_exists: attached element
 				valid_number_of_nesting: nesting >= 0
@@ -63,7 +66,7 @@ deferred class
 
 
 		render_YODA_image(element: YODA_IMAGE; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_IMAGE.
+			--Takes a YODA_IMAGE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				image_exists: attached element
 				valid_number_of_nesting: nesting >= 0
@@ -71,7 +74,7 @@ deferred class
 			end
 
 		render_YODA_snippet(element: YODA_SNIPPET; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_SNIPPET.
+			--Takes a YODA_SNIPPET element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				snipped_exists: attached element
 				valid_number_of_nesting: nesting >= 0
@@ -79,7 +82,7 @@ deferred class
 			end
 
 		render_bold(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT_INTERFACE.
+			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				bold_exists: attached element
 				valid_number_of_nesting: nesting >= 0
@@ -87,7 +90,7 @@ deferred class
 			end
 
 		render_code(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT_INTERFACE.
+			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				code_exists: attached element
 				valid_number_of_nesting: nesting >= 0
@@ -95,7 +98,7 @@ deferred class
 			end
 
 		render_italic(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT_INTERFACE.
+			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				italic_exists: attached element
 				valid_number_of_nesting: nesting >= 0
@@ -103,7 +106,7 @@ deferred class
 			end
 
 		render_qoute(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT_INTERFACE.
+			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				quote_exists: attached element
 				valid_number_of_nesting: nesting >= 0
@@ -111,7 +114,7 @@ deferred class
 			end
 
 		render_title(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT_INTERFACE.
+			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				quote_exists: attached element
 				valid_number_of_nesting: nesting >= 0
@@ -120,7 +123,7 @@ deferred class
 			end
 
 		render_underline(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT_INTERFACE.
+			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				underline_exists: attached element
 				valid_number_of_nesting: nesting >= 0
@@ -129,7 +132,7 @@ deferred class
 
 
 		render_anchor(element: YODA_ANCHOR; nesting: INTEGER): STRING
-			-- Perform render operation on YODA_TEXT_INTERFACE.
+			--Takes a YODA_ANCHOR element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				underline_exists: attached element
 				valid_number_of_nesting: nesting >= 0
