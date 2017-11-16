@@ -18,7 +18,7 @@ feature {NONE}
 		local
 			a: A
 		do
-			--When I create an instance of A and call f("PASS"), everything works fine
+			--When I create an instance of A and call f("ARGUMENT1: "), everything works fine
 			create a
 			print(a.f("ARGUMENT1: ")+"%N")
 			--Now I'm passing an agent of a.f to some_function, this workes fine as well
