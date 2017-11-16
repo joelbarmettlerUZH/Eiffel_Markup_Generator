@@ -32,7 +32,7 @@ deferred class
 			end
 
 		as_string(nesting: INTEGER): STRING
-			--adds amount of nesting and concatenates the strings with a new line at the end.
+			--Adds amount of nesting and concatenates the strings with a new line at the end.
 			require
 				valid_nesting: nesting >= 0
 			do
@@ -41,6 +41,8 @@ deferred class
 
 
 		spaces(repeat_str: STRING; n: INTEGER): STRING
+			--Iterates such that empty string "" gets concatenated with the string input exactly n times
+			--and returns the resulted string.
 			local
 				i: INTEGER
 				str: STRING

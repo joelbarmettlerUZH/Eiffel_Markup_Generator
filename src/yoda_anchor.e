@@ -18,7 +18,7 @@ class
 
 	feature {ANY}
 		make(u_id: STRING)
-			--Creates the external YODA_LINK, validates it and sets the feature variables
+			--Creates the external YODA_ANCHOR, validates it and sets the feature variables
 			require
 				u_id_not_void: attached u_id
 				u_id_not_zero: u_id.count > 0
@@ -32,7 +32,10 @@ class
 
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
-			--Apply YODA_LINK render to renderer.
+			--Applies YODA_ANCHOR render to a class of type renderer as for example HTML_RENDERER.
+			--renderer.render_yoda_anchor(current, nesting) returns a String that replaces the YODA_tags
+			--with the corresponding HTML tags, inserts the spacing and
+			--the needed span id (element.id) and assigns it to the Result.
 			require else
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
