@@ -1,5 +1,5 @@
 note
-	description: "Concrete element Yoda text."
+	description: "Concrete Element YODA_TEXT."
 	author: "Joel Barmettler"
 	date: "$25.10.17$"
 	revision: "$15.11.2017$"

@@ -1,5 +1,5 @@
 note
-	description: "Summary description for {TEXT_INTERFACE}."
+	description: "Parent class that is a YODA_ELEMENT."
 	author: "Marius Högger"
 	date: "$26.10.2017$"
 	revision: "$15.11.2017$"

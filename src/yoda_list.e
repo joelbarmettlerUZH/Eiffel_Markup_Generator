@@ -1,8 +1,8 @@
 note
-	description: "Concretete element Yoda list."
+	description: "Concrete Element YODA_LIST."
 	author: "Joel Barmettler"
 	date: "$25.10.17$"
-	revision: "$27.10.2017$"
+	revision: "$16.11.2017$"
 
 class
 	YODA_LIST

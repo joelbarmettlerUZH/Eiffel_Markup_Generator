@@ -2,7 +2,7 @@ note
 	description: "Deferred Yoda Element acts as parent class for all YODA_* classes."
 	author: "Joel Barmettler"
 	date: "$25.10.17$"
-	revision: "$27.10.2017$"
+	revision: "$16.11.2017$"
 
 deferred class
 	YODA_ELEMENT
