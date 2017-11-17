@@ -27,7 +27,7 @@ class
 				name := u_name
 				create elements.make
 				--Each inddex in renderer_names and renderer_instances has to correspond, so the HTML_RENDERER and the String HTML have both index 0.
-				renderer_names := <<"HTML">>
+				renderer_names := <<"html">>
 				renderer_instances := <<create {HTML_RENDERER}>>
 
 			ensure
@@ -68,7 +68,7 @@ class
 				next_id := 1
 				--by default, assume the wished language is HTML. Gets overwritten when the user specifies another supported language
 				renderer := create {HTML_RENDERER}
-				output_format.to_upper
+				output_format.to_lower
 				return_string := ""
 				--instanciation of needed renderer calls sub renderer if existing
 				Result := return_string
