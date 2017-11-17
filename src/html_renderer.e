@@ -151,6 +151,7 @@ class
 				output_file: RAW_FILE
 				output_path: PATH
 				input_file_name: STRING
+				input_file_path: PATH
 				output_folder: DIRECTORY
 				output_folder_name: STRING
 			do
@@ -171,7 +172,12 @@ class
 				end
 
 				-- copy file into resources folder
-				input_file_name := element.content.substring (element.content.last_index_of('\', element.content.count)+1, element.content.count)
+				create input_file_path.make_from_string (element.content)
+				input_file_name := ""
+				if attached input_file_path.entry as e
+				then
+					input_file_name := e.out
+				end
 				create output_path.make_current
 				output_path:=output_path.appended ("/temp_output/resources/" + input_file_name)
 				create input_file.make_open_read (element.content)
