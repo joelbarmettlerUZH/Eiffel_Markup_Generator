@@ -73,6 +73,14 @@ deferred class
 			deferred
 			end
 
+		render_YODA_extern_image(element: YODA_IMAGE; nesting: INTEGER): STRING
+			--Takes a YODA_IMAGE element, renders it according to the languages standards and returns a String representing the content in the specific language
+			require
+				image_exists: attached element
+				valid_number_of_nesting: nesting >= 0
+			deferred
+			end
+
 		render_YODA_snippet(element: YODA_SNIPPET; nesting: INTEGER): STRING
 			--Takes a YODA_SNIPPET element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require

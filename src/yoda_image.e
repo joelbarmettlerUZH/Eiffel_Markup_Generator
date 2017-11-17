@@ -17,6 +17,7 @@ class
 	feature {ANY}
 		--name and documents shall be public, allow access for everybody
 		content: STRING
+		is_extern: BOOLEAN
 
 
 	feature {ANY}
@@ -28,6 +29,7 @@ class
 			do
 				content := u_content
 				name := "local image"
+				is_extern := False
 			ensure
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_image(CURRENT))
 				content_set: content = u_content
@@ -42,6 +44,7 @@ class
 			do
 				content := u_content
 				name := "extern image"
+				is_extern := TRUE
 			ensure
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_extern_image(CURRENT))
 				content_set: content = u_content
@@ -55,7 +58,12 @@ class
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
 			do
-				Result := renderer.render_yoda_image (current, nesting)
+				if is_extern
+				then
+					Result := renderer.render_YODA_extern_image (current, nesting)
+				else
+					Result := renderer.render_YODA_image (current, nesting)
+				end
 			ensure then
     			result_exists: attached result
     			content_not_changed: content.is_equal (old content)

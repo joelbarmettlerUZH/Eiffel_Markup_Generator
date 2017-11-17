@@ -29,6 +29,7 @@ class
 				about: YODA_DOCUMENT
 				yodalib: YODA_PROJECT
 				array_2_dim: ARRAY2[YODA_ELEMENT]
+				array_3_dim: ARRAY2[YODA_ELEMENT]
 				array_2_dim_2: ARRAY2[YODA_ELEMENT]
 				array_2_dim_3: ARRAY2[YODA_ELEMENT]
 				anchor1: YODA_ANCHOR
@@ -103,6 +104,7 @@ class
 				index.add_element (yoda.title (yoda.text ("Formatting Text"), 2))
 				index.add_element (yoda.title (yoda.text ("Inline Formating"), 3))
 				index.add_element (yoda.text ("First, you can make your text {{b}}bold{{/b}}, {{i}}italic{{/i}} or {{u}}underline{{/u}} flexible in the text."))
+				index.add_element (yoda.underline(yoda.italic(yoda.bold(yoda.text ("And by using the decorators, even all together")))))
 				index.add_element (yoda.title (yoda.text ("Preformatted Styling"), 3))
 				index.add_element (yoda.text ("Additionally, we offer styling features like this uote from our lord and saviour:"))
 				index.add_element (yoda.title (yoda.text ("Quote"), 4))
@@ -122,10 +124,15 @@ class
 				index.add_element (yoda.text ("Or even tables:"))
 				create array_2_dim.make_filled (yoda.text("Entry"), 6, 4)
 				index.add_element (yoda.table (array_2_dim))
+				--table in table test
+				create array_3_dim.make_filled (yoda.text("Entry"), 6, 4)
+				array_3_dim[1,1]:=yoda.table (array_2_dim)
+				index.add_element (yoda.table (array_3_dim))
+				--
 				index.add_element (yoda.title (yoda.text ("Images"), 2))
 				index.add_element (yoda.text ("To show fancy stuff, you can link images online or offline"))
 				index.add_element (yoda.image_extern ("https://www.sideshowtoy.com/wp-content/uploads/2014/05/400080-product-feature.jpg"))
-				index.add_element (yoda.image ("C:\tmp\yoda.gif"))
+				--index.add_element (yoda.image ("C:\tmp\yoda.gif"))
 				index.add_element (yoda.title (yoda.text ("Links"), 2))
 				index.add_element (yoda.text ("You are free to link to other files in your project or online websites"))
 				index.add_element (yoda.title (yoda.text ("External link"), 3))
@@ -138,7 +145,7 @@ class
 				index.add_element (yoda.link_extern (yoda.image_extern ("http://icons.iconarchive.com/icons/iconsmind/outline/64/Play-Music-icon.png"), "https://www.youtube.com/watch?v=kDoY_zXf7uQ"))
 				index.add_element (yoda.title (yoda.text ("Anchor Link"), 3))
 				index.add_element (yoda.link_anchor (yoda.text ("This links up to the table"), anchor1))
-				about.add_element (yoda.title (yoda.text ("This is the about us page now :)"), 2))
+				about.add_element (yoda.title (yoda.text ("This is the about us page now :)"), 3))
 				about.add_element (yoda.snippet_from_file ("resources/snippet.txt"))
 				about.add_element (yoda.link_intern (yoda.text ("Take me back to main, my little padawan"), index))
 				print(yodalib.render("html")[0])

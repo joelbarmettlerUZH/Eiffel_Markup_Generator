@@ -27,7 +27,7 @@ class
 				--Replace not-allowed symbols like "<" with a code that tells HTML to display a "<" but not interpret it.
 				--also, replace all yoda syling tags with the corresponding one.
 				YODA_tag := <<"<", ">", "{{b}}", "{{/b}}", "{{u}}", "{{/u}}", "{{i}}", "{{/i}}", "{{n}}", "%N" >>
-				corresponding_HTML_tag := << "&lt;", "&gt;", "<b>", "</b>", "<u>", "</u>", "<i>", "</i>", "</br>", "</br>">>
+				corresponding_HTML_tag := << "&lt;", "&gt;", "<b>", "</b>", "<u>", "</u>", "<i>", "</i>", "<br>", "<br>">>
 				from i := 1
 				until i > YODA_tag.count
 				loop
@@ -142,7 +142,10 @@ class
 
 
 		render_YODA_image(element: YODA_IMAGE; nesting: INTEGER): STRING
-			--
+			--Creates a new folder "resources" in the project/documentc folder if the project/document is saved, othewise
+			--creates a folder "temp_output" in the working directory in the working directory.
+			--Then copies the image from the local path to the "resources" folder and creates the HTML-image tags
+			--with the local path from the project/document/temp folder to the image in the "resources" folder
 			local
 				input_file: RAW_FILE
 				output_file: RAW_FILE
@@ -151,43 +154,43 @@ class
 				output_folder: DIRECTORY
 				output_folder_name: STRING
 			do
-				--print(element.name)
-				if	-- if intern image: copy immage to "resource" folder and change path acordingly
-					element.name.is_equal("local image")
+				-- creat "temp_output" folder if not already exists
+				output_folder_name := "temp_output"
+				create output_folder.make (output_folder_name)
+				if
+					not output_folder.exists
 				then
-					-- creat "temp_output" folder if not already exists
-					output_folder_name := "temp_output"
-					create output_folder.make (output_folder_name)
-					if
-						not output_folder.exists
-					then
-						output_folder.create_dir
-					end
-					-- create "resources" folder if not exists
-					create output_folder.make (".\temp_output\resources")
-					if
-						not output_folder.exists
-					then
-						output_folder.create_dir
-					end
-
-					-- copy file into resources folder
-					input_file_name := element.content.substring (element.content.last_index_of('\', element.content.count)+1, element.content.count)
-					create output_path.make_current
-					output_path:=output_path.appended ("\temp_output\resources\" + input_file_name)
-					create input_file.make_open_read (element.content)
-					create output_file.make_with_path (output_path)
-					output_file.open_write
-					input_file.copy_to(output_file)
-					output_file.close
-
-					-- write relative path for HTML
-					Result := spaces(nesting) + "<img src='" + ".\resources\"+ input_file_name + "'><br>%N"
-
-				else
-				-- if extern link use linke as content
-					Result := spaces(nesting) + "<img src='" + element.content + "'><br>%N"
+					output_folder.create_dir
 				end
+				-- create "resources" folder if not exists
+				create output_folder.make ("./temp_output/resources")
+				if
+					not output_folder.exists
+				then
+					output_folder.create_dir
+				end
+
+				-- copy file into resources folder
+				input_file_name := element.content.substring (element.content.last_index_of('\', element.content.count)+1, element.content.count)
+				create output_path.make_current
+				output_path:=output_path.appended ("/temp_output/resources/" + input_file_name)
+				create input_file.make_open_read (element.content)
+				create output_file.make_with_path (output_path)
+				output_file.open_write
+				input_file.copy_to(output_file)
+				output_file.close
+
+				-- write relative path for HTML
+				Result := spaces(nesting) + "<img src='" + "./resources/"+ input_file_name + "' alt='" + input_file_name + " missing'><br>%N"
+			ensure then
+				valid_start_tag: result.has_substring("<img src='")
+				valid_end_tag: result.has_substring("'><br>")
+			end
+
+		render_YODA_extern_image(element: YODA_IMAGE; nesting: INTEGER): STRING
+			--Creates HTML-image tags for a image with a url.
+			do
+				Result := spaces(nesting) + "<img src='" + element.content + "' alt='" + element.content + " missing'><br>%N"
 			ensure then
 				valid_start_tag: result.has_substring("<img src='")
 				valid_end_tag: result.has_substring("'><br>")
@@ -267,6 +270,8 @@ class
 			do
 				return_string := element.component.render(create {HTML_RENDERER}, 0)
 				return_string.replace_substring_all("%N", "")
+				return_string.replace_substring_all("<p>", "")
+				return_string.replace_substring_all("</p>", "")
 				Result := spaces(nesting) + "<h" + element.strength.out + ">" + return_string + "</h" + element.strength.out + ">%N"	--need to add strenght via element.strength
 			ensure then
 				valid_start_tag: Result.has_substring("<h")
