@@ -22,12 +22,16 @@ class
 		make(u_content: STRING)
 			--Creates the YODA_SNIPPET, validates it and sets the feature variables
 			--Validator gets called in order to ensure that a snippet remains valid for all languages.
+			require
+				u_content_not_void: attached u_content
+				u_content_not_empty: u_content.count > 0
 			do
 				content := u_content
 				name := "snippet"
 			ensure then
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_snippet(CURRENT))
 				name_set: name.is_equal("snippet")
+				content_set: content = u_content
 			end
 
 

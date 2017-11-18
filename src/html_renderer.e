@@ -298,8 +298,10 @@ class
 			do
 				Result := spaces(nesting) + "<span id='" + element.id.out + "'></span>%N"
 			ensure then
-				valid_start_tag: result.has_substring("id='")
-				valid_end_tag: result.has_substring(">")
+				--valid_start_tag: result.has_substring("id='")
+				--valid_end_tag: result.has_substring(">")
+				valid_start_tag: result.has_substring("<span id='")
+				valid_end_tag: result.has_substring("'></span>%N")
 			end
 
 end
