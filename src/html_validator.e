@@ -27,7 +27,8 @@ class
 			local
 				prohibited_sub_strings_array: ARRAY[STRING]
 			do
-				prohibited_sub_strings_array := << "<pre>", "</pre>" >>
+				--add prohibited substring in the following array
+				prohibited_sub_strings_array := << >>
 				Result := prohibited_sub_strings_array
 			ensure
 				result_not_void: attached Result
@@ -188,13 +189,9 @@ class
 				point_position: INTEGER
 			do
 				-- check if link contains "@"
-				if
-					element.url.occurrences ('@')=0
-				then
+				if element.url.occurrences ('@')=0 then
 					exc.raise("Validation Error 101 - eMail adress does not contain '@'")
-				elseif
-					element.url.occurrences ('@')>1
-				then
+				elseif element.url.occurrences ('@')>1 then
 					exc.raise("Validation Error 102 - eMail adress has more than one occurence of '@'")
 				else
 					--check if link contains "." somewhere after the "@"
@@ -222,9 +219,7 @@ class
 			do
 				--check whether the file acutally exists locally
 				create input_file.make_with_name (element.content)
-				if
-					not input_file.exists
-				then
+				if not input_file.exists then
 					exc.raise("Validation Error 104 - image imput file can not be found")
 				else
 					--return True when no exception occured along the way
@@ -248,9 +243,7 @@ class
 				--	element.content <-> "^[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$"
 
 				--Check if link contains "https://" or "http://"
-				if
-					not (element.content.has_substring("https://") or element.content.has_substring("http://"))
-				then
+				if not (element.content.has_substring("https://") or element.content.has_substring("http://")) then
 				--if not prepend "https://"
 					element.content.prepend("http://")
 				end

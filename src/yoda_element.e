@@ -34,6 +34,7 @@ deferred class
 		as_string(nesting: INTEGER): STRING
 			--Adds amount of nesting and concatenates the strings with a new line at the end.
 			require
+				nesting_not_void: attached nesting
 				valid_nesting: nesting >= 0
 			do
 				Result := spaces("-", nesting) + name + "%N"

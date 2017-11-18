@@ -90,7 +90,8 @@ class
 		save(output_format, template: STRING)
 			--The save-procedure creates a temporary output folder temp_output (deletes old one first when already existing) in which the elements will store their resources when being rendered
 			--Then, for every document in the project, the project is being saved with the save_document procedure, and the temp folder is renamed with the corresponding project name
-			-- stores those file in a new folder
+			--stores those file in a new folder
+			--The content will be wriiten into the template where the placeholder-tag "{{content}}" is placed
 			local
 				output_folder: DIRECTORY
 				new_name: PATH

@@ -58,8 +58,7 @@ class
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
 			do
-				if is_extern
-				then
+				if is_extern then
 					Result := renderer.render_YODA_extern_image (current, nesting)
 				else
 					Result := renderer.render_YODA_image (current, nesting)

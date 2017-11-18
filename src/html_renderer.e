@@ -158,24 +158,19 @@ class
 				-- creat "temp_output" folder if not already exists
 				output_folder_name := "temp_output"
 				create output_folder.make (output_folder_name)
-				if
-					not output_folder.exists
-				then
+				if not output_folder.exists then
 					output_folder.create_dir
 				end
 				-- create "resources" folder if not exists
 				create output_folder.make ("./temp_output/resources")
-				if
-					not output_folder.exists
-				then
+				if not output_folder.exists then
 					output_folder.create_dir
 				end
 
 				-- copy file into resources folder
 				create input_file_path.make_from_string (element.content)
 				input_file_name := ""
-				if attached input_file_path.entry as e
-				then
+				if attached input_file_path.entry as e then
 					input_file_name := e.out
 				end
 				create output_path.make_current

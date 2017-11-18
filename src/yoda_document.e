@@ -156,6 +156,7 @@ class
 			--is chosen by the save procedure from either document or project. The save_document procedure opens the template and replaces the {{CONTENT}} tag inside the template with
 			--the string-representation of the document, which is produced by the render function of the document. The save_document procedure then saves the document with the correct
 			--filename and filetype into the specified folder.
+			--The content will be wriiten into the template where the placeholder-tag "{{content}}" is placed
 			require
 				valid_template: True
 			local
