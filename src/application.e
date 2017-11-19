@@ -43,7 +43,7 @@ class
 				index.add_element (yoda.text ("First, you can make your text {{b}}bold{{/b}}, {{i}}italic{{/i}} or {{u}}underline{{/u}} flexible in the text."))
 				index.add_element (yoda.underline(yoda.italic(yoda.bold(yoda.text ("And by using the decorators, even all together")))))
 				index.add_element (yoda.title (yoda.text ("Preformatted Styling"), 3))
-				index.add_element (yoda.text ("Additionally, we offer styling features like this uote from our lord and saviour:"))
+				index.add_element (yoda.text ("Additionally, we offer styling features like this quote from our lord and saviour:"))
 				index.add_element (yoda.title (yoda.text ("Quote"), 4))
 				index.add_element (yoda.quote (yoda.text ("May the Force be with you, my little padawan")))
 				index.add_element (yoda.title (yoda.text ("Code"), 4))

@@ -16,7 +16,7 @@ __***And by using the decorators, even all together***__
 
 ### Preformatted Styling
 
-Additionally, we offer styling features like this uote from our lord and saviour:
+Additionally, we offer styling features like this quote from our lord and saviour:
 
 #### Quote
 
