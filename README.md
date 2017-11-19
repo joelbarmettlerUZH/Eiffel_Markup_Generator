@@ -1,5 +1,9 @@
 # YODA - UZH Software Construction HS17
 
+Joel Barmettler, Spasen Trendafilov, Marius Högger, Daniela Flüeli
+
+[Click here to see real live output of the YODA library, created by src/application.e](http://www.zusammenfassung.schule/yoda/index.html)
+
 Let's show what yoda can do:
 
 ## Formatting Text
