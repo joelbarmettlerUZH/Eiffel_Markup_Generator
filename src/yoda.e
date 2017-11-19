@@ -42,6 +42,7 @@ class
 				result_is_YODA_TABLE: attached {YODA_TABLE} Result
 			end
 
+
 		list(content: ARRAY[YODA_ELEMENT]): YODA_LIST
 			--This factory serves as an interface for the user. When he just want to create a list and does not specify what kind of list, we assume he likes to have a bulletpoint list.
 			--So this factory then calls the yoda bulletpoint list factory width the same argumetns, a content array with YODA_ELEMENTS, and returns whatever this factory might return.
@@ -71,6 +72,7 @@ class
 				result_is_YODA_LIST: attached {YODA_LIST} Result
 			end
 
+
 		bulletpoint_list(content: ARRAY[YODA_ELEMENT]): YODA_LIST
 			--Factory that creates an instance of YODA_LIST with the content-array of YODA_ELEMENTS the user passed as an argument, and returns it to the user
 			--This factory calls the standard make procedure with an additional boolean "False" that indicates that the list is not is_numbered.
@@ -84,6 +86,7 @@ class
 				result_not_void: attached Result
 				result_is_YODA_LIST: attached {YODA_LIST} Result
 			end
+
 
 		link(content: YODA_ELEMENT; url: STRING): YODA_LINK
 			--This factory serves as an interface for the user. When he just want to create a link and does not specify what kind of link, we assume he likes to have an external link to some webpage.
@@ -210,6 +213,7 @@ class
 				result_is_YODA_LINK: attached {YODA_IMAGE} Result
 			end
 
+
 		image_extern(content: STRING): YODA_IMAGE
 			--Factory that creates an instance of YODA_IMAGE with a string containing an online link to some image that the user passed as an argument, and returns it to the user
 			--the interaction with this factory looks as follows: yoda.image_extern("http://www.yoda.ch/logo.jpg")
@@ -323,6 +327,7 @@ class
 				result_not_void: attached Result
 				result_is_YODA_LINK: attached {YODA_TEXT_INTERFACE} Result
 			end
+
 
 		title(content: YODA_TEXT_INTERFACE; strength: INTEGER): YODA_TEXT_INTERFACE
 			--Factory that creates an instance of YODA_TEXT_INTERFACE that surrounds some text with a styling attribute, in this case "title", and return it to the user

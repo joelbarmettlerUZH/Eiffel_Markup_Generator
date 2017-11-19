@@ -15,10 +15,11 @@ inherit
 		end
 
 
-feature {ANY}
+feature {RENDERER}
 	component: YODA_TEXT_INTERFACE
 
-feature {NONE}
+
+feature {ANY}
 	make_style(u_component: YODA_TEXT_INTERFACE)
 		--Creates a new instance of a decorator with the given YODA_ELEMENT as sontent, also sets it's name to "style"
 			-- Set `component' to `u_component'.
@@ -32,7 +33,7 @@ feature {NONE}
 			name_set: name.is_equal("style")
 		end
 
-feature
+
 	render(renderer: RENDERER; nesting: INTEGER): STRING
 		--Defined here to be used by all subclasses
 		deferred
@@ -47,6 +48,6 @@ feature
 
 
 invariant
-	component_not_void: component /= void
+	component_not_void: attached component
 
 end

@@ -13,8 +13,10 @@ class
 	create
 		make
 
-	feature	{ANY}
-		id: STRING
+
+	feature	{RENDERER, VALIDATOR, YODA_ELEMENT}
+		content: STRING
+
 
 	feature {ANY}
 		make(u_id: STRING)
@@ -24,9 +26,9 @@ class
 				u_id_not_zero: u_id.count > 0
 			do
 				name := "anchor Link"
-				id := u_id
+				content := u_id
 			ensure
-				id_set: u_id.is_equal (id)
+				id_set: u_id.is_equal (content)
 				name_set: name.is_equal("anchor Link")
 			end
 
@@ -44,4 +46,10 @@ class
 			ensure then
     			result_exists: attached result
     		end
+
+
+    invariant
+		content_not_void: attached content
+		content_not_empty: content.count > 0
+
 end

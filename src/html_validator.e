@@ -10,7 +10,7 @@ class
 	inherit
 		VALIDATOR
 
-	feature {ANY}
+	feature {YODA_ELEMENT}
 
 		exc: EXCEPTIONS
 			--Creates a instance of exceptio
@@ -22,6 +22,7 @@ class
 				Result := e
 			end
 
+
 		prohibited_text_sub_strings: ARRAY[STRING]
 			--Creates list of prohibited substrings for a YODA_TEXT element.
 			local
@@ -30,8 +31,6 @@ class
 				--add prohibited substring in the following array
 				prohibited_sub_strings_array := << >>
 				Result := prohibited_sub_strings_array
-			ensure
-				result_not_void: attached Result
 			end
 
 
@@ -42,8 +41,6 @@ class
 			do
 				prohibited_sub_strings_array := << "<html>", "</html>", "<body>", "</body>" >>
 				Result := prohibited_sub_strings_array
-			ensure
-				result_not_void: attached Result
 			end
 
 
@@ -75,8 +72,6 @@ class
 
 		validate_text(element: YODA_TEXT): BOOLEAN
 			--validates a YODA_TEXT whether it's content is conforming with the HTML text rules. Returns True if so, raise exceptions otherwise
-			require else
-				element_not_empty: attached element
 			local
 				prohibited_strings: ARRAY[STRING]
 			do
@@ -85,15 +80,11 @@ class
 				--Calls remove_probibited_sub_strings function to remove the prohibited substrings.
 				remove_probibited_sub_strings(element.content, prohibited_strings)
 				Result := True
-			ensure then
-				returnes_true: Result = True
 			end
 
 
 		validate_table(element: YODA_TABLE): BOOLEAN
 				--validates a YODA_TABLE whether it's content is conforming with the HTML text rules. Returns True if so, raise exceptions otherwise
-			require else
-				element_not_empty: attached element
 			do
 				--The only constraints that the tables has is that the table has to contain at least one element
 				--and that the elements of the table are allowed in a table
@@ -103,15 +94,11 @@ class
 
 				--return True when no exception occured allong the way
 				Result := True
-			ensure then
-				returnes_true: Result = True
 			end
 
 
 		validate_list(element: YODA_LIST): BOOLEAN
 			--validates a YODA_LIST whether it's content is conforming with the HTML text rules. Returns True if so, raise exceptions otherwise
-			require else
-				element_not_empty: attached element
 			do
 				--The only constraints that the list has is that the link has to contain at least one element
 				--and that the elements of the table are allowed in a table
@@ -121,16 +108,12 @@ class
 
 				--return True when no exception occured allong the way
 				Result := True
-			ensure then
-				returnes_true: Result = True
 			end
 
 
 		validate_link(element: YODA_LINK): BOOLEAN
 			--validates a YODA_LINK whether it's content is conforming with the HTML text rules. Returns True if so, raise exceptions otherwise
 			--Checks if the url-string contains "https://" or "http://", if not prepends "http://"
-			require else
-				element_not_empty: attached element
 			do
 				--For complete validation of links/Url's it would be very good to use RegEx (regular expressions)
 				--However, since we don't want other libraries to be required for the user od YODA and since RegEx is not
@@ -149,28 +132,21 @@ class
 
 				--return True when no exception occured allong the way
 				Result := True
-			ensure then
-				returnes_true: Result = True
 			end
+
 
 		validate_intern_link(element: YODA_LINK): BOOLEAN
 			--validates a intern YODA_LINK (link to a different document of the project) whether it's content is conforming with the HTML text rules.
 			--Returns True if so, raise exceptions otherwise
-			require else
-				element_not_empty: attached element
 			do
 				--Only requirement for the intern Link in HTML is that the document exists
 				--This is already checked in the YODA_LINK class where it only allows existing YODA_DOCUMENTs as arguments
 				Result := True
-			ensure then
-				returnes_true: Result = True
 			end
 
 
 		validate_anchor(element: YODA_LINK): BOOLEAN
 			--validates a YODA_ANCHOR whether it's content is conforming with the HTML text rules. Returns True if so, raise exceptions otherwise
-			require else
-				element_not_empty: attached element
 			do
 				--Nothing to be done. HTML has no hard constraints on anchors since it's only an empty element.
 				Result := True
@@ -182,8 +158,6 @@ class
 		validate_email(element: YODA_LINK): BOOLEAN
 			--validates a YODA_LINK for an email, whether it's content is conforming with the HTML text rules. Returns True if so, raise exception otherwise
 			--checks is the url/emai-string contains exactly one @ and checks if there is a "." after the "@". Else raise exceptions
-			require else
-				element_not_empty: attached element
 			local
 				at_position: INTEGER
 				point_position: INTEGER
@@ -203,17 +177,12 @@ class
 						Result := True
 					end
 				end
-			ensure then
-				returnes_true: Result = True
 			end
 
 
 		validate_image(element: YODA_IMAGE): BOOLEAN
 			--validates a YODA_IMAGE of a local image, whether it's content is conforming with the HTML text rules. Returns True if so, raise exception otherwise
 			--checks if path to the source image exists
-			require else
-				element_not_empty: attached element
-				element_content_not_empty: attached element.content
 			local
 				input_file: RAW_FILE
 			do
@@ -225,15 +194,11 @@ class
 					--return True when no exception occured along the way
 					Result := True
 				end
-			ensure then
-				returnes_true: Result = True
 			end
+
 
 		validate_extern_image(element: YODA_IMAGE): BOOLEAN
 			--validates a YODA_IMAGE of a extern image, whether it's content is conforming with the HTML text rules. Returns True if so, raise exception otherwise
-			require else
-				element_not_empty: attached element
-				element_content_not_empty: attached element.content
 			do
 				--For complete validation of links/Url's it would be very good to use RegEx (regular expressions)
 				--However, since we don't want other libraries to be required for the user od YODA and since RegEx is not
@@ -250,16 +215,12 @@ class
 
 				--return True when no exception occured allong the way
 				Result := True
-			ensure then
-				returnes_true: Result = True
 			end
 
 
 		validate_snippet(element: YODA_SNIPPET): BOOLEAN
 			--validates a YODA_SNIPPET whether it's content is conforming with the HTML text rules. Returns True if so, raise exception otherwise
 			--checks if there are any occurences of prohibited substrings
-			require else
-				element_not_empty: attached element
 			local
 				prohibited_strings: ARRAY[STRING]
 			do
@@ -268,8 +229,6 @@ class
 				--Calls remove_probibited_sub_strings function to remove the prohibited substrings.
 				remove_probibited_sub_strings(element.content, prohibited_strings)
 				Result := True
-			ensure then
-				returnes_true: Result = True
 			end
 
 end

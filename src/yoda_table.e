@@ -17,7 +17,7 @@ class
 	create
 		make
 
-	feature {ANY}
+	feature	{RENDERER, VALIDATOR, YODA_ELEMENT}
 		--name and documents shall be public, allow access for everybody
 		content: ARRAY2[YODA_ELEMENT]
 
@@ -36,7 +36,6 @@ class
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_table(CURRENT))
 				name_set: name.is_equal("table")
 			end
-
 
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
@@ -84,6 +83,7 @@ class
 
 
 	invariant
-		content_exists: attached content
+		content_not_void: attached content
+		content_not_empty: content.count > 0
 
 end

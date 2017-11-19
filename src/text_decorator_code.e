@@ -13,19 +13,16 @@ inherit
 			render
 		end
 
+
 create
 	make_style
 
-feature
+
+feature {ANY}
 	render(renderer: RENDERER; nesting: INTEGER): STRING
 		--Apply render_code renderer to TEXT_DECORATOR_TITLE.
-		require else
-			renderer_exists: renderer /= Void
-			valid_number_of_nesting: nesting >= 0
 		do
     		Result := renderer.render_code(current, nesting)
-		ensure then
-    		result_exists: attached result
 		end
 
 end

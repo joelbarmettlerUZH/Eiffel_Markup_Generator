@@ -13,14 +13,17 @@ inherit
 			render
 		end
 
+
 create
 	make_style,
 	make_style_with_attribute
 
-feature
+
+feature {RENDERER}
 	strength: INTEGER
 
-feature {NONE}
+
+feature {ANY}
 	make_style_with_attribute (u_component: YODA_TEXT_INTERFACE; u_attribute: INTEGER)
 		--Creates the decorator with an additional argument. The additional argument is used for the strength of the title.
 		require
@@ -39,16 +42,15 @@ feature {NONE}
 			name_set: name.is_equal ("title")
 		end
 
-feature
+
 	render(renderer: RENDERER; nesting: INTEGER): STRING
 		--Apply render_title renderer to TEXT_DECORATOR_TITLE.
-		require else
-			renderer_exists: renderer /= Void
-			valid_number_of_nesting: nesting >= 0
 		do
     		Result := renderer.render_title(current, nesting)
-		ensure then
-    		result_exists: attached result
 		end
 
+
+	invariant
+		positive_strength: strength > 0
+		strength_not_to_big: strength < 7
 end

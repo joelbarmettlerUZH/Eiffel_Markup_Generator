@@ -10,7 +10,7 @@ class
 	create
 		make
 
-	feature {ANY}
+	feature	{ANY}
 		--A Yoda Project has a name (which defines the name of the output folder) as well as a linked list of yoda documents it contains.
 		documents: LINKED_LIST[YODA_DOCUMENT]
 		name: STRING
@@ -74,6 +74,7 @@ class
 				documents_not_changed: documents.is_equal(old documents)
 			end
 
+
 		print_to_console
 			--This procedure allows the user to print all documents that he's got in the current project, as well as all the elements these documents contain
 			--So the procedure just prints the name of the project and then calls, for each document, its print_to_console procedure again
@@ -127,7 +128,11 @@ class
 					project_folder.delete
 					output_folder.rename_path (new_name)
 				end
-
 			end
+
+	invariant
+		documents_existing: attached documents
+		name_set: attached name
+		name_not_empty: name.count > 0
 
 end

@@ -13,7 +13,7 @@ class
 	create
 		make
 
-	feature {ANY}
+	feature	{RENDERER, VALIDATOR, YODA_ELEMENT}
 		--content public, allow access for everybody
 		content: STRING
 
@@ -35,7 +35,6 @@ class
 			end
 
 
-
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			--Applies YODA_Snippet render to a class of type renderer as for example HTML_RENDERER.
 			--renderer.render_yoda_snippet(current, nesting) returns a String that replaces the YODA_tags with the corresponding HTML tags
@@ -52,6 +51,7 @@ class
 
 
 	invariant
-		placeholder: True
+		content_not_void: attached content
+		content_not_empty: content.count > 0
 
 end
