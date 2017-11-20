@@ -29,7 +29,7 @@ class
 			do
 				content := u_content
 				name := "local image"
-				is_extern := False
+				is_extern := FALSE
 			ensure
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_image(CURRENT))
 				content_set: content = u_content

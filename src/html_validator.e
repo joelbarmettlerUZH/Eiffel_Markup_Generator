@@ -220,7 +220,7 @@ class
 				--check whether the file acutally exists locally
 				create input_file.make_with_name (element.content)
 				if not input_file.exists then
-					exc.raise("Validation Error 104 - image imput file can not be found")
+					exc.raise("Validation Error 104 - image input file can not be found")
 				else
 					--return True when no exception occured along the way
 					Result := True
