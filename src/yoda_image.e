@@ -14,7 +14,7 @@ class
 		make,
 		make_extern
 
-	feature {ANY}
+	feature	{RENDERER, VALIDATOR, YODA_ELEMENT}
 		--name and documents shall be public, allow access for everybody
 		content: STRING
 		is_extern: BOOLEAN
@@ -35,6 +35,7 @@ class
 				content_set: content = u_content
 				name_set: name.is_equal("local image")
 			end
+
 
 		make_extern(u_content: STRING)
 			--Creates the YODA_IMAGE with a extern image(URL), validates it and sets the feature variables
@@ -70,6 +71,8 @@ class
 
 
 	invariant
-		content_text_instantiated: attached content
+		content_not_void: attached content
+		content_not_empty: content.count > 0
+		is_in_or_extern: attached is_extern
 
 end

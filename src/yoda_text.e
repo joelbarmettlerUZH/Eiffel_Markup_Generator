@@ -13,7 +13,7 @@ class
 	create
 		make
 
-	feature {ANY}
+	feature	{RENDERER, VALIDATOR, YODA_ELEMENT}
 		--content of text is public, allow access for everybody
 		content: STRING
 
@@ -50,6 +50,7 @@ class
 
 
 	invariant
-		content_text_instantiated: attached content
+		content_not_void: attached content
+		content_not_empty: content.count > 0
 end
 

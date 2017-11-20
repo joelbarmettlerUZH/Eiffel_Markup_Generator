@@ -16,7 +16,7 @@ class
 		make_email,
 		make_anchor
 
-	feature {ANY}
+	feature	{RENDERER, VALIDATOR, YODA_ELEMENT}
 		--Content and url public, allow access for everybody
 		content: YODA_ELEMENT
 		url: STRING
@@ -65,7 +65,7 @@ class
 				u_linked_anchor_not_void: attached u_linked_anchor
 			do
 				content := u_content
-				url := "#"+u_linked_anchor.id
+				url := "#"+u_linked_anchor.content
 				name := "anchor Link"
 			ensure then
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_anchor(CURRENT))
@@ -105,7 +105,8 @@ class
 
 
 	invariant
-
-		content_text_instantiated: attached content
+		content_not_void: attached content
+		has_url: attached url
+		url_not_empty: current.url.count > 0
 
 end

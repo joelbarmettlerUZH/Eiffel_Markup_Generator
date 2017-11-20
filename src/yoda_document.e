@@ -94,6 +94,7 @@ class
 				Result := return_string
 			end
 
+
 		print_to_console
 			--The print_to_console procedure loops over the elements and calls their printing representation for the console
 			local
@@ -106,6 +107,7 @@ class
 				end
 				print(print_string + "%N")
 			end
+
 
 		save(output_format,  template: STRING)
 			--The save procedure allows the user to save a document to the disk. For this reason, the user specifies an output format like he does in "render"
@@ -151,6 +153,7 @@ class
 				end
 			end
 
+
 		save_document(output_format, folder,  template: STRING)
 			--The save_document procedure does the actual saving part. The procedure needs an output format, a folder and a template. The output_format and template is user-chosen, the folder
 			--is chosen by the save procedure from either document or project. The save_document procedure opens the template and replaces the {{CONTENT}} tag inside the template with
@@ -182,5 +185,8 @@ class
 
 
 	invariant
-		name_never_void: name /= void implies name.count > 0
+		name_set: attached name
+		name_not_empty: name.count > 0
+		at_lest_one_renderer: renderer_instances.count > 0 and renderer_names.count > 0
+		elements_existing: attached elements
 end

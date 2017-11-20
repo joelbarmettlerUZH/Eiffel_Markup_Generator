@@ -17,7 +17,7 @@ class
 	create
 		make
 
-	feature {ANY}
+	feature	{RENDERER, VALIDATOR, YODA_ELEMENT}
 		--content and is_ordered public, allow access for everybody
 		content: ARRAY[YODA_ELEMENT]
 		is_ordered: BOOLEAN
@@ -42,6 +42,7 @@ class
 				name_set: name.is_equal("list")
 			end
 
+
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			--Applies YODA_LIST render to a class of type renderer as for example HTML_RENDERER.
 			--renderer.render_yoda_list(current, nesting) returns a String that replaces the YODA_tags with the corresponding HTML tags
@@ -56,6 +57,7 @@ class
     			result_exists: attached result
     			content_not_changed: content.is_equal (old content)
 			end
+
 
 		as_string(nesting: INTEGER): STRING
 			--Uses spaces function from parent class in order to concatenate the right amount
@@ -72,6 +74,9 @@ class
 				Result := result_string
 			end
 
+
 	invariant
+		content_not_void: attached content
 		content_not_empty: content.count > 0
+		ordered_or_unordered: attached is_ordered
 end

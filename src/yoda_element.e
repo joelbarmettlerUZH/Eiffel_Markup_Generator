@@ -7,11 +7,10 @@ note
 deferred class
 	YODA_ELEMENT
 
-	feature {ANY}
+	feature {YODA_ELEMENT, RENDERER, VALIDATOR, TEXT_DECORATOR}
 		name: STRING
 
-	feature {ANY}
-
+	feature {NONE}
 		validation_langauges: ARRAY[VALIDATOR]
 			--array of validators that act as validation languages, needs to be extendet by marksdown
 			--validator or other extensible markup languages
@@ -23,21 +22,6 @@ deferred class
 				Result := languages_array
 			ensure
 				result_not_void: attached Result
-			end
-
-
-		render(renderer: RENDERER; nesting: INTEGER): STRING
-			--deferred function that allows all elements to get visited by a Renderer
-			deferred
-			end
-
-		as_string(nesting: INTEGER): STRING
-			--Adds amount of nesting and concatenates the strings with a new line at the end.
-			require
-				nesting_not_void: attached nesting
-				valid_nesting: nesting >= 0
-			do
-				Result := spaces("-", nesting) + name + "%N"
 			end
 
 
@@ -58,6 +42,29 @@ deferred class
 					i := i + 1
 				end
 				Result := str
+			end
+
+
+	feature{ANY}
+		render(renderer: RENDERER; nesting: INTEGER): STRING
+			--deferred function that allows all elements to get visited by a Renderer
+			require
+				renderer_exists: attached renderer
+				valid_number_of_nesting: nesting >= 0
+			deferred
+			ensure
+    			result_exists: attached result
+    			--content_not_changed: content.is_equal (old content)
+			end
+
+
+		as_string(nesting: INTEGER): STRING
+			--Adds amount of nesting and concatenates the strings with a new line at the end.
+			require
+				nesting_not_void: attached nesting
+				valid_nesting: nesting >= 0
+			do
+				Result := spaces("-", nesting) + name + "%N"
 			end
 
 

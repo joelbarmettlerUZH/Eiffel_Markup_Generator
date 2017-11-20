@@ -10,8 +10,7 @@ class
 	inherit
 		RENDERER
 
-
-	feature {ANY}
+	feature {YODA_ELEMENT}
 		render_YODA_text(element: YODA_TEXT; nesting: INTEGER): STRING
 			--The render_YODA_Text function takes a YODA_TEXT element and replaces all yoda stling tags with the corresponding html-tag.
 			--Then, it returns the content of the yoda_text surrounded with paragraph tags.
@@ -188,6 +187,7 @@ class
 				valid_end_tag: result.has_substring("'><br>")
 			end
 
+
 		render_YODA_extern_image(element: YODA_IMAGE; nesting: INTEGER): STRING
 			--Creates HTML-image tags for a image with a url.
 			do
@@ -196,6 +196,7 @@ class
 				valid_start_tag: result.has_substring("<img src='")
 				valid_end_tag: result.has_substring("'><br>")
 			end
+
 
 		render_YODA_snippet(element: YODA_SNIPPET; nesting: INTEGER): STRING
 			--This function renders a snippet. Nothing is parsed, the whole responsibility lies on the user. The snippet content is just inserted returned with replacing
@@ -207,6 +208,7 @@ class
 				snippet_content.replace_substring_all ("%N", "%N" + spaces(nesting))
 				Result := element.content + "%N"
 			end
+
 
 		render_bold(element: TEXT_DECORATOR; nesting: INTEGER): STRING
 			-- The bold renderer renders the text element it contains and surrounds it with html bold tags.
@@ -220,6 +222,7 @@ class
 				valid_start_tag: result.has_substring("<b>")
 				valid_end_tag: result.has_substring("</b>")
 			end
+
 
 		render_code(element: TEXT_DECORATOR; nesting: INTEGER): STRING
 			-- The code renderer renders the text element it contains and surrounds it with html code tags.
@@ -236,6 +239,7 @@ class
 				valid_end_tag: result.has_substring("</code>")
 			end
 
+
 		render_italic(element: TEXT_DECORATOR; nesting: INTEGER): STRING
 			-- The italic renderer renders the text element it contains and surrounds it with html italic tags.
 			local
@@ -248,6 +252,7 @@ class
 				valid_start_tag: result.has_substring("<i>")
 				valid_end_tag: result.has_substring("</i>")
 			end
+
 
 		render_qoute(element: TEXT_DECORATOR; nesting: INTEGER): STRING
 			-- The quote renderer renders the text element it contains and surrounds it with html quote tags.
@@ -264,6 +269,7 @@ class
 				valid_end_tag: result.has_substring("</blockquote>")
 			end
 
+
 		render_title(element: TEXT_DECORATOR_TITLE; nesting: INTEGER): STRING
 			-- The title renderer renders the text element it contains and surrounds it with html title tags.
 			local
@@ -278,6 +284,7 @@ class
 				valid_start_tag: Result.has_substring("<h")
 				valid_end_tag: Result.has_substring("</h")
 			end
+
 
 		render_underline(element: TEXT_DECORATOR; nesting: INTEGER): STRING
 			-- The underline renderer renders the text element it contains and surrounds it with html underline tags.
@@ -296,10 +303,12 @@ class
 		render_anchor(element: YODA_ANCHOR; nesting: INTEGER): STRING
 			-- Renders a span element with the id corresponding to the anchors set id, returns it as a string with the right nesting amount
 			do
-				Result := spaces(nesting) + "<span id='" + element.id.out + "'></span>%N"
+				Result := spaces(nesting) + "<span id='" + element.content.out + "'></span>%N"
 			ensure then
-				valid_start_tag: result.has_substring("id='")
-				valid_end_tag: result.has_substring(">")
+				--valid_start_tag: result.has_substring("id='")
+				--valid_end_tag: result.has_substring(">")
+				valid_start_tag: result.has_substring("<span id='")
+				valid_end_tag: result.has_substring("'></span>%N")
 			end
 
 end

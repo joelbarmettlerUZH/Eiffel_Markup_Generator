@@ -7,7 +7,7 @@ note
 deferred class
 	RENDERER
 
-	feature {ANY}
+	feature {YODA_ELEMENT}
 
 		spaces(n: INTEGER): STRING
 			--When rendering a certain output language, we need to have the right number of indentations, corresponding to the nesting factor of an element.
@@ -37,6 +37,7 @@ deferred class
 				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
+
 
 		render_YODA_table(element: YODA_TABLE; nesting: INTEGER): STRING
 			--Takes a YODA_TABLE element, renders it according to the languages standards and returns a String representing the content in the specific language
@@ -81,6 +82,7 @@ deferred class
 			deferred
 			end
 
+
 		render_YODA_snippet(element: YODA_SNIPPET; nesting: INTEGER): STRING
 			--Takes a YODA_SNIPPET element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
@@ -88,6 +90,7 @@ deferred class
 				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
+
 
 		render_bold(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
@@ -97,6 +100,7 @@ deferred class
 			deferred
 			end
 
+
 		render_code(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
@@ -104,6 +108,7 @@ deferred class
 				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
+
 
 		render_italic(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
@@ -113,6 +118,7 @@ deferred class
 			deferred
 			end
 
+
 		render_qoute(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
@@ -120,6 +126,7 @@ deferred class
 				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
+
 
 		render_title(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
@@ -129,6 +136,7 @@ deferred class
 				--stength is validated by the decorator
 			deferred
 			end
+
 
 		render_underline(element: YODA_TEXT_INTERFACE; nesting: INTEGER): STRING
 			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
