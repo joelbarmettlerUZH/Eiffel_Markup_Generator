@@ -51,7 +51,7 @@ deferred class
 			end
 
 
-		validate_anchor(element: YODA_LINK): BOOLEAN
+		validate_anchor_link(element: YODA_LINK): BOOLEAN
 			--Deferred validate function. Has no other purpose than ensuring this function is shared between all its children.
 			require
 				element_not_empty: attached element
@@ -102,6 +102,15 @@ deferred class
 
 
 		validate_text(element: YODA_TEXT): BOOLEAN
+			--Deferred validate function. Has no other purpose than ensuring this function is shared between all its children.
+			require
+				element_not_empty: attached element
+			deferred
+			ensure
+				returnes_true: Result = True
+			end
+
+		validate_anchor(element: YODA_ANCHOR): BOOLEAN
 			--Deferred validate function. Has no other purpose than ensuring this function is shared between all its children.
 			require
 				element_not_empty: attached element

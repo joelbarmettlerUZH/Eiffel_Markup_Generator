@@ -25,11 +25,12 @@ class
 				u_id_not_void: attached u_id
 				u_id_not_zero: u_id.count > 0
 			do
-				name := "anchor Link"
+				name := "anchor point"
 				content := u_id
 			ensure
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_anchor(CURRENT))
 				id_set: u_id.is_equal (content)
-				name_set: name.is_equal("anchor Link")
+				name_set: name.is_equal("anchor point")
 			end
 
 

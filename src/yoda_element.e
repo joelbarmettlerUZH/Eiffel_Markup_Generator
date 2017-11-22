@@ -11,6 +11,10 @@ deferred class
 		name: STRING
 
 	feature {NONE}
+
+
+
+
 		validation_langauges: ARRAY[VALIDATOR]
 			--array of validators that act as validation languages, needs to be extendet by marksdown
 			--validator or other extensible markup languages
@@ -46,6 +50,20 @@ deferred class
 
 
 	feature{ANY}
+		is_valid_file(path_string: STRING): BOOLEAN
+			local
+				input_file: RAW_FILE
+			do
+				--check whether the file acutally exists locally
+				create input_file.make_with_name (path_string)
+				if not input_file.exists then
+					Result := FALSE
+				else
+					Result := TRUE
+				end
+			end
+
+
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			--deferred function that allows all elements to get visited by a Renderer
 			require

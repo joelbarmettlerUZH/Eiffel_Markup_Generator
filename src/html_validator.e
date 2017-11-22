@@ -145,8 +145,8 @@ class
 			end
 
 
-		validate_anchor(element: YODA_LINK): BOOLEAN
-			--validates a YODA_ANCHOR whether it's content is conforming with the HTML text rules. Returns True if so, raise exceptions otherwise
+		validate_anchor_link(element: YODA_LINK): BOOLEAN
+			--validates a YODA_LINK (link to a different place in the document) whether it's content is conforming with the HTML text rules.
 			do
 				--Nothing to be done. HTML has no hard constraints on anchors since it's only an empty element.
 				Result := True
@@ -189,7 +189,7 @@ class
 				--check whether the file acutally exists locally
 				create input_file.make_with_name (element.content)
 				if not input_file.exists then
-					exc.raise("Validation Error 104 - image imput file can not be found")
+					exc.raise("Validation Error 104 - image input file can not be found")
 				else
 					--return True when no exception occured along the way
 					Result := True
@@ -229,6 +229,15 @@ class
 				--Calls remove_probibited_sub_strings function to remove the prohibited substrings.
 				remove_probibited_sub_strings(element.content, prohibited_strings)
 				Result := True
+			end
+
+		validate_anchor(element: YODA_ANCHOR): BOOLEAN
+			--validates a YODA_ANCHOR
+			do
+				--Nothing to be done. HTML has no hard constraints on anchors since it's only an empty element.
+				Result := True
+			ensure then
+				returnes_true: Result = True
 			end
 
 end
