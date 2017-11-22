@@ -10,15 +10,8 @@ deferred class
 	feature {YODA_ELEMENT, RENDERER, VALIDATOR, TEXT_DECORATOR, EQA_TEST_SET}
 		name: STRING
 
-<<<<<<< HEAD
+
 	feature {EQA_TEST_SET}
-=======
-	feature {NONE}
-
-
-
-
->>>>>>> ecce3dd4c888e2106290a4cae1cb05444f981b82
 		validation_langauges: ARRAY[VALIDATOR]
 			--array of validators that act as validation languages, needs to be extendet by marksdown
 			--validator or other extensible markup languages
@@ -90,7 +83,7 @@ deferred class
 				end
 			end
 
-			
+
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			--deferred function that allows all elements to get visited by a Renderer
 			require
