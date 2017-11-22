@@ -235,7 +235,7 @@ class
 				snippet_content_exists: attached content
 				string_not_empty: not content.is_empty
 			do
-				Result := create {YODA_SNIPPET}.make(content)
+				Result := create {YODA_SNIPPET}.make_string(content)
 			ensure
 				result_not_void: attached Result
 				result_is_YODA_LINK: attached {YODA_SNIPPET} Result
@@ -248,14 +248,11 @@ class
 			require
 				snippet_content_exists: attached content
 				string_not_empty: not content.is_empty
-			local
-				input_file: PLAIN_TEXT_FILE
-				file_content: STRING
 			do
-				create input_file.make_open_read (content)
-				input_file.read_stream (input_file.count)
-				file_content := input_file.last_string
-				Result := create {YODA_SNIPPET}.make (file_content)
+				Result := create {YODA_SNIPPET}.make_file(content)
+			ensure
+				result_not_void: attached Result
+				result_is_YODA_LINK: attached {YODA_SNIPPET} Result
 			end
 
 
