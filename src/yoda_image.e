@@ -11,7 +11,7 @@ class
 		YODA_ELEMENT
 
 	create
-		make,
+		make_local,
 		make_extern
 
 	feature	{RENDERER, VALIDATOR, YODA_ELEMENT}
@@ -21,12 +21,14 @@ class
 
 
 	feature {ANY}
-		make(u_content: STRING)
+		make_local(u_content: STRING)
 			--Creates the YODA_IMAGE with a local image, validates it and sets the feature variables
 			require
 				String_not_void: attached u_content
 				String_not_empty: u_content.count > 0
+				File_exists: is_valid_file(u_content)
 			do
+				--set content
 				content := u_content
 				name := "local image"
 				is_extern := FALSE

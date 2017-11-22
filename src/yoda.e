@@ -196,18 +196,18 @@ class
 			--So this factory just calls the image_intern factory with the same arguments. For this reason, no contracts are needed, they are all located inthe image_intern factory.
 			--the interaction with this factory looks as follows: yoda.image("../images/yoda.gif")
 			do
-				Result := image_intern(content)
+				Result := image_local(content)
 			end
 
 
-		image_intern(content: STRING): YODA_IMAGE
+		image_local(content: STRING): YODA_IMAGE
 			--Factory that creates an instance of YODA_IMAGE with a string containing the local path to this image that the user passed as an argument, and returns it to the user
 			--the interaction with this factory looks as follows: yoda.image("../images/yoda.gif")
 			require
 				image_content_exists: attached content
 				string_not_empty: not content.is_empty
 			do
-				Result := create {YODA_IMAGE}.make(content)
+				Result := create {YODA_IMAGE}.make_local(content)
 			ensure
 				result_not_void: attached Result
 				result_is_YODA_LINK: attached {YODA_IMAGE} Result
