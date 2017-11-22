@@ -17,7 +17,7 @@ class
 	create
 		make
 
-	feature	{RENDERER, VALIDATOR, YODA_ELEMENT}
+	feature	{RENDERER, VALIDATOR, YODA_ELEMENT, EQA_TEST_SET}
 		--name and documents shall be public, allow access for everybody
 		content: ARRAY2[YODA_ELEMENT]
 
@@ -46,7 +46,7 @@ class
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
   			do
-    			Result := renderer.render_yoda_table (current, nesting)
+    			Result := renderer.render_table (current, nesting)
 			ensure then
     			result_exists: attached result
     			content_not_changed: content.is_equal (old content)

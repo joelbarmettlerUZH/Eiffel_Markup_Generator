@@ -11,8 +11,8 @@ class
 		YODA_ELEMENT
 
 	create
-		make,
-		make_extern
+		make_local,
+		make_external
 
 	feature	{RENDERER, VALIDATOR, YODA_ELEMENT}
 		--name and documents shall be public, allow access for everybody
@@ -21,15 +21,17 @@ class
 
 
 	feature {ANY}
-		make(u_content: STRING)
+		make_local(u_content: STRING)
 			--Creates the YODA_IMAGE with a local image, validates it and sets the feature variables
 			require
 				String_not_void: attached u_content
 				String_not_empty: u_content.count > 0
+				File_exists: is_valid_file(u_content)
 			do
+				--set content
 				content := u_content
 				name := "local image"
-				is_extern := False
+				is_extern := FALSE
 			ensure
 				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_image(CURRENT))
 				content_set: content = u_content
@@ -37,19 +39,19 @@ class
 			end
 
 
-		make_extern(u_content: STRING)
+		make_external(u_content: STRING)
 			--Creates the YODA_IMAGE with a extern image(URL), validates it and sets the feature variables
 			require
 				String_not_void: attached u_content
 				String_not_empty: u_content.count > 0
 			do
 				content := u_content
-				name := "extern image"
+				name := "external image"
 				is_extern := TRUE
 			ensure
-				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_extern_image(CURRENT))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_image(CURRENT))
 				content_set: content = u_content
-				name_set: name.is_equal("extern image")
+				name_set: name.is_equal("external image")
 			end
 
 
@@ -60,9 +62,9 @@ class
 				valid_number_of_nesting: nesting >= 0
 			do
 				if is_extern then
-					Result := renderer.render_YODA_extern_image (current, nesting)
+					Result := renderer.render_image_external (current, nesting)
 				else
-					Result := renderer.render_YODA_image (current, nesting)
+					Result := renderer.render_image_local (current, nesting)
 				end
 			ensure then
     			result_exists: attached result

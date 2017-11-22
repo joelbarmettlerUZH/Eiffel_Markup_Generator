@@ -11,7 +11,7 @@ class
 		YODA_ELEMENT
 
 	create
-		make,
+		make_external,
 		make_internal,
 		make_email,
 		make_anchor
@@ -23,7 +23,7 @@ class
 
 
 	feature {ANY}
-		make(u_content: YODA_ELEMENT; u_url: STRING)
+		make_external(u_content: YODA_ELEMENT; u_url: STRING)
 			--Creates the external YODA_LINK, validates it and sets the feature variables.
 			--Validator gets called in order to ensure that a link remains valid for all languages.
 			require
@@ -31,6 +31,21 @@ class
 				u_url_not_void: attached u_url
 				u_url_count_not_zero: u_url.count > 0
 			do
+				--Validate input on general constraints (independent of output language)
+					--For complete validation of links/Url's it would be very good to use RegEx (regular expressions)
+					--However, since we don't want other libraries to be required for the user od YODA and since RegEx is not
+					--supported by the Eiffel standart libraries we are not able to user RegEX for now.
+					--If at any point in the the use uf RegEx is easely available we could use checks like the following:
+					--	u_url <-> "^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$"
+					--	u_url <-> "^[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$"
+
+				--Check if link contains "https://" or "http://"
+				if
+					not (u_url.has_substring("https://") or u_url.has_substring("http://"))
+				then
+				--if not prepend "https://"
+					u_url.prepend("http://")
+				end
 				content := u_content
 				url := u_url
 				name := "external Link"
@@ -52,7 +67,7 @@ class
 				url := u_linked_doc.name + "{{doctype}}"
 				name := "internal Link"
 			ensure then
-				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_intern_link(CURRENT))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_link(CURRENT))
 				name_set: name.is_equal("internal Link")
 			end
 
@@ -68,7 +83,7 @@ class
 				url := "#"+u_linked_anchor.content
 				name := "anchor Link"
 			ensure then
-				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_anchor(CURRENT))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_link(CURRENT))
 				name_set: name.is_equal("anchor Link")
 			end
 
@@ -78,12 +93,14 @@ class
 			--Validator gets called in order to ensure that a link remains valid for all languages.
 			require
 				u_content_not_void: attached u_content
+				u_content_valid: is_valid_email(u_content)
 			do
+				-- Set attributes
 				content := create {YODA_TEXT}.make(u_content)
 				url := "mailto:"+u_content
 				name := "eMail"
 			ensure
-				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_email(CURRENT))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_link(CURRENT))
 				name_set: name.is_equal("eMail")
 			end
 
@@ -96,7 +113,7 @@ class
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
 			do
-				Result := renderer.render_yoda_link (current, nesting)
+				Result := renderer.render_link (current, nesting)
 			ensure then
     			result_exists: attached result
     			content_not_changed: content.is_equal (old content)

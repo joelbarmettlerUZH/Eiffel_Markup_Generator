@@ -19,9 +19,11 @@
 		</capability>
 		<precompile name="base_pre" location="$ISE_PRECOMP\base-scoop-safe.ecf"/>
 		<library name="base" location="$ISE_LIBRARY\library\base\base.ecf"/>
+		<library name="testing" location="$ISE_LIBRARY\library\testing\testing-safe.ecf"/>
 		<cluster name="yoda" location=".\" recursive="true">
 			<class_option class="RENDERER" profile="false">
 			</class_option>
+			<tests name="tests" location="\Users\Spasen\onedrive\Hs17\Software Construction\YODA\sc-hs17-group4-dev\sc-hs17-group4\src\tests\"/>
 		</cluster>
 	</target>
 </system>

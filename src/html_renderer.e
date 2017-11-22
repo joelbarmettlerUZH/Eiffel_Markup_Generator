@@ -11,7 +11,7 @@ class
 		RENDERER
 
 	feature {YODA_ELEMENT}
-		render_YODA_text(element: YODA_TEXT; nesting: INTEGER): STRING
+		render_text(element: YODA_TEXT; nesting: INTEGER): STRING
 			--The render_YODA_Text function takes a YODA_TEXT element and replaces all yoda stling tags with the corresponding html-tag.
 			--Then, it returns the content of the yoda_text surrounded with paragraph tags.
 			local
@@ -43,7 +43,7 @@ class
 			end
 
 
-		render_YODA_table(element: YODA_TABLE; nesting: INTEGER): STRING
+		render_table(element: YODA_TABLE; nesting: INTEGER): STRING
 			--To render an table, the have to perform a first loop that surround all elemets the first row in the ARRAY2 with table header th tags. Then, for every following row,
 			--surround each row element with td tags. Between each new row, add table row tr tags. Always keep track of the nesting and increase nesting for new rows and new
 			--elements in the row. The initial nesting of the table itself is handed to the renderer, so we build up on this one.
@@ -88,7 +88,7 @@ class
 			end
 
 
-		render_YODA_list(element: YODA_LIST; nesting: INTEGER): STRING
+		render_list(element: YODA_LIST; nesting: INTEGER): STRING
 			-- To render a list, we have to first differentiate between the ordered or unordered list, in order to set the right list-tag. Then, we loop
 			--over the list elements, render them and surround the outcome with list tags.
 			local
@@ -121,7 +121,7 @@ class
 			end
 
 
-		render_YODA_link(element: YODA_LINK; nesting: INTEGER): STRING
+		render_link(element: YODA_LINK; nesting: INTEGER): STRING
 			--A link consists of some content that is clickable and a place it links to. When we were dealing with internal links, the url of the element is just
 			--some name of another document. At the stage where this internal link was created, it is not determined yet what document-type this document will be.
 			--Therefore, we marked the internal link with a yoda specific {{doctype}} tag that not just symbolizes that a link to another document was used, but also
@@ -140,7 +140,7 @@ class
 			end
 
 
-		render_YODA_image(element: YODA_IMAGE; nesting: INTEGER): STRING
+		render_image_local(element: YODA_IMAGE; nesting: INTEGER): STRING
 			--Creates a new folder "resources" in the project/documentc folder if the project/document is saved, othewise
 			--creates a folder "temp_output" in the working directory in the working directory.
 			--Then copies the image from the local path to the "resources" folder and creates the HTML-image tags
@@ -188,7 +188,7 @@ class
 			end
 
 
-		render_YODA_extern_image(element: YODA_IMAGE; nesting: INTEGER): STRING
+		render_image_external(element: YODA_IMAGE; nesting: INTEGER): STRING
 			--Creates HTML-image tags for a image with a url.
 			do
 				Result := spaces(nesting) + "<img src='" + element.content + "' alt='" + element.content + " missing'><br>%N"
@@ -198,7 +198,7 @@ class
 			end
 
 
-		render_YODA_snippet(element: YODA_SNIPPET; nesting: INTEGER): STRING
+		render_snippet(element: YODA_SNIPPET; nesting: INTEGER): STRING
 			--This function renders a snippet. Nothing is parsed, the whole responsibility lies on the user. The snippet content is just inserted returned with replacing
 			--every newline character by a newline with the right amount of nesting spaces.
 			local
