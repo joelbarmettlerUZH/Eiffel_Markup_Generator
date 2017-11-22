@@ -68,7 +68,7 @@ class
 				url := "#"+u_linked_anchor.content
 				name := "anchor Link"
 			ensure then
-				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_anchor(CURRENT))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_anchor_link(CURRENT))
 				name_set: name.is_equal("anchor Link")
 			end
 
