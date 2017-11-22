@@ -33,7 +33,7 @@ class
 				name := "local image"
 				is_extern := FALSE
 			ensure
-				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_image_internal(CURRENT))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_image(CURRENT))
 				content_set: content = u_content
 				name_set: name.is_equal("local image")
 			end
@@ -49,7 +49,7 @@ class
 				name := "external image"
 				is_extern := TRUE
 			ensure
-				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_image_external(CURRENT))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_image(CURRENT))
 				content_set: content = u_content
 				name_set: name.is_equal("external image")
 			end
@@ -62,9 +62,9 @@ class
 				valid_number_of_nesting: nesting >= 0
 			do
 				if is_extern then
-					Result := renderer.render_YODA_image_external (current, nesting)
+					Result := renderer.render_image_external (current, nesting)
 				else
-					Result := renderer.render_YODA_image_local (current, nesting)
+					Result := renderer.render_image_local (current, nesting)
 				end
 			ensure then
     			result_exists: attached result

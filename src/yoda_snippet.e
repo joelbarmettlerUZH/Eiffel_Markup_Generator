@@ -65,7 +65,7 @@ class
 				renderer_exists: renderer /= Void
 				valid_number_of_nesting: nesting >= 0
 			do
-				Result := renderer.render_yoda_snippet (current, nesting)
+				Result := renderer.render_snippet (current, nesting)
 			ensure then
     			result_exists: attached result
     			content_not_changed: content.is_equal (old content)

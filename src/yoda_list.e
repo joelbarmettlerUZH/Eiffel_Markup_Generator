@@ -52,7 +52,7 @@ class
 				renderer_exists: attached renderer
 				valid_number_of_nesting: nesting >= 0
 			do
-				Result := renderer.render_yoda_list (current, nesting)
+				Result := renderer.render_list (current, nesting)
 			ensure then
     			result_exists: attached result
     			content_not_changed: content.is_equal (old content)

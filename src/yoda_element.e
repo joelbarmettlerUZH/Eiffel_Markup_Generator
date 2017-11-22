@@ -64,6 +64,29 @@ deferred class
 			end
 
 
+		is_valid_email(email_string: STRING): BOOLEAN
+			local
+				at_position: INTEGER
+				point_position: INTEGER
+			do
+				-- check if link contains "@"
+				if email_string.occurrences ('@')=0 then
+					Result := False
+				elseif email_string.occurrences ('@')>1 then
+					Result := False
+				else
+					--check if link contains "." somewhere after the "@"
+					at_position := email_string.index_of ('@', 1)
+					point_position := email_string.index_of ('.', at_position)
+					if point_position=0 then
+						Result := False
+					else
+						Result := True
+					end
+				end
+			end
+
+			
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			--deferred function that allows all elements to get visited by a Renderer
 			require

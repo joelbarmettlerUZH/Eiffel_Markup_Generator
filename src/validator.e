@@ -9,7 +9,7 @@ deferred class
 
 --shared features are deferred
 	feature {YODA_ELEMENT}
-		validate_image_internal(element: YODA_IMAGE): BOOLEAN
+		validate_image(element: YODA_IMAGE): BOOLEAN
 			--Deferred validate function. Has no other purpose than ensuring this function is shared between all its children.
 			require
 				element_not_empty: attached element
@@ -20,48 +20,7 @@ deferred class
 			end
 
 
-		validate_image_external(element: YODA_IMAGE): BOOLEAN
-			--Deferred validate function. Has no other purpose than ensuring this function is shared between all its children.
-			require
-				element_not_empty: attached element
-				element_content_not_empty: attached element.content
-			deferred
-			ensure
-				returnes_true: Result = True
-			end
-
-
-		validate_link_external(element: YODA_LINK): BOOLEAN
-			--Deferred validate function. Has no other purpose than ensuring this function is shared between all its children.
-			require
-				element_not_empty: attached element
-			deferred
-			ensure
-				returnes_true: Result = True
-			end
-
-
-		validate_link_internal(element: YODA_LINK): BOOLEAN
-			--Deferred validate function. Has no other purpose than ensuring this function is shared between all its children.
-			require
-				element_not_empty: attached element
-			deferred
-			ensure
-				returnes_true: Result = True
-			end
-
-
-		validate_anchor_link(element: YODA_LINK): BOOLEAN
-			--Deferred validate function. Has no other purpose than ensuring this function is shared between all its children.
-			require
-				element_not_empty: attached element
-			deferred
-			ensure
-				returnes_true: Result = True
-			end
-
-
-		validate_email(element: YODA_LINK): BOOLEAN
+		validate_link(element: YODA_LINK): BOOLEAN
 			--Deferred validate function. Has no other purpose than ensuring this function is shared between all its children.
 			require
 				element_not_empty: attached element
