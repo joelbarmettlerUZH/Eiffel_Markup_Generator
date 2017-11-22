@@ -111,7 +111,7 @@ class
 			end
 
 
-		validate_link(element: YODA_LINK): BOOLEAN
+		validate_link_external(element: YODA_LINK): BOOLEAN
 			--validates a YODA_LINK whether it's content is conforming with the HTML text rules. Returns True if so, raise exceptions otherwise
 			--Checks if the url-string contains "https://" or "http://", if not prepends "http://"
 			do
@@ -135,7 +135,7 @@ class
 			end
 
 
-		validate_intern_link(element: YODA_LINK): BOOLEAN
+		validate_link_internal(element: YODA_LINK): BOOLEAN
 			--validates a intern YODA_LINK (link to a different document of the project) whether it's content is conforming with the HTML text rules.
 			--Returns True if so, raise exceptions otherwise
 			do
@@ -180,7 +180,7 @@ class
 			end
 
 
-		validate_image(element: YODA_IMAGE): BOOLEAN
+		validate_image_internal(element: YODA_IMAGE): BOOLEAN
 			--validates a YODA_IMAGE of a local image, whether it's content is conforming with the HTML text rules. Returns True if so, raise exception otherwise
 			--checks if path to the source image exists
 			local
@@ -197,7 +197,7 @@ class
 			end
 
 
-		validate_extern_image(element: YODA_IMAGE): BOOLEAN
+		validate_image_external(element: YODA_IMAGE): BOOLEAN
 			--validates a YODA_IMAGE of a extern image, whether it's content is conforming with the HTML text rules. Returns True if so, raise exception otherwise
 			do
 				--For complete validation of links/Url's it would be very good to use RegEx (regular expressions)

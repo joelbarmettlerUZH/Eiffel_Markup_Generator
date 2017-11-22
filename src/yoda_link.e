@@ -11,7 +11,7 @@ class
 		YODA_ELEMENT
 
 	create
-		make,
+		make_external,
 		make_internal,
 		make_email,
 		make_anchor
@@ -23,7 +23,7 @@ class
 
 
 	feature {ANY}
-		make(u_content: YODA_ELEMENT; u_url: STRING)
+		make_external(u_content: YODA_ELEMENT; u_url: STRING)
 			--Creates the external YODA_LINK, validates it and sets the feature variables.
 			--Validator gets called in order to ensure that a link remains valid for all languages.
 			require
@@ -35,7 +35,7 @@ class
 				url := u_url
 				name := "external Link"
 			ensure
-				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_link(CURRENT))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_link_external(CURRENT))
 				content_set: content = u_content
 				name_set: name.is_equal("external Link")
 			end
@@ -52,7 +52,7 @@ class
 				url := u_linked_doc.name + "{{doctype}}"
 				name := "internal Link"
 			ensure then
-				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_intern_link(CURRENT))
+				valid_for_all_langauges: validation_langauges.for_all(agent {VALIDATOR}.validate_link_internal(CURRENT))
 				name_set: name.is_equal("internal Link")
 			end
 

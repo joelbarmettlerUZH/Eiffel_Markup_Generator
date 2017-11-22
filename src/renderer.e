@@ -66,7 +66,7 @@ deferred class
 			end
 
 
-		render_YODA_image(element: YODA_IMAGE; nesting: INTEGER): STRING
+		render_YODA_image_local(element: YODA_IMAGE; nesting: INTEGER): STRING
 			--Takes a YODA_IMAGE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				image_exists: attached element
@@ -74,7 +74,7 @@ deferred class
 			deferred
 			end
 
-		render_YODA_extern_image(element: YODA_IMAGE; nesting: INTEGER): STRING
+		render_YODA_image_external(element: YODA_IMAGE; nesting: INTEGER): STRING
 			--Takes a YODA_IMAGE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				image_exists: attached element

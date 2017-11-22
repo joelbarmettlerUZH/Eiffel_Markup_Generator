@@ -140,7 +140,7 @@ class
 			end
 
 
-		render_YODA_image(element: YODA_IMAGE; nesting: INTEGER): STRING
+		render_YODA_image_local(element: YODA_IMAGE; nesting: INTEGER): STRING
 			--Creates a new folder "resources" in the project/documentc folder if the project/document is saved, othewise
 			--creates a folder "temp_output" in the working directory in the working directory.
 			--Then copies the image from the local path to the "resources" folder and creates the HTML-image tags
@@ -188,7 +188,7 @@ class
 			end
 
 
-		render_YODA_extern_image(element: YODA_IMAGE; nesting: INTEGER): STRING
+		render_YODA_image_external(element: YODA_IMAGE; nesting: INTEGER): STRING
 			--Creates HTML-image tags for a image with a url.
 			do
 				Result := spaces(nesting) + "<img src='" + element.content + "' alt='" + element.content + " missing'><br>%N"
