@@ -17,7 +17,7 @@ class
 	create
 		make
 
-	feature	{RENDERER, VALIDATOR, YODA_ELEMENT}
+	feature	{RENDERER, VALIDATOR, YODA_ELEMENT, EQA_TEST_SET}
 		--content and is_ordered public, allow access for everybody
 		content: ARRAY[YODA_ELEMENT]
 		is_ordered: BOOLEAN
@@ -48,14 +48,8 @@ class
 			--renderer.render_yoda_list(current, nesting) returns a String that replaces the YODA_tags with the corresponding HTML tags
 			--such that it is possible to distinguish for the renderer wether it is a ordered or unordered list
 			--and assigns it to the Result.
-			require else
-				renderer_exists: attached renderer
-				valid_number_of_nesting: nesting >= 0
 			do
 				Result := renderer.render_list (current, nesting)
-			ensure then
-    			result_exists: attached result
-    			content_not_changed: content.is_equal (old content)
 			end
 
 

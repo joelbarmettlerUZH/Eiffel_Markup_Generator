@@ -211,7 +211,7 @@ class
 			do
 				snippet_content := element.content
 				snippet_content.replace_substring_all ("%N", "%N" + spaces(nesting))
-				Result := element.content + "%N"
+				Result := spaces(nesting) + element.content + "%N"
 			end
 
 

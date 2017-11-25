@@ -15,7 +15,7 @@ inherit
 		end
 
 
-feature {RENDERER}
+feature {RENDERER, EQA_TEST_SET}
 	component: YODA_TEXT_INTERFACE
 
 

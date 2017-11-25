@@ -14,7 +14,7 @@ class
 		make
 
 
-	feature	{RENDERER, VALIDATOR, YODA_ELEMENT}
+	feature	{RENDERER, VALIDATOR, YODA_ELEMENT, EQA_TEST_SET}
 		content: STRING
 
 
@@ -39,13 +39,8 @@ class
 			--renderer.render_yoda_anchor(current, nesting) returns a String that replaces the YODA_tags
 			--with the corresponding HTML tags, inserts the spacing and
 			--the needed span id (element.id) and assigns it to the Result.
-			require else
-				renderer_exists: attached renderer
-				valid_number_of_nesting: nesting >= 0
 			do
 				Result := renderer.render_anchor (current, nesting)
-			ensure then
-    			result_exists: attached result
     		end
 
 

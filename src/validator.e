@@ -8,7 +8,7 @@ deferred class
 	VALIDATOR
 
 --shared features are deferred
-	feature {YODA_ELEMENT}
+	feature {YODA_ELEMENT, EQA_TEST_SET}
 		validate_image(element: YODA_IMAGE): BOOLEAN
 			--Deferred validate function. Has no other purpose than ensuring this function is shared between all its children.
 			require

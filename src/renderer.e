@@ -7,7 +7,7 @@ note
 deferred class
 	RENDERER
 
-	feature {YODA_ELEMENT}
+	feature {YODA_ELEMENT, EQA_TEST_SET}
 
 		spaces(n: INTEGER): STRING
 			--When rendering a certain output language, we need to have the right number of indentations, corresponding to the nesting factor of an element.

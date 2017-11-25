@@ -88,7 +88,7 @@ deferred class
 			--deferred function that allows all elements to get visited by a Renderer
 			require
 				renderer_exists: attached renderer
-				valid_number_of_nesting: nesting >= 0
+				--is_valid_nesting: nesting >= 0
 			deferred
 			ensure
     			result_exists: attached result
@@ -100,7 +100,7 @@ deferred class
 			--Adds amount of nesting and concatenates the strings with a new line at the end.
 			require
 				nesting_not_void: attached nesting
-				valid_nesting: nesting >= 0
+				--valid_nesting: nesting >= 0
 			do
 				Result := spaces("-", nesting) + name + "%N"
 			end

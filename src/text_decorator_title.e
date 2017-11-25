@@ -19,7 +19,7 @@ create
 	make_style_with_attribute
 
 
-feature {RENDERER}
+feature {RENDERER, EQA_TEST_SET}
 	strength: INTEGER
 
 

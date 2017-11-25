@@ -87,7 +87,7 @@ class
 				print(yodalib.render("html")[0])
 				yodalib.print_to_console
 				--index.save ("html", "resources/template.txt")
-				yodalib.save ("html", "resources/template.txt")
+				--yodalib.save ("html", "resources/template.txt")
 			end
 
 

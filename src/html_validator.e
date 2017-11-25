@@ -10,7 +10,7 @@ class
 	inherit
 		VALIDATOR
 
-	feature {YODA_ELEMENT}
+	feature {YODA_ELEMENT, EQA_TEST_SET}
 		validate_text(element: YODA_TEXT): BOOLEAN
 			--validates a YODA_TEXT whether it's content is conforming with the HTML text rules. Returns True if so, raise exceptions otherwise
 			do

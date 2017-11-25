@@ -16,7 +16,7 @@ class
 		make_email,
 		make_anchor
 
-	feature	{RENDERER, VALIDATOR, YODA_ELEMENT}
+	feature	{RENDERER, VALIDATOR, YODA_ELEMENT, EQA_TEST_SET}
 		--Content and url public, allow access for everybody
 		content: YODA_ELEMENT
 		url: STRING
@@ -109,15 +109,8 @@ class
 			--Applies YODA_LINK render to a class of type renderer as for example HTML_RENDERER.
 			--renderer.render_yoda_link(current, nesting) returns a String that replaces the YODA_tags with the corresponding HTML tags
 			--and assigns it to the Result.
-			require else
-				renderer_exists: attached renderer
-				valid_number_of_nesting: nesting >= 0
 			do
 				Result := renderer.render_link (current, nesting)
-			ensure then
-    			result_exists: attached result
-    			content_not_changed: content.is_equal (old content)
-    			url_not_changed: url.is_equal (old url)
 			end
 
 

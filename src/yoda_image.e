@@ -14,7 +14,7 @@ class
 		make_local,
 		make_external
 
-	feature	{RENDERER, VALIDATOR, YODA_ELEMENT}
+	feature	{RENDERER, VALIDATOR, YODA_ELEMENT, EQA_TEST_SET}
 		--name and documents shall be public, allow access for everybody
 		content: STRING
 		is_extern: BOOLEAN
@@ -57,18 +57,12 @@ class
 
 		render(renderer: RENDERER; nesting: INTEGER): STRING
 			--Apply render_YODA_IMAGE renderer to YODA_IMAGE.
-			require else
-				renderer_exists: attached renderer
-				valid_number_of_nesting: nesting >= 0
 			do
 				if is_extern then
 					Result := renderer.render_image_external (current, nesting)
 				else
 					Result := renderer.render_image_local (current, nesting)
 				end
-			ensure then
-    			result_exists: attached result
-    			content_not_changed: content.is_equal (old content)
 			end
 
 
