@@ -21,7 +21,10 @@ class
 		make(u_name: STRING)
 			--Creates a new Yoda Project with a user chosen Name and instanciates an empty linked list where the yoda documents will be stored
 			require
-				name_not_empty: attached u_name
+				name_not_void: attached u_name
+				name_not_empty: u_name.count > 0
+				name_not_too_long: u_name.count < 150
+				name_valid: valid_name(u_name)
 			do
 				name := u_name
 				create documents.make
@@ -92,7 +95,11 @@ class
 			--The save-procedure creates a temporary output folder temp_output (deletes old one first when already existing) in which the elements will store their resources when being rendered
 			--Then, for every document in the project, the project is being saved with the save_document procedure, and the temp folder is renamed with the corresponding project name
 			--stores those file in a new folder
-			--The content will be wriiten into the template where the placeholder-tag "{{content}}" is placed
+			--The content will be wriiten into the template where the placeholder-tag "{{CONTENT}}" is placed
+			require else
+				output_format_exists: attached output_format
+				documents_not_empty: not documents.is_empty
+				template_valid: is_valid_template(template)
 			local
 				output_folder: DIRECTORY
 				new_name: PATH
@@ -129,6 +136,37 @@ class
 					output_folder.rename_path (new_name)
 				end
 			end
+
+
+		valid_name(project_name: STRING): BOOLEAN
+			local
+				prohibited_characters: ARRAY[CHARACTER]
+			do
+				prohibited_characters := << '"','~','#','*','&','{','}','\',':','>','<','/','+','%%','|','?','.' >>
+				Result := True
+				across prohibited_characters as prohib
+				loop
+					if project_name.has(prohib.item)then
+						Result := False
+					end
+				end
+			end
+
+
+		is_valid_template(path_string: STRING): BOOLEAN
+			local
+				input_file: RAW_FILE
+			do
+				--check whether the file acutally exists locally
+				create input_file.make_open_read (path_string)
+				if not input_file.exists then
+					Result := False
+				else
+					input_file.read_stream (input_file.count)
+					Result := input_file.last_string.has_substring("{{CONTENT}}")
+				end
+			end
+
 
 	invariant
 		documents_existing: attached documents
