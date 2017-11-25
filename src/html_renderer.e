@@ -10,7 +10,7 @@ class
 	inherit
 		RENDERER
 
-	feature {YODA_ELEMENT}
+	feature {YODA_ELEMENT, EQA_TEST_SET}
 		render_text(element: YODA_TEXT; nesting: INTEGER): STRING
 			--The render_YODA_Text function takes a YODA_TEXT element and replaces all yoda stling tags with the corresponding html-tag.
 			--Then, it returns the content of the yoda_text surrounded with paragraph tags.
@@ -130,10 +130,15 @@ class
 			--Finally, we simply add the url after the href and render the clickable content between the link tags.
 			local
 				doc_url: STRING
+				positibe_nesting: INTEGER
 			do
 				doc_url := element.url
+				positibe_nesting := nesting
+				if positibe_nesting < 0 then
+					positibe_nesting := 0
+				end
 				doc_url.replace_substring_all ("{{doctype}}", ".html")
-				Result := spaces(nesting) + "<a href='" + doc_url + "'> %N" + element.content.render(create {HTML_RENDERER},nesting+1) + spaces(nesting) + "</a>%N"
+				Result := spaces(positibe_nesting) + "<a href='" + doc_url + "'> %N" + element.content.render(create {HTML_RENDERER},positibe_nesting+1) + spaces(positibe_nesting) + "</a>%N"
 			ensure then
 				valid_start_tag: result.has_substring("<a href='")
 				valid_end_tag: result.has_substring("</a>")
@@ -155,13 +160,13 @@ class
 				output_folder_name: STRING
 			do
 				-- creat "temp_output" folder if not already exists
-				output_folder_name := "temp_output"
+				output_folder_name := "./temp_output"
 				create output_folder.make (output_folder_name)
 				if not output_folder.exists then
 					output_folder.create_dir
 				end
 				-- create "resources" folder if not exists
-				create output_folder.make ("./temp_output/resources")
+				create output_folder.make (output_folder_name+"/resources")
 				if not output_folder.exists then
 					output_folder.create_dir
 				end

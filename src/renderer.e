@@ -34,7 +34,6 @@ deferred class
 			--Takes a YODA_TEXT element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				text_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
 
@@ -43,7 +42,6 @@ deferred class
 			--Takes a YODA_TABLE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				table_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
 
@@ -52,7 +50,6 @@ deferred class
 			--Takes a YODA_TEXT element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				list_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
 
@@ -61,7 +58,6 @@ deferred class
 			--Takes a YODA_TEXT element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				link_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
 
@@ -70,7 +66,6 @@ deferred class
 			--Takes a YODA_IMAGE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				image_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
 
@@ -78,7 +73,6 @@ deferred class
 			--Takes a YODA_IMAGE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				image_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
 
@@ -87,7 +81,6 @@ deferred class
 			--Takes a YODA_SNIPPET element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				snipped_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
 
@@ -96,7 +89,6 @@ deferred class
 			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				bold_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
 
@@ -105,7 +97,6 @@ deferred class
 			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				code_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
 
@@ -114,7 +105,6 @@ deferred class
 			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				italic_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
 
@@ -123,7 +113,6 @@ deferred class
 			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				quote_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
 
@@ -132,7 +121,6 @@ deferred class
 			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				quote_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 				--stength is validated by the decorator
 			deferred
 			end
@@ -142,7 +130,6 @@ deferred class
 			--Takes a YODA_TEXT_INTERFACE element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				underline_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
 
@@ -151,7 +138,6 @@ deferred class
 			--Takes a YODA_ANCHOR element, renders it according to the languages standards and returns a String representing the content in the specific language
 			require
 				underline_exists: attached element
-				valid_number_of_nesting: nesting >= 0
 			deferred
 			end
 
