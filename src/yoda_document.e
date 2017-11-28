@@ -23,10 +23,13 @@ class
 			--to the renderer_names and an instance of the langauge renderer to renderer_instances.
 			require
 				u_name_exists: attached u_name
+				name_not_empty: u_name.count > 0
+				name_not_too_long: u_name.count < 150
+				name_valid: valid_name(u_name)
 			do
 				name := u_name
 				create elements.make
-				--Each inddex in renderer_names and renderer_instances has to correspond, so the HTML_RENDERER and the String HTML have both index 0.
+				--Each index in renderer_names and renderer_instances has to correspond, so the HTML_RENDERER and the String HTML have both index 0.
 				renderer_names := <<"html">>
 				renderer_instances := <<create {HTML_RENDERER}>>
 
@@ -34,6 +37,7 @@ class
 				name_not_empty: name = u_name
 				renderer_instances_array_created: attached renderer_instances
 				renderer_names_array_created: attached renderer_names
+				elements_is_empty: elements.count = 0
 			end
 
 
@@ -59,6 +63,7 @@ class
 			require
 				output_format_exists: attached output_format
 				output_format_not_empty: not output_format.is_empty
+				elements_not_empty: not elements.is_empty
 			local
 				return_string: STRING
 				renderer: RENDERER
@@ -118,7 +123,9 @@ class
 			--is that the user shall be allowed to only render one document without the whole project, and therefore such a temp_output folder is needed, which is created and renamed
 			--by this function here.
 			require
-				valid_template: True
+				output_format_exists: attached output_format
+				elements_not_empty: not elements.is_empty
+				template_valid: is_valid_template(template)
 			local
 				output_folder_name: STRING
 				output_folder: DIRECTORY
@@ -161,7 +168,9 @@ class
 			--filename and filetype into the specified folder.
 			--The content will be wriiten into the template where the placeholder-tag "{{content}}" is placed
 			require
-				valid_template: True
+				output_format_exists: attached output_format
+				elements_not_empty: not elements.is_empty
+				template_valid: is_valid_template(template)
 			local
 				input_file: PLAIN_TEXT_FILE
 				output_file: PLAIN_TEXT_FILE
@@ -181,6 +190,39 @@ class
 				create output_file.make_open_write (folder + "/" + current.name + "." + output_format)
 				output_file.put_string (file_content)
 				output_file.close
+			end
+
+
+		valid_name(document_name: STRING): BOOLEAN
+			--function to check if the name applied to the document is vaild, means it can be used as a file name for the
+			--generation of the output file.
+			local
+				prohibited_characters: ARRAY[CHARACTER]
+			do
+				prohibited_characters := << '"','~','#','*','&','{','}','\',':','>','<','/','+','%%','|','?','.' >>
+				Result := True
+				across prohibited_characters as prohib
+				loop
+					if document_name.has(prohib.item)then
+						Result := False
+					end
+				end
+			end
+
+		is_valid_template(path_string: STRING): BOOLEAN
+			--function to check if the template given via the path-string is a valid template, so if it exists and if it contains the
+			--correct placeholder tag "{{CONTENT}}"
+			local
+				input_file: RAW_FILE
+			do
+				--check whether the file acutally exists locally
+				create input_file.make_open_read (path_string)
+				if not input_file.exists then
+					Result := False
+				else
+					input_file.read_stream (input_file.count)
+					Result := input_file.last_string.has_substring("{{CONTENT}}")
+				end
 			end
 
 
