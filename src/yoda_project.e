@@ -139,6 +139,8 @@ class
 
 
 		valid_name(project_name: STRING): BOOLEAN
+			--function to check if the name applied to the project is vaild, means it can be used as a folder name for the
+			--generation of the output folder.
 			local
 				prohibited_characters: ARRAY[CHARACTER]
 			do
@@ -154,6 +156,8 @@ class
 
 
 		is_valid_template(path_string: STRING): BOOLEAN
+			--function to check if the template given via the path-string is a valid template, so if it exists and if it contains the
+			--correct placeholder tag "{{CONTENT}}"
 			local
 				input_file: RAW_FILE
 			do
