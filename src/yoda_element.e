@@ -88,7 +88,7 @@ deferred class
 			--deferred function that allows all elements to get visited by a Renderer
 			require
 				renderer_exists: attached renderer
-				--is_valid_nesting: nesting >= 0
+				is_valid_nesting: nesting >= 0
 			deferred
 			ensure
     			result_exists: attached result

@@ -33,7 +33,7 @@ class
 				create yoda
 				create index.make ("index")
 				create about.make ("about")
-				create yodalib.make ("YODALIB")
+				create yodalib.make ("yodalib")
 				yodalib.add_document (index)
 				yodalib.add_document (about)
 				index.add_element (yoda.title (yoda.text ("Welcome to the YODA-Homepage"), 1))
@@ -72,7 +72,7 @@ class
 				index.add_element (yoda.title (yoda.text ("Links"), 2))
 				index.add_element (yoda.text ("You are free to link to other files in your project or online websites"))
 				index.add_element (yoda.title (yoda.text ("External link"), 3))
-				index.add_element (yoda.link_external (yoda.text ("Make simple links arround texts"), "http://www.jedipedia.wikia.com/wiki/Yoda"))
+				index.add_element (yoda.link_external (yoda.text ("Make simple links around texts"), "http://www.jedipedia.wikia.com/wiki/Yoda"))
 				index.add_element (yoda.title (yoda.text ("Local link"), 3))
 				index.add_element (yoda.link_intern (yoda.text ("Or, link to other documents like this link here"), about))
 				index.add_element (yoda.title (yoda.text ("email link"), 2))
@@ -84,7 +84,8 @@ class
 				about.add_element (yoda.title (yoda.text ("This is the about us page now :)"), 3))
 				about.add_element (yoda.snippet_from_file ("resources/snippet.txt"))
 				about.add_element (yoda.link_intern (yoda.text ("Take me back to main, my little padawan"), index))
-				print(yodalib.render("html")[0])
+				--print(yodalib.render("html")[0])
+				print(yodalib.render("html")[1])
 				yodalib.print_to_console
 				--index.save ("html", "resources/template.txt")
 				--yodalib.save ("html", "resources/template.txt")
