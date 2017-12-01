@@ -130,15 +130,10 @@ class
 			--Finally, we simply add the url after the href and render the clickable content between the link tags.
 			local
 				doc_url: STRING
-				positibe_nesting: INTEGER
 			do
 				doc_url := element.url
-				positibe_nesting := nesting
-				if positibe_nesting < 0 then
-					positibe_nesting := 0
-				end
 				doc_url.replace_substring_all ("{{doctype}}", ".html")
-				Result := spaces(positibe_nesting) + "<a href='" + doc_url + "'> %N" + element.content.render(create {HTML_RENDERER},positibe_nesting+1) + spaces(positibe_nesting) + "</a>%N"
+				Result := spaces(nesting) + "<a href='" + doc_url + "'> %N" + element.content.render(create {HTML_RENDERER},nesting+1) + spaces(nesting) + "</a>%N"
 			ensure then
 				valid_start_tag: result.has_substring("<a href='")
 				valid_end_tag: result.has_substring("</a>")
