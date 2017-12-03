@@ -1,3 +1,4 @@
 ### EiffelStudio ###
 # The compilation directory
 EIFGENs
+src/exception_trace.log
