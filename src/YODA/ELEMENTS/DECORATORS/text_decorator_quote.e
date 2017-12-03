@@ -1,8 +1,8 @@
 note
-	description: "Summary description for {TEXT_DECORATOR_QUOTE}."
+	description: "Applies the styling to make the content look like a quote. (Actual implementations are in the _RENDERER classes)"
 	author: "Marius Högger"
 	date: "$26.10.2017$"
-	revision: "$27.10.2017$"
+	revision: "$15.11.2017$"
 
 class
 	TEXT_DECORATOR_QUOTE
@@ -13,17 +13,16 @@ inherit
 			render
 		end
 
+
 create
 	make_style
 
-feature
+
+feature {ANY}
 	render(renderer: RENDERER; nesting: INTEGER): STRING
 		-- Apply render_quote renderer to TEXT_DECORATOR_QUOTE.
-		require
-			renderer_exists: renderer /= Void
-			valid_number_of_nesting: nesting >= 0
 		do
-			-- Calls Renderer.render_quote(current, int)
+    		Result := renderer.render_qoute(current, nesting)
 		end
 
 end

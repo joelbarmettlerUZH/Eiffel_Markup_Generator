@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<link rel="stylesheet" href="http://www.zusammenfassung.schule/yoda/main.css" />
+		<title>Yoda Demo Page</title>
+		<meta charset="UTF-8"> 
+  </head>
+  <body>
+  {{CONTENT}}
+  </body>
+</html>
