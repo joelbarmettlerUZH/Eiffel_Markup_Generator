@@ -84,11 +84,11 @@ class
 				about.add_element (yoda.title (yoda.text ("This is the about us page now :)"), 3))
 				about.add_element (yoda.snippet_from_file ("resources/snippet.txt"))
 				about.add_element (yoda.link_intern (yoda.text ("Take me back to main, my little padawan"), index))
-				--print(yodalib.render("html")[0])
+				print(yodalib.render("html")[0])
 				print(yodalib.render("html")[1])
 				yodalib.print_to_console
 				--index.save ("html", "resources/template.txt")
-				--yodalib.save ("html", "resources/template.txt")
+				yodalib.save ("html", "resources/template.txt")
 			end
 
 
