@@ -145,7 +145,7 @@ class
 					output_folder.create_dir
 				end
 				-- save current document into the output_folder
-				CURRENT.save_document (output_format, output_folder.path.out , template)
+				current.save_document (output_format, output_folder.path.out , template)
 				-- rename output folder from "temp_output" to "DOCUMENTNAME_output"
 				create new_name.make_from_string (name+"_output")
 				create document_folder.make_with_path (new_name)

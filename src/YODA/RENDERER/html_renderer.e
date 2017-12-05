@@ -133,7 +133,7 @@ class
 			do
 				doc_url := element.url
 				doc_url.replace_substring_all ("{{doctype}}", ".html")
-				Result := spaces(nesting) + "<a href='" + doc_url + "'> %N" + element.content.render(create {HTML_RENDERER},nesting+1) + spaces(nesting) + "</a>%N"
+				Result := spaces(nesting) + "<a href='" + doc_url + "'>%N" + element.content.render(create {HTML_RENDERER},nesting+1) + spaces(nesting) + "</a>%N"
 			ensure then
 				valid_start_tag: result.has_substring("<a href='")
 				valid_end_tag: result.has_substring("</a>")
