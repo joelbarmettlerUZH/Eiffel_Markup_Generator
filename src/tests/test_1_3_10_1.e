@@ -11,10 +11,11 @@ class
 	TEST_1_3_10_1
 
 inherit
-	EQA_TEST_SET
+	TEST_INTERFACE
 		redefine
 			on_prepare
 		end
+
 
 feature {NONE} -- Events
 	html: HTML_RENDERER
@@ -54,8 +55,8 @@ feature -- Test routines
 			          "covers/{HTML_RENDERER}.render_text"
 		do
 			assert("Setting Paragraph Tags around Text",equal(t1.render (html, 0), "<p>Hard working, you must</p>%N"))
-			assert("Negative Nesting prevented",equal(t1.render (html, -1), "<p>Hard working, you must</p>%N"))
 			assert("Nesting adds Tabs before element",equal(t1.render (html, 1), "%T<p>Hard working, you must</p>%N"))
+			precon_trigger(agent t1.render (html, -1), "is_valid_nesting")
 			assert("Deeper Nesting adds more Tabs before element",equal(t1.render (html, 3), "%T%T%T<p>Hard working, you must</p>%N"))
 			assert("Correctly replace not-allowed characters by alternative representation",equal(t2.render (html, 0), "<p>Replace these &lt; symbols &gt; in text</p>%N"))
 			assert("Replace inline styling tags with corresponding HTML Tag",equal(t3.render (html, 0), "<p><b>bold</b>, <i>italic</i>, <u>underline</u>.</p>%N"))
