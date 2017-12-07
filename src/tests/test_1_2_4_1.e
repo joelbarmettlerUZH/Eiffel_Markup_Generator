@@ -8,7 +8,7 @@
 	testing: "type/manual"
 
 class
-	TEST_1_2_3_4
+	TEST_1_2_4_1
 
 inherit
 	TEST_INTERFACE
@@ -33,7 +33,7 @@ feature {NONE} -- Events
 
 feature -- Test routines
 
-	test_1_2_3_4
+	test_1_2_4_1
 			-- New test routine
 		note
 			testing:  "covers/{YODA_DOCUMENT}.print_to_console"
