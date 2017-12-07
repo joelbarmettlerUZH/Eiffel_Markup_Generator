@@ -1,11 +1,15 @@
 note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		Each YODA-Element shall offer the functionality of being rendered, meaning to be outputted as a proper
+		string-based representation in the chosen output language.
+		Whenever a certain nested element composition is not directly supported by the chosen output language,
+		YODA shall render the element composition in an alternative, acceptable way.
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "0.41 Percent"
 
 class
 	TEST_1_3_10_1_S6
@@ -34,7 +38,8 @@ feature -- Test routines
 		note
 			testing:  "covers/{HTML_RENDERER}.render_link", "covers/{YODA_LINK}.render"
 		do
-			assert("The link gets properly rendered with the 'mailto:'statement before the mail", equal(link1.render(renderer, 0), "<a href='mailto:obiwan@yoda.ch'>%N%T<p>obiwan@yoda.ch</p>%N</a>%N"))
+			assert("The link gets properly rendered with the 'mailto:'statement before the mail",
+				equal(link1.render(renderer, 0), "<a href='mailto:obiwan@yoda.ch'>%N%T<p>obiwan@yoda.ch</p>%N</a>%N"))
 		end
 
 end
