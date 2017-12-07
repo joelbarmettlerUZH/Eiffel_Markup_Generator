@@ -68,7 +68,7 @@ feature -- Test routines
 	test_1_3_10_1_s9
 			-- New test routine
 		note
-			testing:  "covers/{YODA_IMAGE}.render", "covers/{HTML_RENDERER}.render_image_local"
+			testing:  "covers/{YODA_IMAGE}.render", "covers/{HTML_RENDERER}.render_image_local", "execution/isolated"
 		local
 			temp_output_folder: DIRECTORY
 			original_image_1: RAW_FILE

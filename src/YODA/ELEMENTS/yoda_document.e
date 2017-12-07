@@ -110,7 +110,7 @@ class
 				loop
 					print_string := print_string + el.item.as_string (1)
 				end
-				print(print_string + "%N")
+				io.output.put_string(print_string + "%N")
 			end
 
 
@@ -140,8 +140,7 @@ class
 				then
 					output_folder.create_dir
 				else
-					output_folder.delete_content
-					output_folder.delete
+					output_folder.recursive_delete
 					output_folder.create_dir
 				end
 				-- save current document into the output_folder
@@ -216,10 +215,11 @@ class
 				input_file: RAW_FILE
 			do
 				--check whether the file acutally exists locally
-				create input_file.make_open_read (path_string)
+				create input_file.make (path_string)
 				if not input_file.exists then
 					Result := False
 				else
+					create input_file.make_open_read (path_string)
 					input_file.read_stream (input_file.count)
 					Result := input_file.last_string.has_substring("{{CONTENT}}")
 				end

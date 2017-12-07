@@ -23,6 +23,9 @@
 		<cluster name="yoda" location=".\" recursive="true">
 			<class_option class="RENDERER" profile="false">
 			</class_option>
+			<file_rule>
+				<exclude>^tests$</exclude>
+			</file_rule>
 			<tests name="tests" location="\Users\Spasen\onedrive\Hs17\Software Construction\YODA\sc-hs17-group4-dev\sc-hs17-group4\src\tests\"/>
 		</cluster>
 	</target>
