@@ -1,11 +1,14 @@
 note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		The client shall be able to create new YODA-Documents, 
+		which serve as a container of YODA-Elements. 
+		Each YODA-Document shall have a client chosen name for identification purposes.
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "3.89 Percent"
 
 class
 	TEST_1_2_1_1

@@ -1,11 +1,13 @@
 note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		Every YODA-Document shall offer the functionality to render itself, 
+		meaning to render all its YODA-elements into the client-chosen Output-language.
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "2.38 Percent"
 
 class
 	TEST_1_2_5_1

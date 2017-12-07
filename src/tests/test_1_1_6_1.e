@@ -1,11 +1,13 @@
 note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		A YODA_Project shall be saved into a new folder in the working directory, 
+		named according to the project name. This folder shall contain all saved YODA-Documents and all the resources if used
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "3.89 Percent"
 
 class
 	TEST_1_1_6_1

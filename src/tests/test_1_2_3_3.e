@@ -1,11 +1,13 @@
 note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		The order of the YODA-Elements in the final Output-Document shall be the same 
+		as the order in which they were added to the YODA-Document in the program code.
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "0 Percent (covered in Test FR #1.2.3.1)"
 
 class
 	TEST_1_2_3_3

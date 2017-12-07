@@ -1,11 +1,14 @@
 note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		A document of a project shall be saved into the project folder in the working directory. 
+		If a document is saved individually a new folder shall be created in the working directory, 
+		named according to the document name. This folder shall contain the document-file and resources if used.
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "3.06 Percent"
 
 class
 	TEST_1_2_6_1

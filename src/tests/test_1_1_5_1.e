@@ -1,11 +1,16 @@
 ﻿note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		The client shall have the possibility to render a YODA-Project, 
+		meaning every YODA-Document and every YODA-Element, 
+		to any of the supported output types. 
+		All necessary output data shall be returned as a well formatted string. 
+		The string should be formatted in a readable form with correct indentation.
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "1.67 Percen"
 
 class
 	TEST_1_1_5_1

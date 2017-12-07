@@ -1,11 +1,12 @@
 note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+	An YODA-Element can be added to a YODA-Document an arbitrary number of times, at arbitrary places.
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "0 Percent (covered in Test FR #1.2.3.1)"
 
 class
 	TEST_1_2_3_2

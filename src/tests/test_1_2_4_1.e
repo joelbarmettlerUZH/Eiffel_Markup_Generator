@@ -1,11 +1,13 @@
 ﻿note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		For each YODA-Document, the client shall be able to print out all names of the YODA-Elements 
+		contained in the YODA-Document to the console.
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "0.56 Percent"
 
 class
 	TEST_1_2_4_1
