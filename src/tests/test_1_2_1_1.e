@@ -52,8 +52,6 @@ feature -- Test routines
 		end
 
 	test_factory(s: STRING): YODA_DOCUMENT
-		local
-			Jedi2: YODA_DOCUMENT
 		do
 			Result := create {YODA_DOCUMENT}.make (s)
 		end

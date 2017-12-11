@@ -40,7 +40,7 @@ feature -- Test routines
 		note
 			testing:  "covers/{YODA_DOCUMENT}.print_to_console"
 		local
-			output: PLAIN_TEXT_FILE
+			--output: PLAIN_TEXT_FILE
 		do
 			--con.last_string
 			--print("hjkh")

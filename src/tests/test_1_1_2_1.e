@@ -49,8 +49,6 @@ feature -- Test routines
 		end
 
 	test_factory(s: STRING): YODA_PROJECT
-		local
-			Project2: YODA_PROJECT
 		do
 			Result := create {YODA_PROJECT}.make (s)
 		end

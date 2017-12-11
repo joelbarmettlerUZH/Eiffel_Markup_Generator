@@ -49,7 +49,6 @@ feature {NONE} -- Events
 			local
 				created_output_folder: DIRECTORY
 				created_output_folder2: DIRECTORY
-				temp_output_folder: DIRECTORY
 			do
 				create created_output_folder.make ("./Yoda_Quotes_output")
 				if created_output_folder.exists then
@@ -59,10 +58,6 @@ feature {NONE} -- Events
 				if created_output_folder2.exists then
 					created_output_folder2.recursive_delete
 				end
-				--create temp_output_folder.make ("./temp_output")
-				--if temp_output_folder.exists then
-				--		temp_output_folder.recursive_delete
-				--end
 			end
 
 feature -- Test routines
@@ -73,7 +68,6 @@ feature -- Test routines
 			testing:  "covers/{YODA_DOCUMENT}.save", "execution/isolated"
 		local
 			created_output_folder: DIRECTORY
-			created_resource_folder: DIRECTORY
 			created_output_file: RAW_FILE
 			created_output_folder2: DIRECTORY
 			created_resource_folder2: DIRECTORY
