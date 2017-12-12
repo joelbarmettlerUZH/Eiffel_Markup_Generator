@@ -17,8 +17,8 @@ inherit
 		end
 
 feature {NONE} -- Events
-img1 : YODA_IMAGE
-factory: YODA
+	img1 : YODA_IMAGE
+	factory: YODA
 
 	on_prepare
 			-- <Precursor>
@@ -38,22 +38,20 @@ feature -- Test routines
 			trooper1: YODA_IMAGE
 		do
 			--check img1.make_local("resources/yoda.gif")
-			assert ("test internal image with parameter resources/yoda.gif", equal(equal(
-			equal(img1.name, "local image"),
-			equal(img1.content, "resources/yoda.gif")),equal(
-			equal(attached {YODA_IMAGE} img1 , True),
-			equal(img1.is_extern, False))))
+			assert ("test internal image with parameter resources/yoda.gif", equal(img1.name, "local image"))
+			assert ("test internal image img1.content", equal(img1.content, "resources/yoda.gif"))
+			assert ("test internal image attached img1", attached {YODA_IMAGE} img1)
+			assert ("test internal image img1.is_exter should be false", equal(img1.is_extern, False))
 
 			--check precon "string_not_empty" in YODA
 			precon_function_trigger(agent factory.image_local (""), "string_not_empty")
 
 			--check through factory {YODA}
 			obiwan1 := factory.image_local ("resources/yoda.gif")
-			assert ("test of internal image with factory and parameter resources/yoda.gif", equal(equal(
-			equal(obiwan1.name, "local image"),
-			equal(obiwan1.content, "resources/yoda.gif")),equal(
-			equal(attached {YODA_IMAGE} obiwan1 , True),
-			equal(obiwan1.is_extern, False))))
+			assert ("test of internal image with factory and parameter resources/yoda.gif", equal(obiwan1.name, "local image"))
+			assert ("test of internal image with factory obiwan1.content",equal(obiwan1.content, "resources/yoda.gif"))
+			assert ("test of internal image with factory attached obiwan1", attached {YODA_IMAGE} obiwan1)
+			assert ("test of internal image with factory obiwan1.is_extern should be false", equal(obiwan1.is_extern, False))
 
 			--check precon "File_exists" in YODA_IMAGE
 			precon_function_trigger(agent factory.image_local ("some text, no image or such"), "file_exists")

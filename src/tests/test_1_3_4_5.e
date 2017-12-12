@@ -40,12 +40,10 @@ feature -- Test routines
 		local
 			obiwan: YODA_LINK
 		do
-			--check email1.make_email("yoda@power.yedi")
-			assert ("test anchor link around text to anchor", equal(equal(
-			equal(anchor_link1.url.count > 0, True),
-			equal(anchor_link1.name, "anchor Link")),
-			equal(attached {YODA_LINK} anchor_link1 , True)))
-
+			--check anchor1.make_email("yoda@power.yedi")
+			assert ("test anchor link around text to anchor", anchor_link1.url.count > 0)
+			assert ("test anchor link around text to anchor name", equal(anchor_link1.name, "anchor Link"))
+			assert ("test anchor link around text to anchor attached", attached {YODA_LINK} anchor_link1)
 			assert ("email url is of type YODA_TEXT", equal(attached {YODA_TEXT} anchor_link1.content, True))
 
 			--not void precon check
@@ -54,10 +52,9 @@ feature -- Test routines
 
 			--check through factory {YODA}
 			obiwan := factory.link_anchor (button1, anchor1)
-			assert ("test of anchor link with factory and the parameter text and doc", equal(equal(
-			equal(obiwan.url.count > 0, True),
-			equal(obiwan.name, "anchor Link")),
-			equal(obiwan.content.name, "text")))
+			assert ("test of anchor link with factory and the parameter text and doc content name", equal(obiwan.content.name, "text"))
+			assert ("test of anchor link with factory and the parameter text and doc url count", obiwan.url.count > 0)
+			assert ("test of anchor link with factory and the parameter text and doc name", equal(obiwan.name, "anchor Link"))
 			assert ("anchor link contains #",obiwan.url.has_substring("#"))
 		end
 end

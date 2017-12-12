@@ -1,6 +1,6 @@
 note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		Eiffel tests that can be executed by testing tool. This particular test tests requirements until 1.3.1.7 | quote
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
@@ -46,19 +46,12 @@ feature -- Test routines
 			obiwan : YODA_TEXT_INTERFACE
 		do
 			obiwan := factory.bold (yoda1)
-			assert("test of bold text", equal(
-			equal(jedi1.component, yoda1),
-			equal(jedi1.name, "style")))
 
-			assert("test of bold text with some string with tags in it", equal(equal(jedi2.component, yoda2),equal(jedi2.name, "style")))
+			assert ("test of bold text", equal(jedi1.component, yoda1))
+			assert ("test of bold text name", equal(jedi1.name, "style"))
+			assert ("test of bold text with some string with tags in it", equal(equal(jedi2.component, yoda2),equal(jedi2.name, "style")))
 
-			--fails, see below
-			--precon_function_trigger(agent test_factory(""), "u_content_not_empty")
-
-			--instead this function will fail
 			precon_function_trigger(agent factory.text(""), "text_not_empty")
-
 			assert("test of bold text with factory and parameter String1", equal(attached {YODA_TEXT_INTERFACE} obiwan, equal(obiwan.name, "style")))
-			--precon_function_trigger(agent {TEXT_DECORATOR_BOLD}.make_style(void), "u_component_not_void"))
 		end
 end

@@ -27,9 +27,9 @@ class
 			--Creates the external YODA_LINK, validates it and sets the feature variables.
 			--Validator gets called in order to ensure that a link remains valid for all languages.
 			require
-				u_content_not_void: attached u_content
-				u_url_not_void: attached u_url
-				u_url_count_not_zero: u_url.count > 0
+				content_exists: attached u_content
+				url_exists: attached u_url
+				url_not_empty: u_url.count > 0
 			do
 				--Validate input on general constraints (independent of output language)
 					--For complete validation of links/Url's it would be very good to use RegEx (regular expressions)
@@ -60,8 +60,9 @@ class
 			--Creates the internal YODA_LINK, validates it and sets the feature variables
 			--Validator gets called in order to ensure that a link remains valid for all languages.
 			require else
-				u_content_not_void: attached u_content
-				u_linked_doc_not_void: attached u_linked_doc
+				link_intern_content_exists: attached u_content
+				linked_doc_exists: attached u_linked_doc
+				linked_doc_correct_type: attached {YODA_DOCUMENT} u_linked_doc
 			do
 				content := u_content
 				url := u_linked_doc.name + "{{doctype}}"
@@ -76,8 +77,9 @@ class
 			--Creates the anchor that marks a hypertext link, validates it and sets the feature variables
 			--Validator gets called in order to ensure that a link remains valid for all languages.
 			require else
-				u_content_not_void: attached u_content
-				u_linked_anchor_not_void: attached u_linked_anchor
+				u_content_exists: attached u_content
+				anchor_exists: attached u_linked_anchor
+				u_linked_anchor_correct_type: attached {YODA_ANCHOR} u_linked_anchor
 			do
 				content := u_content
 				url := "#"+u_linked_anchor.content
@@ -92,7 +94,8 @@ class
 			--Creates the YODA_LINK as an E-Mail Mailto, validates it and sets the feature variables
 			--Validator gets called in order to ensure that a link remains valid for all languages.
 			require
-				u_content_not_void: attached u_content
+				mail_address_exists: attached u_content
+				string_not_empty: not u_content.is_empty
 				u_content_valid: is_valid_email(u_content)
 			do
 				-- Set attributes

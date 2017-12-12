@@ -46,26 +46,13 @@ feature -- Test routines
 			obiwan : YODA_TEXT_INTERFACE
 		do
 			obiwan := factory.quote (yoda1)
-			assert("test of quote text", equal(equal(jedi1.component, yoda1), equal(jedi1.name, "style")))
-			assert("test of quote text with some string with tags in it", equal(equal(jedi2.component, yoda2),equal(jedi2.name, "style")))
+			assert ("test of quote text", equal(jedi1.component, yoda1))
+			assert ("test of quote text name", equal(jedi1.name, "style"))
+			assert ("test of quote text with some string with tags in it", equal(jedi2.component, yoda2))
+			assert ("test of quote jedi2 name" ,equal(jedi2.name, "style"))
 
-			--fails, see below
-			--precon_function_trigger(agent test_factory(""), "u_content_not_empty")
-
-			--instead this function will fail
 			precon_function_trigger(agent factory.text(""), "text_not_empty")
-
-			assert("test of quote text with factory and parameter String1", equal(attached {YODA_TEXT_INTERFACE} obiwan, equal(obiwan.name, "style")))
-			--precon_function_trigger(agent {TEXT_DECORATOR_BOLD}.make_style(void), "u_component_not_void"))
+			assert ("test of quote text with factory and parameter String1", attached {YODA_TEXT_INTERFACE} obiwan)
+			assert ("test of quote text with factory and parameter String1 name", equal(obiwan.name, "style"))
 		end
-
---	test_factory(s: STRING):TEXT_DECORATOR_BOLD
---		local
---		--will fail here since "" text cannot be created -> precon violation of YODA_TEXT
---		--so question is how can we do that?
---			text : YODA_TEXT
---		do
---			text := factory.text (s)
---			Result := {TEXT_DECORATOR_BOLD}.make_style(text)
---		end
 end

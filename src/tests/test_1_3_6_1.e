@@ -17,14 +17,14 @@ inherit
 		end
 
 feature {NONE} -- Events
-factory: YODA
-firstString: YODA_TEXT
-secondString: YODA_TEXT
+	factory: YODA
+	firstString: YODA_TEXT
+	secondString: YODA_TEXT
 
-text_array: ARRAY[YODA_ELEMENT]
-empty_array: ARRAY[YODA_ELEMENT]
-list1: YODA_LIST
-list2: YODA_LIST
+	text_array: ARRAY[YODA_ELEMENT]
+	empty_array: ARRAY[YODA_ELEMENT]
+	list1: YODA_LIST
+	list2: YODA_LIST
 
 
 	on_prepare
@@ -52,44 +52,38 @@ feature -- Test routines
 			obiwan2: YODA_LIST
 		do
 			--check list1.make(text_array, True)
-			assert ("test list with parameter array and True", equal(equal(
-			equal(list1.name, "list"),
-			equal(list1.content.count, 2)),equal(
-			equal(attached {YODA_LIST} list1 , True),
-			equal(list1.is_ordered, True))))
+			assert ("test list with parameter array and True", equal(list1.name, "list"))
+			assert ("test list list1.content.count", equal(list1.content.count, 2))
+			assert ("test list attached list1", attached {YODA_LIST} list1)
+			assert ("test list list1.is_ordered", list1.is_ordered)
 
 			--check list2.make(text_array, False)
-			assert ("test list with parameter array and True", equal(equal(
-			equal(list2.name, "list"),
-			equal(list2.content.count, 2)),equal(
-			equal(attached {YODA_LIST} list2 , True),
-			equal(list2.is_ordered, False))))
+			assert ("test list with parameter array and True", equal(list2.content.count, 2))
+			assert ("test list list2.name", equal(list2.name, "list"))
+			assert ("test list attached list2", attached {YODA_LIST} list2)
+			assert ("test list list2.is_ordered should be false", equal(list2.is_ordered, False))
 
 			--check precon in {YODA}.list
 			precon_function_trigger(agent factory.list (empty_array), "array_not_empty")
 
 			--check through factoy {YODA}.list with is ordered false
 			obiwan1 := factory.list (text_array)
-			assert ("test list with parameter array and True", equal(equal(
-			equal(obiwan1.name, "list"),
-			equal(text_array.count, 2)),equal(
-			equal(attached {YODA_LIST} obiwan1 , True),
-			equal(obiwan1.is_ordered, False))))
+			assert ("test list with factory", equal(text_array.count, 2))
+			assert ("test list with factory obiwan1.nae", equal(obiwan1.name, "list"))
+			assert ("test list with attached obiwan1", attached {YODA_LIST} obiwan1)
+			assert ("test list with obiwan1.is_ordered should be false", equal(obiwan1.is_ordered, False))
 
 			--check through factoy {YODA}.list with is ordered true
 			obiwan2 := factory.numbered_list (text_array)
-			assert ("test of list with factory and parameter array and True", equal(equal(
-			equal(obiwan2.name, "list"),
-			equal(text_array.count, 2)),equal(
-			equal(attached {YODA_LIST} obiwan2 , True),
-			equal(obiwan2.is_ordered, True))))
+			assert ("test of list with factory and parameter array and True", equal(text_array.count, 2))
+			assert ("test of list with factory obiwan2.name", equal(obiwan2.name, "list"))
+			assert ("test of list with factory text_array.count should be 2", equal(text_array.count, 2))
+			assert ("test of list with factory attached obiwan2", attached {YODA_LIST} obiwan2)
+			assert ("test list with obiwan2.is_ordered should be true", equal(obiwan2.is_ordered, True))
 
 			--check precon in {YODA}.
 			precon_function_trigger(agent factory.numbered_list(empty_array),"array_not_empty")
-
-
 		end
-
 end
 
 

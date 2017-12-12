@@ -27,8 +27,8 @@ class
 			--Creates the external YODA_LINK, validates it and sets the feature variables.
 			--Validator gets called in order to ensure that a link remains valid for all languages.
 			require
-				u_content_exists: attached u_content
-				u_content.count > 0
+				table_content_exists: attached u_content
+				array_not_empty: u_content.count > 0
 			do
 				content := u_content
 				name := "table"

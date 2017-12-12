@@ -28,8 +28,8 @@ class
 			--Creates the YODA_LIST, validates it and sets the feature variables
 			--Validator gets called in order to ensure that a list remains valid for all languages.
 			require else
-				u_content_not_void: attached u_content
-				u_content_not_empty: u_content.count > 0
+				list_content_exists: attached u_content
+				array_not_empty: u_content.count > 0
 			do
 				content := u_content
 				is_ordered := u_is_ordered

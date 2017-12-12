@@ -24,7 +24,8 @@ feature {ANY}
 		--Creates a new instance of a decorator with the given YODA_ELEMENT as sontent, also sets it's name to "style"
 			-- Set `component' to `u_component'.
 		require
-			u_component_not_void: u_component /= Void
+			content_exists: attached u_component
+			element_type_YODA_TEXT: attached {YODA_TEXT_INTERFACE} u_component
 		do
 			component := u_component
 			name := "style"

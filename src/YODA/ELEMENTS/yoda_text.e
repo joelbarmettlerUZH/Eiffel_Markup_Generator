@@ -22,8 +22,8 @@ class
 		make(u_content: STRING)
 			--Creates the YODA_TEXT that will be created in the factory of the YODA class, validates it and sets the content and name variables
 			require
-				u_content_not_void: attached u_content
-				u_content_not_empty: u_content.count > 0
+				text_content_exists: attached u_content
+				text_not_empty: u_content.count > 0
 			do
 				content := u_content
 				name := "text"

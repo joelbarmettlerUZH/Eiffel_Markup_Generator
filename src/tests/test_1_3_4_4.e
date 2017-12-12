@@ -17,10 +17,8 @@ inherit
 		end
 
 feature {NONE} -- Events
-factory: YODA
-email1: YODA_LINK
-
-
+	factory: YODA
+	email1: YODA_LINK
 
 	on_prepare
 			-- <Precursor>
@@ -40,10 +38,9 @@ feature -- Test routines
 			obiwan: YODA_LINK
 		do
 			--check email1.make_email("yoda@power.yedi")
-			assert ("test email with parameter yoda@power.yedi", equal(equal(
-			equal(email1.url.count > 0, True),
-			equal(email1.name, "eMail")),
-			equal(attached {YODA_TEXT} email1.content , True)))
+			assert ("test email with parameter yoda@power.yedi", email1.url.count > 0)
+			assert ("test email with parameter yoda@power.yedi name", equal(email1.name, "eMail"))
+			assert ("test email attached", attached {YODA_TEXT} email1.content)
 
 			assert ("email url is of type YODA_TEXT", equal(attached {YODA_TEXT} email1.content, True))
 
@@ -53,10 +50,9 @@ feature -- Test routines
 
 			--check through factory {YODA}
 			obiwan := factory.email ("yoda@power.yedi")
-			assert ("test of internal link with factory and the parameter text and doc", equal(equal(
-			equal(obiwan.url.count > 0, True),
-			equal(obiwan.name, "eMail")),
-			equal(obiwan.content.name, "text")))
+			assert ("test of internal link with factory and the parameter text and doc", obiwan.url.count > 0)
+			assert ("test of internal link with factory and the parameter text and doc name", equal(obiwan.name, "eMail"))
+			assert ("test of internal link with factory and the parameter text and doc content name", equal(obiwan.content.name, "text"))
 
 			--check precon
 			precon_function_trigger(agent factory.email ("not valid"), "u_content_valid")

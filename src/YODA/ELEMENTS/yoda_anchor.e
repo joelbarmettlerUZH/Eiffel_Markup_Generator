@@ -22,8 +22,8 @@ class
 		make(u_id: STRING)
 			--Creates the external YODA_ANCHOR, validates it and sets the feature variables
 			require
-				u_id_not_void: attached u_id
-				u_id_not_zero: u_id.count > 0
+				id_exists: attached u_id
+				id_not_empty: u_id.count > 0
 			do
 				name := "anchor point"
 				content := u_id
