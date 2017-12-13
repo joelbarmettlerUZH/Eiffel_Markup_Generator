@@ -28,10 +28,11 @@ feature {NONE} -- Events
 	Yaddle: YODA_DOCUMENT
 	text1: YODA_TEXT
 	image1: YODA_IMAGE
-	del_output_folder: DIRECTORY
 
 	on_prepare
 			-- <Precursor>
+		local
+			del_output_folder: DIRECTORY
 		do
 			create Jedi.make("Jedi")
 			create Jedi2.make("Jedi2")
@@ -52,7 +53,6 @@ feature {NONE} -- Events
 			local
 				created_output_folder: DIRECTORY
 				created_output_folder2: DIRECTORY
-				--temp_output_folder: DIRECTORY
 			do
 				create created_output_folder.make ("./Jedi_output")
 				if created_output_folder.exists then
@@ -77,6 +77,7 @@ feature -- Test routines
 			created_output_folder2: DIRECTORY
 			created_output_file2: RAW_FILE
 			created_output_file3: RAW_FILE
+			created_output_file4: RAW_FILE
 		do
 			precon_procedure_trigger(agent Jedi.save ("html", "tests/Testdata/template.txt"),"documents_not_empty")
 			Yoda.add_element(text1)
@@ -97,10 +98,13 @@ feature -- Test routines
 			create created_resource_folder.make ("./Jedi2_output/resources")
 			assert ("save project with two documents, document 1 created", created_output_file2.exists)
 			assert ("save project with document with with one local image., resources folder created", created_resource_folder.has_entry ("yoda_1.gif"))
+			created_output_file2.close
 			create created_output_file3.make_open_read ("./Jedi2_output/Yoda.html")
 			assert ("save project with two documents, document 1 created", created_output_file3.exists)
-			create created_output_file3.make_open_read ("./Jedi2_output/Yaddle.html")
-			assert ("save project with two documents, document 2 created", created_output_file3.exists)
+			created_output_file3.close
+			create created_output_file4.make_open_read ("./Jedi2_output/Yaddle.html")
+			assert ("save project with two documents, document 2 created", created_output_file4.exists)
+			created_output_file4.close
 			Jedi3.add_document(Yoda)
 			Jedi3.add_document(Yaddle)
 			precon_procedure_trigger(agent Jedi3.save ("html", "tests/Testdata/template123.txt"),"template_valid")

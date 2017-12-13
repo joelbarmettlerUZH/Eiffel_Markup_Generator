@@ -169,6 +169,7 @@ class
 					create input_file.make_open_read (path_string)
 					input_file.read_stream (input_file.count)
 					Result := input_file.last_string.has_substring("{{CONTENT}}")
+					input_file.close
 				end
 			end
 

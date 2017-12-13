@@ -27,10 +27,12 @@ feature {NONE} -- Events
 	Yoda_Quotes3: YODA_DOCUMENT
 	text1: YODA_TEXT
 	image1: YODA_IMAGE
-	del_output_folder: DIRECTORY
+
 
 	on_prepare
 			-- <Precursor>
+		local
+			del_output_folder: DIRECTORY
 		do
 			create Yoda_Quotes.make("Yoda_Quotes")
 			create Yoda_Quotes2.make("Yoda_Quotes2")

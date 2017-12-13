@@ -179,6 +179,7 @@ class
 				output_file.open_write
 				input_file.copy_to(output_file)
 				output_file.close
+				input_file.close
 
 				-- write relative path for HTML
 				Result := spaces(nesting) + "<img src='" + "./resources/"+ input_file_name + "' alt='" + input_file_name + " missing'><br>%N"
