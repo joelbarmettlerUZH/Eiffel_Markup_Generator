@@ -75,4 +75,10 @@ feature {NONE}
 			retry
 		end
 
+
+	sleep (nanoseconds: INTEGER_64)
+		external
+			"C blocking use %"eif_misc.h%""
+		end
+
 end
