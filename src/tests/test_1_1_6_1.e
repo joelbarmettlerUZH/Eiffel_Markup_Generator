@@ -39,7 +39,7 @@ feature {NONE} -- Events
 			create Yoda.make("Yoda")
 			create Yaddle.make("Yaddle")
 			create text1.make("You will find only what you bring in.")
-			create image1.make_local("./resources/yoda_1.gif")
+			create image1.make_local("./tests/Testdata/yoda_1.gif")
 			create del_output_folder.make ("./temp_output")
 			if del_output_folder.exists then
 					del_output_folder.recursive_delete
@@ -78,10 +78,10 @@ feature -- Test routines
 			created_output_file2: RAW_FILE
 			created_output_file3: RAW_FILE
 		do
-			precon_procedure_trigger(agent Jedi.save ("html", "resources/template.txt"),"documents_not_empty")
+			precon_procedure_trigger(agent Jedi.save ("html", "tests/Testdata/template.txt"),"documents_not_empty")
 			Yoda.add_element(text1)
 			Jedi.add_document(Yoda)
-			Jedi.save ("html", "resources/template.txt")
+			Jedi.save ("html", "tests/Testdata/template.txt")
 			create created_output_folder.make ("./Jedi_output")
 			assert ("save project with one document. (without local image), outputfolder created", created_output_folder.exists)
 			create created_output_file.make_open_read ("./Jedi_output/Yoda.html")
@@ -90,7 +90,7 @@ feature -- Test routines
 			Yaddle.add_element(image1)
 			Jedi2.add_document(Yoda)
 			Jedi2.add_document(Yaddle)
-			Jedi2.save ("html", "resources/template.txt")
+			Jedi2.save ("html", "tests/Testdata/template.txt")
 			create created_output_folder2.make ("./Jedi2_output")
 			assert ("save project with two documents.", created_output_folder2.exists)
 			create created_output_file2.make_open_read ("./Jedi2_output/Yoda.html")
@@ -103,8 +103,8 @@ feature -- Test routines
 			assert ("save project with two documents, document 2 created", created_output_file3.exists)
 			Jedi3.add_document(Yoda)
 			Jedi3.add_document(Yaddle)
-			precon_procedure_trigger(agent Jedi3.save ("html", "resources/template123.txt"),"template_valid")
-			precon_procedure_trigger(agent Jedi3.save ("html", "resources/template_invalid.txt"),"template_valid")
+			precon_procedure_trigger(agent Jedi3.save ("html", "tests/Testdata/template123.txt"),"template_valid")
+			precon_procedure_trigger(agent Jedi3.save ("html", "tests/Testdata/template_invalid.txt"),"template_valid")
 		end
 
 end

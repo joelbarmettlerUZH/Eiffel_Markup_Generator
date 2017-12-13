@@ -36,7 +36,7 @@ feature {NONE} -- Events
 			create Yoda_Quotes2.make("Yoda_Quotes2")
 			create Yoda_Quotes3.make("Yoda_Quotes3")
 			create text1.make("You will find only what you bring in.")
-			create image1.make_local("./resources/yoda_1.gif")
+			create image1.make_local("./tests/Testdata/yoda_1.gif")
 			create del_output_folder.make ("./temp_output")
 			if del_output_folder.exists then
 					del_output_folder.recursive_delete
@@ -73,16 +73,16 @@ feature -- Test routines
 			created_resource_folder2: DIRECTORY
 			created_output_file2: RAW_FILE
 		do
-			precon_procedure_trigger(agent Yoda_Quotes.save ("html", "resources/template.txt"),"elements_not_empty")
+			precon_procedure_trigger(agent Yoda_Quotes.save ("html", "tests/Testdata/template.txt"),"elements_not_empty")
 			Yoda_Quotes.add_element (text1)
-			Yoda_Quotes.save ("html", "resources/template.txt")
+			Yoda_Quotes.save ("html", "tests/Testdata/template.txt")
 			create created_output_folder.make ("./Yoda_Quotes_output")
 			assert ("save document with one element (not local image), folder created", created_output_folder.exists)
 			create created_output_file.make_open_read ("./Yoda_Quotes_output/Yoda_Quotes.html")
 			assert ("save document with one element (not local image), document created", created_output_file.exists)
 			created_output_file.close
 			Yoda_Quotes2.add_element (image1)
-			Yoda_Quotes2.save ("html", "resources/template.txt")
+			Yoda_Quotes2.save ("html", "tests/Testdata/template.txt")
 			create created_output_folder2.make ("./Yoda_Quotes2_output")
 			assert ("save document with one local image., folder created", created_output_folder2.exists)
 			create created_resource_folder2.make ("./Yoda_Quotes2_output/resources")
@@ -91,8 +91,8 @@ feature -- Test routines
 			assert ("save document with one local image., resources folder created", created_resource_folder2.has_entry ("yoda_1.gif"))
 			created_output_file2.close
 			Yoda_Quotes3.add_element (text1)
-			precon_procedure_trigger(agent Yoda_Quotes3.save ("html", "resources/template123.txt"),"template_valid")
-			precon_procedure_trigger(agent Yoda_Quotes3.save ("html", "resources/template_invalid.txt"),"template_valid")
+			precon_procedure_trigger(agent Yoda_Quotes3.save ("html", "tests/Testdata/template123.txt"),"template_valid")
+			precon_procedure_trigger(agent Yoda_Quotes3.save ("html", "tests/Testdata/template_invalid.txt"),"template_valid")
 		end
 
 end

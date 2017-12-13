@@ -35,19 +35,19 @@ feature {NONE} -- Events
 			yoda_2_content: STRING
 			temp_output_folder: DIRECTORY
 		do
-			create yoda_1.make_open_read ("./resources/yoda_1.gif")
+			create yoda_1.make_open_read ("./tests/Testdata/yoda_1.gif")
 			assert("Local file yoda_1 exists", yoda_1.exists)
 			yoda_1.read_stream (yoda_1.count)
 			yoda_1_content := yoda_1.last_string
-			create yoda_2.make_open_read ("./resources/yoda_2.gif")
+			create yoda_2.make_open_read ("./tests/Testdata/yoda_2.gif")
 			assert("Local file yoda_2 exists", yoda_2.exists)
 			yoda_2.read_stream (yoda_2.count)
 			yoda_2_content := yoda_2.last_string
 			assert("Both files are not equals", not equal(yoda_1_content, yoda_2_content))
 			yoda_1.close
 			yoda_2.close
-			create image1.make_local("./resources/yoda_1.gif")
-			create image2.make_local("./resources/yoda_2.gif")
+			create image1.make_local("./tests/Testdata/yoda_1.gif")
+			create image2.make_local("./tests/Testdata/yoda_2.gif")
 			create temp_output_folder.make ("./temp_output")
 			if temp_output_folder.exists then
 					temp_output_folder.recursive_delete
@@ -91,7 +91,7 @@ feature -- Test routines
 			create temp_output_folder.make ("./temp_output")
 			assert("temp_output/resources directory was created",
 				temp_output_folder.exists)
-			create original_image_1.make_open_read ("./resources/yoda_1.gif")
+			create original_image_1.make_open_read ("./tests/Testdata/yoda_1.gif")
 			original_image_1.read_stream (original_image_1.count)
 			original_image_1_content := original_image_1.last_string
 			create copied_image_1.make_open_read ("./temp_output/resources/yoda_1.gif")
@@ -103,7 +103,7 @@ feature -- Test routines
 			assert("local image file is being copied in temp_output/resources folder",
 				copied_image_1.exists and then equal(original_image_1_content, copied_image_1_content))
 			rendered_image_2 := image2.render (renderer, 0)
-			create original_image_2.make_open_read ("./resources/yoda_2.gif")
+			create original_image_2.make_open_read ("./tests/Testdata/yoda_2.gif")
 			original_image_2.read_stream (original_image_2.count)
 			original_image_2_content := original_image_2.last_string
 			create copied_image_2.make_open_read ("./temp_output/resources/yoda_2.gif")

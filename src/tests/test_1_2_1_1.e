@@ -16,7 +16,6 @@ class
 inherit
 	TEST_INTERFACE
 
-
 feature -- Test routines
 
 	test_1_2_1_1
