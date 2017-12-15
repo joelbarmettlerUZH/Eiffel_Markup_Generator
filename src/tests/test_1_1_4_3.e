@@ -40,7 +40,8 @@ feature -- Test routines
 		note
 			testing:  "covers/{YODA_PROJECT}.print_to_console"
 		do
-			assert("no solution yet on how to read output to console",false)
+			Jedi.print_to_console
+			assert("Not implemented yet, won't be implemented for first release",false)
 		end
 
 end

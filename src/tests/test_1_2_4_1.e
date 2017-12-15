@@ -42,30 +42,8 @@ feature -- Test routines
 		local
 			--output: PLAIN_TEXT_FILE
 		do
-			--con.last_string
-			--print("hjkh")
-
-			--io.read_stream (10000)
-			--io.put_string ("test")
-			--io.put_string(io.output.last_string)
-			--io.output.make_create_read_write ("testtest")
-			--io.putstring ("test")
-			--io.output.put_string ("test")
-			--io.output.put_string ("test")
-			--print("hgh")
-			--print(io.output.laststring)
-			--Doc.print_to_console
-			--io.to_next_line
-			--print(io.default_output)
-			--print(io.standard_default.last_string)
-			--print("kk")
-			--print(io.last_string)
-			--print(io.input.last_string)
-
-			--print("**********************%N***DOCUMENT:Jedi***%N**********************%N%N")
-
-			--assert("print empty document to console",equal(io.laststring , "test"))
-			assert("no solution yet on how to read output to console",false)
+			Doc.print_to_console
+			assert("Not implemented yet, won't be implemented for first release",false)
 		end
 
 end
