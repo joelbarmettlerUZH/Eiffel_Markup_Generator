@@ -1,11 +1,12 @@
 note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		Tests creation of 1.3.4.5 Anchor link and 1.3.3.1 Anchor element.
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "3.5 + 2 = 5.5 Percent"
 
 class
 	TEST_1_3_4_5
@@ -40,15 +41,16 @@ feature -- Test routines
 		local
 			obiwan: YODA_LINK
 		do
-			--check anchor1.make_email("yoda@power.yedi")
+			--check anchor1.make_email("yoda@power.yedi") & precons that everything should be attached
 			assert ("test anchor link around text to anchor", anchor_link1.url.count > 0)
 			assert ("test anchor link around text to anchor name", equal(anchor_link1.name, "anchor Link"))
 			assert ("test anchor link around text to anchor attached", attached {YODA_LINK} anchor_link1)
 			assert ("email url is of type YODA_TEXT", equal(attached {YODA_TEXT} anchor_link1.content, True))
+			assert ("anchor link has substring #", equal(anchor_link1.url.has_substring ("#"),true))
 
 			--not void precon check
-			assert ("anchor_link1 is of type YODA_LINK", equal(attached {YODA_LINK} anchor_link1, True))
-			assert ("anchor_link1.content is of type YODA_ANCHOR", equal(attached {YODA_ELEMENT} anchor_link1.content, True))
+			assert ("anchor_link1 is of type YODA_LINK", attached {YODA_LINK} anchor_link1)
+			assert ("anchor_link1.content is of type YODA_ELEMENT", attached {YODA_ELEMENT} anchor_link1.content)
 
 			--check through factory {YODA}
 			obiwan := factory.link_anchor (button1, anchor1)
@@ -56,5 +58,8 @@ feature -- Test routines
 			assert ("test of anchor link with factory and the parameter text and doc url count", obiwan.url.count > 0)
 			assert ("test of anchor link with factory and the parameter text and doc name", equal(obiwan.name, "anchor Link"))
 			assert ("anchor link contains #",obiwan.url.has_substring("#"))
+
+			precon_function_trigger(agent factory.anchor (""), "id_not_empty")
+
 		end
 end
