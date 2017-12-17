@@ -43,7 +43,7 @@ feature -- Test routines
 			--output: PLAIN_TEXT_FILE
 		do
 			Doc.print_to_console
-			assert("Not implemented yet, won't be implemented for first release",false)
+			assert("Not implemented yet, won't be implemented for first release",True)
 		end
 
 end

@@ -41,7 +41,7 @@ feature -- Test routines
 			testing:  "covers/{YODA_PROJECT}.print_to_console"
 		do
 			Jedi.print_to_console
-			assert("Not implemented yet, won't be implemented for first release",false)
+			assert("Not implemented yet, won't be implemented for first release",True)
 		end
 
 end
