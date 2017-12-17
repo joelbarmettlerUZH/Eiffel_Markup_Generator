@@ -27,7 +27,7 @@ feature {NONE} -- Events
 			yoda_1: RAW_FILE
 		do
 			create factory
-			create yoda_1.make ("./resources/snippet.txt")
+			create yoda_1.make_with_name ("./resources/snippet.txt")
 			assert("Local snippet snippet.txt exists", yoda_1.exists)
 			create yoda_1.make_open_read ("./resources/snippet.txt")
 			yoda_1.read_stream (yoda_1.count)

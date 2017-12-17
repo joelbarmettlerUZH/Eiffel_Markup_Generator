@@ -215,7 +215,7 @@ class
 				input_file: RAW_FILE
 			do
 				--check whether the file acutally exists locally
-				create input_file.make (path_string)
+				create input_file.make_with_name (path_string)
 				if not input_file.exists then
 					Result := False
 				else
