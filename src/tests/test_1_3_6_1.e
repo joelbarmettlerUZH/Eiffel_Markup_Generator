@@ -1,11 +1,12 @@
 note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		Tests creation list with numbered list and bulletpoint list.
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "5.9 Percent"
 
 class
 	TEST_1_3_6_1

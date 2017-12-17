@@ -179,9 +179,9 @@ class
 			--First, the user creates an local feature of such an anchor element
 			--local anchor: YODA_ANCHOR
 			--Next, the user creates such an anchor using this factory here: anchor := yoda.anchor("Some ID/name")
-			require
-				id_exists: attached id
-				id_not_empty: not id.is_empty
+--			require
+--				id_exists: attached id
+--				id_not_empty: not id.is_empty
 			do
 				Result := create {YODA_ANCHOR}.make(id)
 			ensure

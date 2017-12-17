@@ -1,11 +1,12 @@
 note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		Tests creation of code snippet from string.
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "5.25 Percent is the summed up coverage of from file and from string snippet"
 
 class
 	TEST_1_3_2_2

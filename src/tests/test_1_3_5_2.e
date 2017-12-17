@@ -1,11 +1,12 @@
 note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		Tests creation image, local resource.
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "2.8 Percent"
 
 class
 	TEST_1_3_5_2

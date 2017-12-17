@@ -1,11 +1,12 @@
 ﻿note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		Testing creation email.
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "3 Percent"
 
 class
 	TEST_1_3_4_4

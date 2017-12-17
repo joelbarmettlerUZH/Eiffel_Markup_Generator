@@ -1,11 +1,12 @@
 note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		Testing creation text and text factory
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "3.55 Percent"
 
 class
 	TEST_1_3_1_1

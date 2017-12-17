@@ -1,11 +1,12 @@
 note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		Tests creation code snippet from file with making a file in some directory and opening this file afterwards and finally closing it.
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "see code snippet from string (there is the summed up coverage)"
 
 class
 	TEST_1_3_2_1

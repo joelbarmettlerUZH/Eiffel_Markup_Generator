@@ -1,6 +1,6 @@
 ﻿note
 	description: "[
-		Eiffel tests that can be executed by testing tool.
+		Tests creation title decorator with name, strength and component in factory and also with make.
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
@@ -8,6 +8,7 @@
 	testing: "type/manual"
 	testing:  "covers/{TEXT_DECORATOR_TITLE}.make_style_with_attribute", "covers/{YODA}.title",
 			          "covers/{YODA}.text"
+	coverage: "3.3 Percent"
 
 class
 	TEST_1_3_1_8

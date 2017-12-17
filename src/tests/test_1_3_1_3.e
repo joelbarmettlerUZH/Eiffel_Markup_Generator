@@ -1,11 +1,12 @@
 note
 	description: "[
-		Eiffel tests that can be executed by testing tool. This particular test tests requirements until 1.3.1.7 | quote
+		Tests creation bold decorator which basically tests also the test 1.3.1.2 and 1.3.1.3 but also 1.3.1.4, 1.3.1.5, 1.3.1.6 and 1.3.1.7
 	]"
 	author: "EiffelStudio test wizard"
 	date: "$Date$"
 	revision: "$Revision$"
 	testing: "type/manual"
+	coverage: "3.25 Percent"
 
 class
 	TEST_1_3_1_3
