@@ -35,7 +35,6 @@ feature -- Test routines
 			testing:  "covers/{YODA_SNIPPET}.make_string", "covers/{YODA}.snippet_from_string"
 		local
 			obiwan : YODA_SNIPPET
-			trooper: YODA_SNIPPET
 		do
 			obiwan  := factory.snippet_from_string ("resources/snippet.txt")
 			assert ("test snippet from file with parameter resources/snippet.txt", attached {YODA_SNIPPET} snip1)

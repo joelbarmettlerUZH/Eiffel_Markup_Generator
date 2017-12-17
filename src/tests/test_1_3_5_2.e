@@ -35,7 +35,6 @@ feature -- Test routines
 			testing:  "covers/{YODA}.image", "covers/{HTML_VALIDATOR}.validate_image", "covers/{YODA_IMAGE}.make_local", "covers/{YODA}.image_local"
 		local
 			obiwan1: YODA_IMAGE
-			trooper1: YODA_IMAGE
 		do
 			--check img1.make_local("resources/yoda.gif")
 			assert ("test internal image with parameter resources/yoda.gif", equal(img1.name, "local image"))

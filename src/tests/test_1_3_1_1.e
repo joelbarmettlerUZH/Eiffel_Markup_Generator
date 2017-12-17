@@ -42,6 +42,7 @@ feature -- Test routines
 		local
 			obiwan: YODA_TEXT
 		do
+			obiwan := factory.text(content)
 			assert ("make YODA_TEXT with a String content", equal(text.content, content))
 			assert ("make YODA_TEXT with a String name", equal(text.name,"text"))
 			assert ("make YODA_TEXT is attached", attached {YODA_TEXT} text)
@@ -49,6 +50,9 @@ feature -- Test routines
 			assert ("make YODA_TEXT with a String name2", equal(text2.name,"text"))
 
 			precon_function_trigger(agent factory.text(""),"text_not_empty")
+
+			assert ("make YODA_TEXT with factory and content attached", attached {YODA_TEXT} obiwan)
+			assert ("make YODA_TEXT with factory and ontent name", equal(obiwan.name,"text"))
 		end
 end
 

@@ -1,4 +1,4 @@
-note
+﻿note
 	description: "[
 		Eiffel tests that can be executed by testing tool.
 	]"
@@ -51,5 +51,12 @@ feature -- Test routines
 
 			precon_function_trigger(agent factory.title (yoda1,0), "u_attribute_not_to_small")
 			precon_function_trigger(agent factory.title (yoda1,7), "u_attribute_not_to_bigl")
+
+
+			assert ("test of title factory with text factory concatenated attached", attached {YODA_TEXT_INTERFACE} obiwan)
+			assert ("test of title factory with text factory concatenated name", equal(obiwan.name, "title"))
+			assert ("test of title factory with text factory concatenated", attached {YODA_TEXT} yoda1)
 		end
 end
+
+

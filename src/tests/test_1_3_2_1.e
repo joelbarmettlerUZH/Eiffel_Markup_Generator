@@ -25,7 +25,6 @@ feature {NONE} -- Events
 			-- <Precursor>
 		local
 			yoda_1: RAW_FILE
-			temp_output_folder: DIRECTORY
 		do
 			create factory
 			create yoda_1.make ("./resources/snippet.txt")
@@ -45,8 +44,6 @@ feature -- Test routines
 		note
 			testing:  "covers/{YODA_SNIPPET}.make_file", "covers/{YODA}.snippet_from_file",
 			          "covers/{HTML_VALIDATOR}.validate_snippet"
-		local
-			obiwan : YODA_SNIPPET
 		do
 			assert ("test snippet from file with parameter resources/snippet.txt", equal(snip1.name,"snippet"))
 			assert ("test snippet from file content is > 0", equal(snip1.content.count > 0 ,True))
