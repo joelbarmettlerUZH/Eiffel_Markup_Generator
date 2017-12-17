@@ -162,12 +162,14 @@ class
 				input_file: RAW_FILE
 			do
 				--check whether the file acutally exists locally
-				create input_file.make_open_read (path_string)
+				create input_file.make_with_name (path_string)
 				if not input_file.exists then
 					Result := False
 				else
+					create input_file.make_open_read (path_string)
 					input_file.read_stream (input_file.count)
 					Result := input_file.last_string.has_substring("{{CONTENT}}")
+					input_file.close
 				end
 			end
 

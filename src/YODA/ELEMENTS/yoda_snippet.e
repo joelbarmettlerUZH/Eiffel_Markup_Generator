@@ -24,8 +24,8 @@ class
 			--Creates the YODA_SNIPPET, validates it and sets the feature variables
 			--Validator gets called in order to ensure that a snippet remains valid for all languages.
 			require
-				u_content_not_void: attached u_content
-				u_content_not_empty: u_content.count > 0
+				snippet_content_exists: attached u_content
+				string_not_empty: u_content.count > 0
 			do
 				content := u_content
 				name := "snippet"
@@ -40,8 +40,8 @@ class
 			--Creates the YODA_SNIPPET with content from file at filepath, sets content to the file-content, validates it and sets the feature variables
 			--Validator gets called in order to ensure that a snippet remains valid for all languages.
 			require
-				filepath_exists: attached filepath
-				filepath_not_empty: not filepath.is_empty
+				snippet_content_exists: attached filepath
+				string_not_empty: not filepath.is_empty
 				file_is_valid: is_valid_file(filepath)
 			local
 				input_file: PLAIN_TEXT_FILE

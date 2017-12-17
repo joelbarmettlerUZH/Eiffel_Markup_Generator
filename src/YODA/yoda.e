@@ -12,9 +12,9 @@ class
 		text(content: STRING): YODA_TEXT
 			--Factory that creates an instance of YODA_TEXT with the content-string the user passed as an argument, and returns it to the user
 			--the interaction with this factory looks as follows: yoda.text("Some String")
-			require
-				text_content_exists: attached content
-				text_not_empty: not content.is_empty
+--			require
+--				text_content_exists: attached content
+--				text_not_empty: not content.is_empty
 			do
 				Result := create {YODA_TEXT}.make(content)
 			ensure
@@ -31,10 +31,9 @@ class
 			--create array2.make_filled (yoda.text("Some String"), 2, 4)
 			--The previous steps were just to create a 2D-Structure in Eiffel. The interaction with YODA is now fairly simple. Just pass the array to the libarary - Done.
 			--yoda.table(array2)
-			require
-
-				table_content_exists: attached content
-				array_not_empty: not content.is_empty
+--			require
+--				table_content_exists: attached content
+--				array_not_empty: not content.is_empty
 			do
 				Result := create {YODA_TABLE}.make(content)
 			ensure
@@ -62,9 +61,9 @@ class
 			--This factory calls the standard make procedure with an additional boolean "True" that indicates that the list is_numbered.
 			--This is later on an important attribte for the render visitor.
 			--The interaction needs the same set-up steps as the list factory described above, with the factory call being: yoda.numbered_lsit(array)
-			require
-				list_content_exists: attached content
-				array_not_empty: not content.is_empty
+--			require
+--				list_content_exists: attached content
+--				array_not_empty: not content.is_empty
 			do
 				Result := create {YODA_LIST}.make(content, True)
 			ensure
@@ -77,9 +76,9 @@ class
 			--Factory that creates an instance of YODA_LIST with the content-array of YODA_ELEMENTS the user passed as an argument, and returns it to the user
 			--This factory calls the standard make procedure with an additional boolean "False" that indicates that the list is not is_numbered.
 			--The interaction needs the same set-up steps as the list factory described above, with the factory call being: yoda.bulletpoint_list(array)
-			require
-				list_content_exists: attached content
-				array_not_empty: not content.is_empty
+--			require
+--				list_content_exists: attached content
+--				array_not_empty: not content.is_empty
 			do
 				Result := create {YODA_LIST}.make(content, False)
 			ensure
@@ -106,10 +105,10 @@ class
 			--The interaction width this factory, the user create a link element width a yoda_element and a existing yoda document as arguments:
 			--local document: YODA_DOCUMENT
 			--yoda.link(yoda.text("Click here!"), document)
-			require
-				link_intern_content_exists: attached content
-				linked_doc_exists: attached linked_doc
-				linked_doc_correct_type: attached {YODA_DOCUMENT} linked_doc
+--			require
+--				link_intern_content_exists: attached content
+--				linked_doc_exists: attached linked_doc
+--				linked_doc_correct_type: attached {YODA_DOCUMENT} linked_doc
 			do
 				Result := create {YODA_LINK}.make_internal(content, linked_doc)
 			ensure
@@ -124,10 +123,10 @@ class
 			--For this reason, this factory calls the make funciton in the LINK class which just takes a standard url that is linked.
 			--The interaction width this factory is simple. The user create a link element width a yoda_element and a url as arguments:
 			--yoda.link(yoda.text("Click here!"), "wwww.yoda.ch")
-			require
-				content_exists: attached content
-				url_exists: attached url
-				url_not_empty: not url.is_empty
+--			require
+--				content_exists: attached content
+--				url_exists: attached url
+--				url_not_empty: not url.is_empty
 			do
 				Result := create {YODA_LINK}.make_external(content, url)
 			ensure
@@ -144,10 +143,10 @@ class
 			--local anchor: YODA_ANCHOR
 			--anchor := yoda.anchor("TopOfDocument")
 			--yoda.link_anchor(yoda.text("Click here!"), anchor)
-			require
-				u_content_exists: attached u_content
-				anchor_exists: attached u_linked_anchor
-				u_linked_anchor_correct_type: attached {YODA_ANCHOR} u_linked_anchor
+--			require
+--				u_content_exists: attached u_content
+--				anchor_exists: attached u_linked_anchor
+--				u_linked_anchor_correct_type: attached {YODA_ANCHOR} u_linked_anchor
 			do
 				Result := create {YODA_LINK}.make_anchor (u_content, u_linked_anchor)
 			ensure
@@ -162,9 +161,9 @@ class
 			--For this reason, this factory calls the make_email funciton in the LINK class which just takes an e-mail and makes it clickable
 			--To interact with this factory, the user passes an e-mail, but NO yoda_element. The e-mail will be shown as a text and is linkable.
 			--yoda.email("admin@yoda.ch")
-			require
-				mail_address_exists: attached mail_address
-				string_not_empty: not mail_address.is_empty
+--			require
+--				mail_address_exists: attached mail_address
+--				string_not_empty: not mail_address.is_empty
 			do
 				Result := create {YODA_LINK}.make_email(mail_address)
 			ensure
@@ -180,9 +179,9 @@ class
 			--First, the user creates an local feature of such an anchor element
 			--local anchor: YODA_ANCHOR
 			--Next, the user creates such an anchor using this factory here: anchor := yoda.anchor("Some ID/name")
-			require
-				id_exists: attached id
-				id_not_empty: not id.is_empty
+--			require
+--				id_exists: attached id
+--				id_not_empty: not id.is_empty
 			do
 				Result := create {YODA_ANCHOR}.make(id)
 			ensure
@@ -203,9 +202,10 @@ class
 		image_local(content: STRING): YODA_IMAGE
 			--Factory that creates an instance of YODA_IMAGE with a string containing the local path to this image that the user passed as an argument, and returns it to the user
 			--the interaction with this factory looks as follows: yoda.image("../images/yoda.gif")
-			require
-				image_content_exists: attached content
-				string_not_empty: not content.is_empty
+--			require
+--				image_content_exists: attached content
+--				string_not_empty: not content.is_empty
+--				File_exists: is_valid_file(u_content)
 			do
 				Result := create {YODA_IMAGE}.make_local(content)
 			ensure
@@ -217,9 +217,9 @@ class
 		image_external(content: STRING): YODA_IMAGE
 			--Factory that creates an instance of YODA_IMAGE with a string containing an online link to some image that the user passed as an argument, and returns it to the user
 			--the interaction with this factory looks as follows: yoda.image_extern("http://www.yoda.ch/logo.jpg")
-			require
-				image_content_exists: attached content
-				string_not_empty: not content.is_empty
+--			require
+--				image_content_exists: attached content
+--				string_not_empty: not content.is_empty
 			do
 				Result := create {YODA_IMAGE}.make_external(content)
 			ensure
@@ -236,9 +236,9 @@ class
 		snippet_from_string(content: STRING): YODA_SNIPPET
 			--Factory that creates an instance of YODA_SNIPPET with a string containing some text the user wants to insert into the document, and returns it to the user
 			--the interaction with this factory looks as follows: yoda.snippet("Some freely chosen text that is not parsed")
-			require
-				snippet_content_exists: attached content
-				string_not_empty: not content.is_empty
+--			require
+--				snippet_content_exists: attached content
+--				string_not_empty: not content.is_empty
 			do
 				Result := create {YODA_SNIPPET}.make_string(content)
 			ensure
@@ -250,9 +250,10 @@ class
 		snippet_from_file(content: STRING): YODA_SNIPPET
 			--Factory that creates an instance of YODA_SNIPPET with a string containing a local path to a file containing the text to insert, and returns it to the user
 			--the interaction with this factory looks as follows: yoda.snippet_from_file("../snippets/snippet.txt")
-			require
-				snippet_content_exists: attached content
-				string_not_empty: not content.is_empty
+--			require
+--				snippet_content_exists: attached content
+--				string_not_empty: not content.is_empty
+--				file_is_valid: is_valid_file(filepath)
 			do
 				Result := create {YODA_SNIPPET}.make_file(content)
 			ensure
@@ -264,9 +265,9 @@ class
 		bold(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates an instance of YODA_TEXT_INTERFACE that surrounds some text with a styling attribute, in this case "bold", and return it to the user
 			--The interacion is simple: yoda.bold( yoda.text("Some text") )
-			require
-				bold_content_exists: attached content
-				element_type_YODA_TEXT: attached {YODA_TEXT_INTERFACE} content
+--			require
+--				content_exists: attached content
+--				element_type_YODA_TEXT: attached {YODA_TEXT_INTERFACE} content
 			do
 				Result := create {TEXT_DECORATOR_BOLD}.make_style(content)
 			ensure
@@ -278,9 +279,9 @@ class
 		code(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates an instance of YODA_TEXT_INTERFACE that surrounds some text with a styling attribute, in this case "code", and return it to the user
 			--The interacion is simple: yoda.code( yoda.text("Some text") )
-			require
-				code_content_exists: attached content
-				element_type_YODA_TEXT: attached {YODA_TEXT_INTERFACE} content
+--			require
+--				content_exists: attached content
+--				element_type_YODA_TEXT: attached {YODA_TEXT_INTERFACE} content
 			do
 				Result := create {TEXT_DECORATOR_CODE}.make_style(content)
 			ensure
@@ -292,9 +293,9 @@ class
 		italic(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates an instance of YODA_TEXT_INTERFACE that surrounds some text with a styling attribute, in this case "italic", and return it to the user
 			--The interacion is simple: yoda.italic( yoda.text("Some text") )
-			require
-				italic_content_exists: attached content
-				element_type_YODA_TEXT: attached {YODA_TEXT_INTERFACE} content
+--			require
+--				content_exists: attached content
+--				element_type_YODA_TEXT: attached {YODA_TEXT_INTERFACE} content
 			do
 				Result := create {TEXT_DECORATOR_ITALIC}.make_style(content)
 			ensure
@@ -306,9 +307,9 @@ class
 		quote(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates an instance of YODA_TEXT_INTERFACE that surrounds some text with a styling attribute, in this case "quote", and return it to the user
 			--The interacion is simple: yoda.quote( yoda.text("Some text") )
-			require
-				quote_content_exists: attached content
-				element_type_YODA_TEXT: attached {YODA_TEXT_INTERFACE} content
+--			require
+--				content_exists: attached content
+--				element_type_YODA_TEXT: attached {YODA_TEXT_INTERFACE} content
 			do
 				Result := create {TEXT_DECORATOR_QUOTE}.make_style(content)
 			ensure
@@ -320,9 +321,9 @@ class
 		underline(content: YODA_TEXT_INTERFACE): YODA_TEXT_INTERFACE
 			--Factory that creates an instance of YODA_TEXT_INTERFACE that surrounds some text with a styling attribute, in this case "unterline", and return it to the user
 			--The interacion is simple: yoda.underline( yoda.text("Some text") )
-			require
-				underline_content_exists: attached content
-				element_type_YODA_TEXT: attached {YODA_TEXT_INTERFACE} content
+--			require
+--				content_exists: attached content
+--				element_type_YODA_TEXT: attached {YODA_TEXT_INTERFACE} content
 			do
 				Result := create {TEXT_DECORATOR_UNDERLINE}.make_style(content)
 			ensure
@@ -335,9 +336,9 @@ class
 			--Factory that creates an instance of YODA_TEXT_INTERFACE that surrounds some text with a styling attribute, in this case "title", and return it to the user
 			--The title styling has an additional attribute "strenght" that defines the size of a title, with 1 being the biggest possible title.
 			--The interacion is simple: yoda.title( yoda.text("Some text"), 1)
-			require
-				title_content_exists: attached content
-				element_type_YODA_TEXT: attached {YODA_TEXT_INTERFACE} content
+--			require
+--				content_exists: attached content
+--				element_type_YODA_TEXT: attached {YODA_TEXT_INTERFACE} content
 			do
 				Result := create {TEXT_DECORATOR_TITLE}.make_style_with_attribute(content,strength)
 			ensure

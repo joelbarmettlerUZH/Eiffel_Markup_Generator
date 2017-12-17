@@ -40,7 +40,7 @@ feature {NONE}
 
 
 
-	PRECON_TRIGGER(test_routine: FUNCTION[TUPLE[],ANY]; precon_type: STRING)
+	PRECON_FUNCTION_TRIGGER(test_routine: FUNCTION[TUPLE[],ANY]; precon_type: STRING)
 			-- New test routine
 		note
 			testing:  "covers/{HTML_RENDERER}.render_text"
@@ -55,6 +55,30 @@ feature {NONE}
 			assert("Precondition is of correct type", equal(is_precondition_violated, precon_type))
 			tested := True
 			retry
+		end
+
+
+	PRECON_PROCEDURE_TRIGGER(test_routine: PROCEDURE[TUPLE[]]; precon_type: STRING)
+			-- New test routine
+		note
+			testing:  "covers/{HTML_RENDERER}.render_text"
+		local
+			tested: BOOLEAN
+		do
+			if not tested then
+				test_routine.call
+				--assert("Negative Nesting prevented",equal(t1.render (html, -1), "<p>Hard working, you must</p>%N"))
+			end
+		rescue
+			assert("Precondition is of correct type", equal(is_precondition_violated, precon_type))
+			tested := True
+			retry
+		end
+
+
+	sleep (nanoseconds: INTEGER_64)
+		external
+			"C blocking use %"eif_misc.h%""
 		end
 
 end

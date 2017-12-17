@@ -24,8 +24,8 @@ class
 		make_local(u_content: STRING)
 			--Creates the YODA_IMAGE with a local image, validates it and sets the feature variables
 			require
-				String_not_void: attached u_content
-				String_not_empty: u_content.count > 0
+				image_content_exists: attached u_content
+				string_not_empty: u_content.count > 0
 				File_exists: is_valid_file(u_content)
 			do
 				--set content
@@ -42,8 +42,8 @@ class
 		make_external(u_content: STRING)
 			--Creates the YODA_IMAGE with a extern image(URL), validates it and sets the feature variables
 			require
-				String_not_void: attached u_content
-				String_not_empty: u_content.count > 0
+				image_content_exists: attached u_content
+				string_not_empty: u_content.count > 0
 			do
 				content := u_content
 				name := "external image"
